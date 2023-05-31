@@ -1,0 +1,6 @@
+.vs
+.elixir_ls
+./JScript/node_modues
+JScript/node_modules
+JScript/package-lock.json
+./JScript/package-lock.json
