@@ -28,7 +28,7 @@
 
 # # Run the network scan
 # NetworkScanner.scan_network("192.168.1.0")
-defmodule NetworkScanner do
+def module NetworkScanner do
   @doc """
   Scans the local network for new devices and sends an email notification.
   """
