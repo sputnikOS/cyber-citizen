@@ -4,3 +4,4 @@
 JScript/node_modules
 JScript/package-lock.json
 ./JScript/package-lock.json
+.vscode
