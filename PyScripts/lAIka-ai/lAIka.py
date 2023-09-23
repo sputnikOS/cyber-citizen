@@ -6,10 +6,13 @@ from dotenv import load_dotenv
 # Replace '
 # 
 # YOUR_API_KEY' with your OpenAI API key
-api_key = os.getenv("OPENAI_API_KEY")
+
+def load_dotenv():
+
+    api_key = os.getenv("OPENAI_API_KEY")
 
 # Initialize the OpenAI API client
-openai.api_key = api_key
+    openai.api_key = api_key
 
 banner = """
 
@@ -47,6 +50,7 @@ def chat_with_gpt(prompt):
 if __name__ == "__main__":
     print(banner)
     load_dotenv()
+    print(api_key)
     user_input = input("You: ")
     while user_input.lower() != "exit":
         response = chat_with_gpt(user_input)

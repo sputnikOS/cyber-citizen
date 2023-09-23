@@ -1,9 +1,12 @@
 
 
 import openai
+from dotenv import load_dotenv
 import os
 
-openai.api_key = ""
+
+
+openai.api_key = "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"
 def generate_code():
   try:
 
@@ -11,7 +14,7 @@ def generate_code():
         model="gpt-4",
         messages=[
             {
-                "role": "user",  "content": "generate a HTTP request to the server"
+                "role": "user",  "content": "generate a python script"
             }
         ],
         temperature=0,
@@ -27,5 +30,6 @@ def generate_code():
       return None
 
 if __name__ == "__main__":
+  load_dotenv()
   response = generate_code()
   print(response)
