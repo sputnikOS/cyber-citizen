@@ -1,18 +1,4 @@
-import openai
-import os
-from dotenv import load_dotenv
-
-
-# Replace '
-# 
-# YOUR_API_KEY' with your OpenAI API key
-
-def load_dotenv():
-
-    api_key = os.getenv("OPENAI_API_KEY")
-
-# Initialize the OpenAI API client
-    openai.api_key = api_key
+import argparse
 
 banner = """
 
@@ -29,30 +15,40 @@ banner = """
 ██╔══██╗██╔══██║░╚═══██╗██╔═══╝░██║░░░██║░░░██║░░░██║╚████║██║██╔═██╗░
 ██║░░██║██║░░██║██████╔╝██║░░░░░╚██████╔╝░░░██║░░░██║░╚███║██║██║░╚██╗
 ╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝╚═╝░░╚═╝
+======================================================================
+Projekt Rasputnik
+pyDecrypt
+version 0.0.1
+Usage: python pyCrypt.py "[your_string]" [shift_value]
+=======================================================================
+
 """
 
-def chat_with_gpt(prompt):
-    try:
-        response = openai.Completion.create(
-            engine="text-davinci-002",  # Choose an appropriate engine
-            prompt=prompt,
-            max_tokens=50,  # Adjust the maximum number of tokens in the response
-            stop=None  # Specify a list of strings to stop the completion
-        )
+def caesar_decrypt(ciphertext, shift):
+    plaintext = ""
 
-        return response.choices[0].text.strip()
+    for char in ciphertext:
+        if char.isalpha():
+            is_upper = char.isupper()
+            char = char.lower()
+            decrypted_char = chr(((ord(char) - ord('a') - shift) % 26) + ord('a'))
+            if is_upper:
+                decrypted_char = decrypted_char.upper()
+            plaintext += decrypted_char
+        else:
+            plaintext += char
 
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
-        return None
+    return plaintext
 
-# Example usage
+def main():
+    parser = argparse.ArgumentParser(description="Decrypt text using the Caesar cipher.")
+    parser.add_argument("ciphertext", type=str, help="The text to decrypt")
+    parser.add_argument("shift", type=int, help="The decryption shift value")
+
+    args = parser.parse_args()
+
+    decrypted_text = caesar_decrypt(args.ciphertext, args.shift)
+    print("Decrypted Text:", decrypted_text)
+
 if __name__ == "__main__":
-    print(banner)
-    load_dotenv()
-    print(api)
-    user_input = input("You: ")
-    while user_input.lower() != "exit":
-        response = chat_with_gpt(user_input)
-        print(f"ChatGPT: {response}")
-        user_input = input("You: ")
+    main()

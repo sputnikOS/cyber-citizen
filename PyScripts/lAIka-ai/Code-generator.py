@@ -6,7 +6,7 @@ import os
 
 
 
-openai.api_key = "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"
+openai.api_key = ""
 def generate_code():
   try:
 
