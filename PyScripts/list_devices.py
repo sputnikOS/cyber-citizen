@@ -1,7 +1,7 @@
-import nmap
+import nmap3
 
 def list_devices_on_network():
-    nm = nmap.PortScanner()
+    nm = nmap3.PortScanner()
     nm.scan(hosts='192.168.1.0/24', arguments='-sn')
     
     for host in nm.all_hosts():
