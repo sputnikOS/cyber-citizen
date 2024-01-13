@@ -5,13 +5,10 @@ import platform
 import psutil
 import subprocess
 
-f = open('banner.txt', 'r')
-content = f.read()
 
 def main():
     os.system("clear")
     print("\t" + "#" * 80 + "#")
-    print(content)
     
    
     print("")
@@ -30,6 +27,8 @@ def main():
     print("\033[91m\tCPU %: \033[0m" + str(psutil.cpu_percent()))
     print("\033[91m\tDisk Usage %: \033[0m" + str(psutil.disk_usage('/').percent))
     print("\033")
+
+    print("lscpu")
 
 if __name__ == "__main__":
     main()
