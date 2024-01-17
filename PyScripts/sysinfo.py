@@ -28,7 +28,5 @@ def main():
     print("\033[91m\tDisk Usage %: \033[0m" + str(psutil.disk_usage('/').percent))
     print("\033")
 
-    print("lscpu")
-
 if __name__ == "__main__":
     main()
