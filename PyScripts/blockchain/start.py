@@ -63,8 +63,6 @@ def create_new_block(previous_block, transactions):
     hash = calculate_hash(index, previous_block.hash, timestamp, transactions)
     return Block(index, previous_block.hash, timestamp, transactions, hash)
 
-
-
 @app.route('/')
 def index():
     return render_template('index.html', blockchain=blockchain)
@@ -72,22 +70,6 @@ def index():
 @app.route('/blockchain', methods=['GET'])
 def get_blockchain():
     return jsonify({'blockchain': blockchain})
-
-# Example endpoint to mine a new block
-@app.route('/mine', methods=['GET'])
-def mine_block():
-    previous_block = blockchain[-1]
-    transactions = pending_transactions  # Include pending transactions in the new block
-    new_block = create_new_block(previous_block, transactions)
-
-    # Clear pending transactions after mining a block
-    pending_transactions.clear()
-
-    response = {
-        'message': 'New block mined successfully.',
-        'block': new_block.__dict__
-    }
-    return jsonify(response), 200
 
 @app.route('/transaction', methods=['POST'])
 def add_transaction():
@@ -102,6 +84,22 @@ def add_transaction():
 
     response = {'message': f'Transaction added to pending transactions.'}
     return jsonify(response), 201
+# Example endpoint to mine a new block
+@app.route('/mine', methods=['GET'])
+def mine_block():
+    previous_block = blockchain[-1]
+    transactions = pending_transactions  # Include pending transactions in the new block
+    new_block = create_new_block(previous_block, transactions)
+
+    # Clear pending transactions after mining a block
+    pending_transactions.clear()
+
+    response = {
+        'message': 'New block mined successfully.',
+        'block': new_block.__dict__
+    }
+    return render_template('mine.html', message=response['message'], block=response['block'])
+
 
 
 if __name__ == '__main__':
