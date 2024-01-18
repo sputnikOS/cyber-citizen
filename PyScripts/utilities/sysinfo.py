@@ -14,7 +14,7 @@ def main():
     print("")
 
     freq = psutil.cpu_freq()
-   
+    
     print("\033[91m\tTime: \033[0m" + time.ctime())
     print("\033[91m\tCurrent directory: \033[0m" + os.getcwd())
     print("\033[91m\tOperation System: \033[0m" + platform.platform())
@@ -26,6 +26,7 @@ def main():
     print("\033[91m\tCPU Freq: \033[0m" + str(psutil.cpu_freq(percpu=True)[0][2]) + " Mhz")
     print("\033[91m\tCPU %: \033[0m" + str(psutil.cpu_percent()))
     print("\033[91m\tDisk Usage %: \033[0m" + str(psutil.disk_usage('/').percent))
+    print("\t" + "#" * 80 + "#")
     print("\033")
 
 if __name__ == "__main__":

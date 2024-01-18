@@ -26,8 +26,6 @@ banner = """
 ======================================================================
 Projekt Rasputnik
 pgp key generator
-version 0.0.1
-License: GPLv3
 Usage: python pgp.py "secret message" "file_output"
 =======================================================================
 

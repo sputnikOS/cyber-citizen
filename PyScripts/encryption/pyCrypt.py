@@ -24,7 +24,6 @@ pyCrypt
 version 0.0.1
 Usage: python pyCrypt.py [your_string]
 Algorythm: Fernet
-License: GPLv3
 =======================================================================
 
 """
