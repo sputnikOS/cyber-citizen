@@ -7,7 +7,7 @@ import urllib.request
 
 threads = 10
 target = "http://www.brassdrum.com"
-directory = "C:\DEV"
+directory = ""
 filters = [".jpg", ".gif", "png", ".css"]
 
 os.chdir(directory)

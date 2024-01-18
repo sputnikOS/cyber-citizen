@@ -35,7 +35,7 @@ if __name__ == '__main__':
         port_list = [21, 22, 25, 80, 110, 443]
 
         for x in range(147, 150):
-            _ip = '192.168.1.64' + str(x)
+            _ip = '127.0.0.1' + str(x)
             for _port in port_list:
                 _banner = ret_banner(_ip, _port)
                 if _banner:

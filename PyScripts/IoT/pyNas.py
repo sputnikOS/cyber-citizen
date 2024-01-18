@@ -22,7 +22,7 @@ class NAS_Server:
             return None
 
 if __name__ == '__main__':
-    storage_directory = 'C:\DEV\scripts\PyScripts'  # Replace with your storage directory
+    storage_directory = ''  # Replace with your storage directory
     nas_server = NAS_Server(storage_directory)
 
     with Pyro4.Daemon() as daemon:

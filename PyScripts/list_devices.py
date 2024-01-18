@@ -1,8 +1,8 @@
-import nmap3
+import nmap
 
 def list_devices_on_network():
     nm = nmap3.PortScanner()
-    nm.scan(hosts='192.168.1.0/24', arguments='-sn')
+    nm.scan(hosts='127.0.0.1', arguments='-sn')
     
     for host in nm.all_hosts():
         if 'mac' in nm[host]['addresses']:
