@@ -1,6 +1,9 @@
 import hashlib
 import time
 import argparse
+from flask import Flask, jsonify, request, render_template
+
+app = Flask(__name__)
 
 class Wallet:
     def __init__(self):
@@ -60,26 +63,47 @@ def create_new_block(previous_block, transactions):
     hash = calculate_hash(index, previous_block.hash, timestamp, transactions)
     return Block(index, previous_block.hash, timestamp, transactions, hash)
 
-# Example Usage:
-blockchain = [create_genesis_block()]
-token = Token("Laika", "SAM", 1000)
-previous_block = blockchain[0]
-wallet_A = Wallet()
-wallet_B = Wallet()
-
-# token.mint(wallet_A.public_key, 500)
-# token.transfer(wallet_A.public_key, wallet_B.public_key, 200, token)
 
 
-# # Add token transactions and blocks
-# token_transactions = [Transaction(wallet_A.public_key, wallet_B.public_key, 5, token),
-#                       Transaction(wallet_A.public_key, wallet_B.public_key, 2, token)]
-# new_block = create_new_block(previous_block, token_transactions)
-# blockchain.append(new_block)
-# previous_block = new_block
+@app.route('/')
+def index():
+    return render_template('index.html', blockchain=blockchain)
 
-# Print wallet balances and token amounts
-print(f"\033[91m\tWallet A Balance: {wallet_A.balance}, Token Amount: {wallet_A.tokens}, Address: {wallet_A.public_key}")
-print(f"\033[91m\tWallet B Balance: {wallet_B.balance}, Token Amount: {wallet_B.tokens}, Address: {wallet_B.public_key}")
+@app.route('/blockchain', methods=['GET'])
+def get_blockchain():
+    return jsonify({'blockchain': blockchain})
 
-print(f"\033[91m\tToken Supply: {token.total_supply}")
+# Example endpoint to mine a new block
+@app.route('/mine', methods=['GET'])
+def mine_block():
+    previous_block = blockchain[-1]
+    transactions = pending_transactions  # Include pending transactions in the new block
+    new_block = create_new_block(previous_block, transactions)
+
+    # Clear pending transactions after mining a block
+    pending_transactions.clear()
+
+    response = {
+        'message': 'New block mined successfully.',
+        'block': new_block.__dict__
+    }
+    return jsonify(response), 200
+
+@app.route('/transaction', methods=['POST'])
+def add_transaction():
+    data = request.get_json()
+    sender = data['sender']
+    recipient = data['recipient']
+    amount = data['amount']
+
+    # Create a new transaction and add it to the pending transactions list
+    new_transaction = Transaction(sender, recipient, amount, "your_token_instance")
+    pending_transactions.append(new_transaction.__dict__)
+
+    response = {'message': f'Transaction added to pending transactions.'}
+    return jsonify(response), 201
+
+
+if __name__ == '__main__':
+    blockchain = [create_genesis_block()]
+    app.run(host='0.0.0.0', port=5000)
