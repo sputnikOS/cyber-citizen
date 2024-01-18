@@ -20,7 +20,6 @@ banner = """
 Projekt Rasputnik
 pyDecrypt (Caesar Decryption)
 version 0.0.1
-License: GPLv3
 Usage: python pyCrypt.py [your_string] [shift_value]
 =======================================================================
 
