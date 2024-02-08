@@ -9,4 +9,16 @@ Typescript/coin/node_modules
 Typescript/coin/node 
 Typescript/coin/.idea
 Typescript/coin/package-lock.json
+
+Typescript/ui/explorer/config/
+Typescript/ui/explorer/node_modules
+Typescript/ui/explorer/package-lock.json
+Typescript/ui/explorer/.editorconfig
+Typescript/ui/explorer/build/
+
+Typescript/ui/wallet/build
+Typescript/ui/wallet/config
+Typescript/ui/wallet/node_modules
+Typescript/ui/wallet/package-lock.json
+Typescript/ui/wallet/.editorconfig
 .idea
