@@ -75,7 +75,6 @@ def network_performance():
     print(f"Bytes Sent: {humanize.naturalsize(network_speed.bytes_sent)}")
     print(f"Bytes Received: {humanize.naturalsize(network_speed.bytes_recv)}")
 
-
 def main():
     display()
     print("Starting Benchmark...")
@@ -87,6 +86,5 @@ def main():
 if __name__ == "__main__":
     colorama.init
     banner()
-
     execution_time = timeit.timeit(main, number=1)
     print(f"\nBenchmark completed in {execution_time:.2f} seconds.")

@@ -1,6 +1,6 @@
-import scapy.all as scapy
+# import scapy.all as scapy
+from scapy.all import IP, ICMP, conf, L3socket as scapy
 import sys
-
 banner = """
 
 =======================================================================

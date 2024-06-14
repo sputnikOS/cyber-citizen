@@ -1,6 +1,7 @@
 #/bin/bash
-python ../PyScripts/sysinfo.py
-lscpu
-lsusb
-iperf
-sensors
+python ../PyScripts/utilities/benchmark.py
+# lscpu
+# lsusb
+# iperf
+# sensors
+
