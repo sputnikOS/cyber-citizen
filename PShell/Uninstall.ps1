@@ -1,40 +1,39 @@
-# Check if the script is running as administrator
+# Function to check if the script is running with admin rights
 function Test-IsAdmin {
     $currentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
-    $currentPrincipal = New-Object Security.Principal.WindowsPrincipal($currentUser)
-    return $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+    $principal = New-Object Security.Principal.WindowsPrincipal($currentUser)
+    $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 }
 
-if (-not (Test-IsAdmin)) {
-    Write-Warning "You do not have administrator rights to run this script. Please run PowerShell as an administrator."
-    exit
-}
-
-# Function to uninstall software
-function Uninstall-Software {
+# Function to delete the specified folder
+function Delete-Folder {
     param (
-        [Parameter(Mandatory=$true)]
-        [string]$softwareName
+        [Parameter(Mandatory = $true)]
+        [string]$FolderPath
     )
 
-    $software = Get-WmiObject -Class Win32_Product | Where-Object { $_.Name -like "*$softwareName*" }
-
-    if ($null -eq $software) {
-        Write-Output "Software not found: $softwareName"
+    if (-Not (Test-Path -Path $FolderPath)) {
+        Write-Output "Folder does not exist: $FolderPath"
         return
     }
 
-    foreach ($app in $software) {
-        Write-Output "Uninstalling $($app.Name)..."
-        try {
-            $app.InvokeMethod("Uninstall", $null)
-            Write-Output "Successfully uninstalled: $($app.Name)"
-        } catch {
-            Write-Error "Failed to uninstall: $($app.Name). Error: $_"
-        }
+    try {
+        Remove-Item -Path $FolderPath -Recurse -Force
+        Write-Output "Folder deleted successfully: $FolderPath"
+    } catch {
+        Write-Output "Failed to delete folder: $FolderPath"
+        Write-Output "Error: $_"
     }
 }
 
-# Example usage: replace 'SoftwareName' with the actual name of the software you want to uninstall
-$softwareToUninstall = ""
-Uninstall-Software -softwareName $softwareToUninstall
+# Main script execution
+if (-Not (Test-IsAdmin)) {
+    Write-Output "Script is not running with administrative privileges. Restarting with elevated rights..."
+    Start-Process powershell -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`"" -Verb RunAs
+    exit
+}
+
+# Folder path to delete (Change this to the path you want to delete)
+$folderPath = "C:\Program Files (x86)\Common Files\Adobe\AdobeGCClient\AGCInvokerUtility.exe"
+
+Delete-Folder -FolderPath $folderPath
