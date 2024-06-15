@@ -60,7 +60,7 @@ def memory_performance():
 
 
 def disk_performance():
-    print("\n Disk Performance Benchmark:")
+    print(Fore.LIGHTBLUE_EX + "\nDisk Performance Benchmark:")
     disk_usage = psutil.disk_usage('/')
     print(f"Total Disk Space: {humanize.naturalsize(disk_usage.total)} bytes")
     print(f"Used Disk Space: {humanize.naturalsize(disk_usage.used)} bytes")
