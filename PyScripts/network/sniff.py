@@ -1,4 +1,4 @@
-# import scapy.all as scapy
+# NEEDS TO BE FIXED
 from scapy.all import IP, ICMP, conf, L3socket as scapy
 import sys
 banner = """

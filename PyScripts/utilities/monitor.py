@@ -1,5 +1,8 @@
 from scapy.all import *
 
+
+# NEEDS TO FIXED/COMPLETED
+
 # Dictionary to store known devices (IP address: MAC address)
 known_devices = {}
 

@@ -3,6 +3,8 @@ import time
 from scapy.layers.l2 import ARP, Ether
 import socket
 
+# NEEDS TO BE COMPLETED
+
 def scan(ip):
     # Create an ARP request packet to get the MAC address of the IP
     arp_request = ARP(pdst=ip)
