@@ -3,7 +3,7 @@
     that are meant to be run from the command line. 
     version 1.0.0-alpha (Laika)
     License: GPLv3
-    github: https://www.github.com/sputnik-code
+    github: https://www.github.com/sputnikOS
             
             
                                     A
