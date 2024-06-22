@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "prestart": "npm run compile",
-    "start": "node src/main.js",
+    "start": "node src/main.ts",
     "compile": "tsc"
   },
   "dependencies": {

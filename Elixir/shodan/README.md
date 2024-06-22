@@ -11,6 +11,7 @@ by adding `shodan` to your list of dependencies in `mix.exs`:
 def deps do
   [
     {:shodan, "~> 0.1.0"}
+    {:jason, "~> 1.2"}
   ]
 end
 ```

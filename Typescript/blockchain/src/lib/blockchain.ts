@@ -5,7 +5,7 @@ import {
     getCoinbaseTransaction, isValidAddress, processTransactions, Transaction, UnspentTxOut
 } from './transaction';
 import {addToTransactionPool, getTransactionPool, updateTransactionPool} from './transactionPool';
-import {hexToBinary} from './util';
+import {hexToBinary} from '..//src/util';
 import {createTransaction, findUnspentTxOuts, getBalance, getPrivateFromWallet, getPublicFromWallet} from './wallet';
 
 class Block {

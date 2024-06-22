@@ -22,7 +22,7 @@ defmodule Shodan.MixProject do
   defp deps do
     [
       {:httpoison, "~> 1.8"},
-      {:jason, "~> 1.2"}e
+      {:jason, "~> 1.2"}
     ]
   end
 end

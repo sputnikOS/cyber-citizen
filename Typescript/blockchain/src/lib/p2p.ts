@@ -5,7 +5,7 @@ import {
     replaceChain
 } from './blockchain';
 import {Transaction} from './transaction';
-import {getTransactionPool} from './transactionPool';
+import {getTransactionPool} from '../src/transactionPool';
 
 const sockets: WebSocket[] = [];
 

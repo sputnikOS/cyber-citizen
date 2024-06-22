@@ -6,6 +6,25 @@ function Measure-CPU {
     Write-Output "CPU Usage: $cpuUsage%"
 }
 
+# Get CPU temperature using WMI
+function Get-CpuTemperature {
+    $temperatureQuery = Get-WmiObject -Namespace "root\OpenHardwareMonitor" -Query "SELECT * FROM Sensor WHERE SensorType='Temperature' AND Name LIKE '%CPU%'"
+    
+    if ($temperatureQuery) {
+        foreach ($temp in $temperatureQuery) {
+            if ($temp.Name -like "*CPU*") {
+                $temp.Value
+                break
+            }
+        }
+    }
+    else {
+        Write-Output "Unable to retrieve CPU temperature."
+    }
+}
+
+# Call the function to get CPU temperature
+
 # Function to measure memory performance
 function Measure-Memory {
     Write-Output "Measuring memory performance..."
@@ -40,12 +59,13 @@ function Measure-Network {
 # Function to run all benchmarks
 function Run-Benchmarks {
     Write-Output "Starting system performance benchmarks..."
-
+    
     Measure-CPU
     Measure-Memory
     Measure-Disk
     Measure-Network
-cd 
+    Get-CpuTemperature
+    
     Write-Output "Performance benchmarks completed."
 }
 

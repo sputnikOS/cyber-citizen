@@ -2,10 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const CryptoJS = require("crypto-js");
 const _ = require("lodash");
-const p2p_1 = require("./p2p");
-const transaction_1 = require("./transaction");
+const p2p_1 = require("../../blockchain/lib/p2p");
+const transaction_1 = require("../../blockchain/lib/transaction");
 const transactionPool_1 = require("./transactionPool");
-const util_1 = require("./util");
+const util_1 = require("../../blockchain/lib/util");
 const wallet_1 = require("./wallet");
 class Block {
     constructor(index, hash, previousHash, timestamp, data, difficulty, nonce) {

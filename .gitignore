@@ -5,9 +5,12 @@ JScript/node_modules
 JScript/package-lock.json
 ./JScript/package-lock.json
 .vscode
-Typescript/coin/node_modules
-Typescript/coin/node 
-Typescript/coin/.idea
-Typescript/coin/package-lock.json
+Typescript/ui/node_modules
+Typescript/ui/node 
+Typescript/ui/.idea
+Typescript/ui/package-lock.json
 .idea
-.
+./Typescript/blockchain/node_modues
+Typescript/blockchain/node_modules
+Typescript/blockchain/package-lock.json
+Typescript/ui/explorer/node_modules
