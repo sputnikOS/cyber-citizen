@@ -1,6 +1,6 @@
-    Name: Open-Source Society Scripts
+    Name: Open-Source Foundation (OSF) Cyber Engineering Course
     version 1.0.0-alpha (Laika)
-    Description: An always expanding collection of scripts for education and automation built with the goal of building
+    Description: An always expanding collection of scripts and resources for education and automation built with the goal of building
     License: GPLv3
     everything yourself.
     NOTE: SOME SCRIPTS DO NOT WORK AND ARE MEANT TO BE USED AS REFERENCES AND AS A TEMPLATE
