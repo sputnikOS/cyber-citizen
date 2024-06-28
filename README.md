@@ -1,5 +1,5 @@
     Name: Open-Source Foundation (OSF) Cyber Engineering Course
-    version 1.0.0-alpha (Laika)
+    version 2.0.0-alpha (Laika)
     Description: An always expanding collection of scripts and resources for education and automation built with the goal of building
     License: GPLv3
     everything yourself.
