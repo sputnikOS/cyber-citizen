@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blockchain Explorer</title>
+    <title>Blockchain   </title>
 </head>
 <body>
     <h1>Blockchain Explorer</h1>
@@ -16,8 +16,14 @@
                 Timestamp: {{ block.timestamp }}<br>
                 Transactions: {{ block.transactions }}<br>
                 Hash: {{ block.hash }}
+
             </li>
         {% endfor %}
+    </ul>
+    <ul>
+{% for token in token %}
+        <li> Name: {{ token.name }}</li>
+{% endfor %}
     </ul>
 </body>
 </html>

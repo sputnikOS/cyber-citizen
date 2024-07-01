@@ -5,12 +5,14 @@ from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
+
 class Wallet:
     def __init__(self):
         self.balance = 0
         self.tokens = 0
         self.private_key = hashlib.sha256(str(time.time()).encode()).hexdigest()
         self.public_key = hashlib.sha256(self.private_key.encode()).hexdigest()
+
 
 class Token:
     def __init__(self, name, symbol, total_supply):
@@ -35,12 +37,14 @@ class Token:
             return True
         return False
 
+
 class Transaction:
     def __init__(self, sender, recipient, amount, token):
         self.sender = sender
         self.recipient = recipient
         self.amount = amount
         self.token = token
+
 
 class Block:
     def __init__(self, index, previous_hash, timestamp, transactions, hash):
@@ -50,12 +54,15 @@ class Block:
         self.transactions = transactions
         self.hash = hash
 
+
 def calculate_hash(index, previous_hash, timestamp, transactions):
     value = str(index) + str(previous_hash) + str(timestamp) + str(transactions)
     return hashlib.sha256(value.encode()).hexdigest()
 
+
 def create_genesis_block():
     return Block(0, "0", time.time(), [], calculate_hash(0, "0", time.time(), []))
+
 
 def create_new_block(previous_block, transactions):
     index = previous_block.index + 1
@@ -63,16 +70,19 @@ def create_new_block(previous_block, transactions):
     hash = calculate_hash(index, previous_block.hash, timestamp, transactions)
     return Block(index, previous_block.hash, timestamp, transactions, hash)
 
+
 @app.route('/')
 def index():
     return render_template('index.html', blockchain=blockchain)
+
 
 @app.route('/blockchain', methods=['GET'])
 def get_blockchain():
     return jsonify({'blockchain': blockchain})
 
+
 @app.route('/transaction', methods=['POST'])
-def add_transaction():
+def add_transaction(pending_transactions):
     data = request.get_json()
     sender = data['sender']
     recipient = data['recipient']
@@ -84,9 +94,11 @@ def add_transaction():
 
     response = {'message': f'Transaction added to pending transactions.'}
     return jsonify(response), 201
+
+
 # Example endpoint to mine a new block
 @app.route('/mine', methods=['GET'])
-def mine_block():
+def mine_block(pending_transactions):
     previous_block = blockchain[-1]
     transactions = pending_transactions  # Include pending transactions in the new block
     new_block = create_new_block(previous_block, transactions)
@@ -101,7 +113,10 @@ def mine_block():
     return render_template('mine.html', message=response['message'], block=response['block'])
 
 
-
 if __name__ == '__main__':
     blockchain = [create_genesis_block()]
-    app.run(host='0.0.0.0', port=5000)
+    token = Token("OpenSputnik", "OS", 100)
+    wallet = Wallet()
+    token.mint(wallet.public_key, 500)
+
+    app.run(host='0.0.0.0', port=5001)
