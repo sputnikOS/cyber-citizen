@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    root_path = '/home/laika'  # Replace with the path to your shared folder
+    root_path = ''  # Replace with the path to your shared folder
     files = os.listdir(root_path)
     directories = [d for d in os.listdir(root_path) if os.path.isdir(os.path.join(root_path, d))]
     return render_template('index.html', files=files)

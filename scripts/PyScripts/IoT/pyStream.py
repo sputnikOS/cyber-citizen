@@ -11,8 +11,8 @@ from wyzecam.iotc import WyzeIOTC
 def main():
     assert cv2, "missing opencv-python, required for this example"
 
-    assert os.environ["WYZE_EMAIL"], "sabsowitzstephen@gmail.com"
-    assert os.environ["WYZE_PASSWORD"], "@Fritz19871992$"
+    assert os.environ["WYZE_EMAIL"], ""
+    assert os.environ["WYZE_PASSWORD"], ""
     auth_info = login(os.environ["WYZE_EMAIL"], os.environ["WYZE_PASSWORD"])
     account = get_user_info(auth_info)
     cameras = get_camera_list(auth_info)
