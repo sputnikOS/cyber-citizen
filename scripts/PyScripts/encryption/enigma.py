@@ -1,4 +1,5 @@
 import random
+import sys
 
 # Enigma-like substitution cipher settings
 # Here, we'll use a simple substitution cipher with a randomized mapping
@@ -26,7 +27,7 @@ def decrypt(encrypted_message):
 
 # Example usage
 if __name__ == "__main__":
-    message = "HELLO WORLD"
+    message = sys.argv[1]
     encrypted_message = encrypt(message)
     decrypted_message = decrypt(encrypted_message)
     
