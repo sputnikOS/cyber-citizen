@@ -26,7 +26,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "courses/Toolkit.md",
+                "file": "Progress & Achievements.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
@@ -108,14 +108,14 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "courses/Toolkit.md",
+                "file": "Progress & Achievements.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
                 "showSearch": false,
                 "searchQuery": "",
                 "backlinkCollapsed": false,
-                "unlinkedCollapsed": true
+                "unlinkedCollapsed": false
               }
             }
           },
@@ -125,7 +125,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "courses/Toolkit.md",
+                "file": "Progress & Achievements.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               }
@@ -148,7 +148,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "courses/Toolkit.md"
+                "file": "Progress & Achievements.md"
               }
             }
           }
@@ -170,21 +170,26 @@
   },
   "active": "a7a285d4edbdb567",
   "lastOpenFiles": [
-    "Cybersecurity Intelligence.canvas",
-    "Progress & Achievements.md",
-    "images/logo.png",
-    "courses/Toolkit.md",
     "courses/Introduction to Web Applications.canvas",
     "courses/Penetration Testing Process.canvas",
     "courses/The Cycle of Cyber Threat Intelligence.md",
+    "Progress & Achievements.md",
+    "[.md",
+    "(ISC)2 - Certified in Cybersecurity.md",
+    "().md",
+    "CS50 Cybersecurity_blank.png",
+    "Technical Whitepapers/Linux, AI & the Blockchain.md",
+    "Untitled.canvas",
+    "Cybersecurity Intelligence.canvas",
+    "Technical Whitepapers/Technical Whitepapers.canvas",
+    "Technical Whitepapers/Airgap.md",
+    "courses/Toolkit.md",
+    "images/logo.png",
     "Glossary.md",
     "courses/Digital Forensics Essentials.md",
-    "Technical Whitepapers/Technical Whitepapers.canvas",
     "Technical Whitepapers/Stuxnet.md",
     "courses",
     "images/linux.png",
-    "Technical Whitepapers/Linux, AI & the Blockchain.md",
-    "Technical Whitepapers/Airgap.md",
     "Technical Whitepapers",
     "images/(ISC)2 - Certified in Cybersecurity.pdf",
     "images/Achievements.canvas",
