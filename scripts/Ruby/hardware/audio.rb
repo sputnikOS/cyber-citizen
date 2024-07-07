@@ -15,7 +15,7 @@ def list_audio_devices
     puts "Manufacturer: #{device.Manufacturer}"
     puts "Device ID: #{device.DeviceID}"
     puts "Status: #{device.Status}"
-    puts "Availability: #{device.}"
+    puts "Availability: #{device.Availability}"
     puts "------------------------------------"
   end
 end
