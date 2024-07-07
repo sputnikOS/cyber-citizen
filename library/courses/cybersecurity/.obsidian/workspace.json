@@ -1,0 +1,202 @@
+{
+  "main": {
+    "id": "297023669e9219fe",
+    "type": "split",
+    "children": [
+      {
+        "id": "03ca7617f6c9a023",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "16462d5dc306d053",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "courses/Toolkit.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "a7a285d4edbdb567",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "courses/Toolkit.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "e75841d51ad245c8",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 1
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "4b78b51d28106d03",
+    "type": "split",
+    "children": [
+      {
+        "id": "ede1c94c3525a785",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "9808b3459a35e074",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "086d033931bcc132",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "c091651714ebce12",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "6382f8911e53a5fc",
+    "type": "split",
+    "children": [
+      {
+        "id": "2440350f9826983c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "161b41d33419af21",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "courses/Toolkit.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "fafd6c97b9542d95",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "courses/Toolkit.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": false
+              }
+            }
+          },
+          {
+            "id": "d603ad682893872e",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "11db8ab6f5a06673",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "courses/Toolkit.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "a7a285d4edbdb567",
+  "lastOpenFiles": [
+    "Cybersecurity Intelligence.canvas",
+    "Progress & Achievements.md",
+    "images/logo.png",
+    "courses/Toolkit.md",
+    "courses/Introduction to Web Applications.canvas",
+    "courses/Penetration Testing Process.canvas",
+    "courses/The Cycle of Cyber Threat Intelligence.md",
+    "Glossary.md",
+    "courses/Digital Forensics Essentials.md",
+    "Technical Whitepapers/Technical Whitepapers.canvas",
+    "Technical Whitepapers/Stuxnet.md",
+    "courses",
+    "images/linux.png",
+    "Technical Whitepapers/Linux, AI & the Blockchain.md",
+    "Technical Whitepapers/Airgap.md",
+    "Technical Whitepapers",
+    "images/(ISC)2 - Certified in Cybersecurity.pdf",
+    "images/Achievements.canvas",
+    "images/Pasted image 20240706212913.png",
+    "images/Untitled.canvas",
+    "images/One Server.png",
+    "images/Many Servers - One Database.png",
+    "images/Capture2.png",
+    "images/Capture1.png",
+    "images/Pentesting Process.png",
+    "images",
+    "images/Many Servers, Many Databases.png",
+    "Penetration Testing Process 1.canvas"
+  ]
+}
