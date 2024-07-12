@@ -11,12 +11,8 @@ heroImage: "/terminal.jpeg"
 tags: ["research", "whitepapers", "linux"]
 
 ---
+#### White Paper: Open Source Linux Distribution with Integrated AI, IoT, and Decentralized Blockchain
 
-  
-
-**White Paper: Open Source Linux Distribution with Integrated AI, IoT, and Decentralized Blockchain**
-
-  
 
 **Abstract:**
 
@@ -58,13 +54,16 @@ The convergence of AI, IoT, and blockchain presents unprecedented opportunities 
 
 - **Decentralized Blockchain:**
 
-  
+  ![[Pasted image 20240707075430.png]]
 
   - Integration of a decentralized ledger for secure and transparent data transactions.
 
   - Smart contract support for automation and programmability.
 
   - Consensus mechanisms ensuring data integrity and reliability.
+
+	Pasted image 20240707075440.png
+	
 
   
 

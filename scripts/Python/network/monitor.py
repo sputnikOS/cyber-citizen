@@ -1,7 +1,7 @@
 from scapy.all import *
 
 
-# NEEDS TO FIXED/COMPLETED
+# WORKING
 
 # Dictionary to store known devices (IP address: MAC address)
 known_devices = {}
@@ -20,7 +20,7 @@ def start_monitoring(interface):
 
 if __name__ == "__main__":
     # Replace 'eth0' with your network interface (e.g., 'en0' for macOS, 'eth0' or 'wlan0' for Linux)
-    interface = 'wlan0'
+    interface = 'eth0'
     print(f"[*] Starting ARP monitoring on interface {interface}...")
 
     try:
