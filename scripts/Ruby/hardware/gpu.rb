@@ -1,9 +1,5 @@
 require 'colorize'
-require 'benchmark'
-require 'sysinfo'
-require 'sys/cpu'
 require 'open3'
-require 'win32ole'
 
 
 # Method to display a terminal banner
@@ -41,7 +37,7 @@ end
 # Call the method to retrieve and display GPU information
 
 # Example usage:
-display_banner("GPU Hardware".colorize(:light_blue))
+display_banner("GPU Hardware")
 get_gpu_info
 
 
