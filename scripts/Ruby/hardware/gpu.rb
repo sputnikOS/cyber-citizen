@@ -3,6 +3,8 @@ require 'benchmark'
 require 'sysinfo'
 require 'sys/cpu'
 require 'open3'
+require 'win32ole'
+
 
 # Method to display a terminal banner
 def display_banner(title)
@@ -35,11 +37,13 @@ def get_gpu_info
   end
 end
 
+
 # Call the method to retrieve and display GPU information
 
 # Example usage:
-display_banner("GPU Hardware")
+display_banner("GPU Hardware".colorize(:light_blue))
 get_gpu_info
+
 
 
 

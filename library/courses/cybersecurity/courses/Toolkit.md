@@ -13,9 +13,10 @@ tags: ["tools", "resources"]
 ---
 
 #### Orgs and Activism
-[EFF](https://www.eff.org)
-[Wikileaks](https://www.wikileaks.org)
-[The Linux Foundation](https://linuxfoundation.org)
+- [EFF](https://www.eff.org)
+- [Wikileaks](https://www.wikileaks.org)
+- [The Linux Foundation](https://linuxfoundation.org)
+
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
 - Prevent your ISP from selling your data with custom DNS:

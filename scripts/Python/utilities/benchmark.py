@@ -68,7 +68,7 @@ def disk_performance():
 
 
 def network_performance():
-    print("\nNetwork Performance Benchmark:")
+    print(Fore.LIGHTMAGENTA_EX + "\nNetwork Performance Benchmark:")
     network_speed = psutil.net_io_counters()
     print(f"Packets Sent: {humanize.naturalsize(network_speed.packets_sent)}")
     print(f"Packets Received: {humanize.naturalsize(network_speed.packets_recv)}")
@@ -77,7 +77,6 @@ def network_performance():
 
 def main():
     display()
-    print("Starting Benchmark...")
     cpu_performance()
     memory_performance()
     disk_performance()
