@@ -5,6 +5,8 @@ pubDate:
 heroImage: 
 tags:
 ---
+<img style="width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
+
 
 #### Orgs & Education 
 - [EFF](https://www.eff.org)
@@ -17,6 +19,7 @@ tags:
 - [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)
 - [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
 - [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
+- [Ultimate Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
 
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
@@ -27,16 +30,24 @@ tags:
   * Google is always tracking you, even if you "disable" tracking.
   * I have been using [Proton](https://proton.me) and it has never let me down. For $10/month you have access to their VPN and encrypted services: Calendar, Drive, Email (and Bridge).
   * [Speedtest](https://speed.cloudflare.com)
+
+
 ## Windows Software
+
 <a href="https://learn.microsoft.com/en-us/powershell/"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://git-scm.com/downloads"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"></a>
 <a href="https://www.postman.com/downloads/"><img src="https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=Postman&logoColor=white"></a>
 <a href="https://www.vmware.com/products/workstation-player/"><img src="https://img.shields.io/badge/VMware-231f20?style=for-the-badge&logo=VMware&logoColor=white"></a>
 <a href="https://www.virtualbox.org/wiki/Downloads"><img src="https://img.shields.io/badge/VirtualBox-21416b?style=for-the-badge&logo=VirtualBox&logoColor=white"></a>
 
-[CivTak](https://www.civtak.org/2020/09/23/wintak-is-publicly-available/)
 
 ### Linux Images (VMWare/VirtualBox/USB)
+
+#### Privacy:
+- [Tails](https://tails.net/install/index.en.html)
+- **==[Security Enhanced Linux](https://github.com/SELinuxProject/selinux)==**
+	- **==Security Enhanced Linux was originally created by the NSA and was released as open-source==**
+
 
 #### Penetration Testing:
 <a href="https://kali.org"><img src="https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kali-linux&logoColor=white"></a>
@@ -47,13 +58,12 @@ tags:
 <a href="https://ubuntu.com/download"><img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"></a>
 <a href="https://archlinux.org/download/"><img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white"></a>
 
-### Programming
-- [Awesome Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
-
-### Toolkit
+### Penetration Testing Toolkit
 
 - [Metasploit](https://github.com/rapid7/metasploit-framework)
 - [Metasploitable](https://github.com/rapid7/metasploitable3)
+- [Nmap](https://nmap.org)
+- [Netdiscover](https://www.kali.org/tools/netdiscover/)
 - [F-Society Toolkit](https://github.com/Manisso/fsociety)
 - [Masscan](https://github.com/robertdavidgraham/masscan)
 - [Recon-ng](https://github.com/lanmaster53/recon-ng)
@@ -64,16 +74,27 @@ tags:
 - [Proxychains](https://github.com/haad/proxychains)
 - [Veil Framework](https://github.com/Veil-Framework)
 - [Powershell Empire](https://github.com/EmpireProject/Empire)
-- [Wireshark](https://)
+- [Wireshark](https://www.wireshark.org/download.html)
+- [Responder](https://github.com/SpiderLabs/Responder)
+- [Beef](https://github.com/beefproject/beef)
+- [Hashcat](https://hashcat.net/hashcat/)
+- [Mimikatz](https://github.com/ParrotSec/mimikatz)
+- [Powersploit](https://github.com/PowerShellMafia/PowerSploit)
+- [Nishang](https://github.com/samratashok/nishang)
+- [John the Ripper](https://github.com/openwall/john)
 
-### Intelligence 
+### Open-Source Intelligence Gathering
 - [Shodan](https://www.shodan.io)
+- [CivTak](https://www.civtak.org/2020/09/23/wintak-is-publicly-available/)
 - [OSINT Framework](https://osintframework.com/)
 - [ExploitDB](https://www.exploit-db.com/)
 - [VulnHub](https://www.vulnhub.com/)
 - [SANS Internet Storm Center](https://isc.sans.edu)
 - [NASA Open Data](https://data.nasa.gov)
-### Reading 
+- [SOAR](https://soar.earth)
+ 
+ 
+ ### Reading 
 - **The Sovereign Individual**, James Dale Davidson, Lord William Rees-Mogg.
 - **The Fourth Turning Is Here**, Neil Howe.
 - **Active Measures**, Thomas Rid.
@@ -88,5 +109,4 @@ tags:
 - **Principles for Dealing with the Changing World Order**, Ray Dalio.
 - **Proof of Stake: The Making of Ethereum and the Philosophy of Blockchains**, Vitaric Buterin, Nathan Schneidor.
 
-  
 

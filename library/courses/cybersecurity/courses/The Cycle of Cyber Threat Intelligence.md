@@ -64,11 +64,7 @@ Intelligence is the collecting and processing of information about a competitive
 
 ### Collection
 
-  
-
 #### Key Collection Sources
-
-  
 
 - **Intrusion Analysis**
 
