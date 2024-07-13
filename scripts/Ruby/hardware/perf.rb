@@ -2,7 +2,8 @@ require 'sys/proctable'
 include Sys
 
 def get_cpu_usage
-  `top -bn1 | grep "Cpu(s)"`.match(/(\d+\.\d+) us/)[1].to_f
+  cpu_usage_info = `powershell -Command "(Get-WmiObject Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average"`.strip.to_f
+  # `top -bn1 | grep "Cpu(s)"`.match(/(\d+\.\d+) us/)[1].to_f
 end
 
 def get_memory_usage
@@ -23,8 +24,6 @@ end
 
 def display_hardware_performance
   cpu_usage = get_cpu_usage
-  cpu = cpu_usage.cpu_info
-  puts "#{cpu}"
   used_mem, total_mem, mem_usage = get_memory_usage
   used_disk, total_disk, disk_usage = get_disk_usage
 

@@ -12,10 +12,15 @@ tags: ["tools", "resources"]
 
 ---
 
-#### Orgs and Activism
+#### Orgs & Education
 - [EFF](https://www.eff.org)
 - [Wikileaks](https://www.wikileaks.org)
 - [The Linux Foundation](https://linuxfoundation.org)
+- [The Internet Society](https://www.internetsociety.org)
+- [CIS 5930 Offensive Network Security Spring 2017](https://www.cs.fsu.edu/~liux/courses/offensivenetsec/index.html)
+- [Citizen Clinic](https://citizenclinic.io)
+- [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)
+- [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
 
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
@@ -75,10 +80,8 @@ tags: ["tools", "resources"]
 - [VulnHub](https://www.vulnhub.com/)
 - [SANS Internet Storm Center](https://isc.sans.edu)
 - [NASA Open Data](https://data.nasa.gov)
-#### Courses and Resources
-[CIS 5930 Offensive Network Security Spring 2017](https://www.cs.fsu.edu/~liux/courses/offensivenetsec/index.html)
+### Reading 
 
-#### Reading List
 - **The Sovereign Individual**, James Dale Davidson, Lord William Rees-Mogg.
 
 - **The Fourth Turning Is Here**, Neil Howe.
