@@ -21,6 +21,8 @@ tags: ["tools", "resources"]
 - [Citizen Clinic](https://citizenclinic.io)
 - [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)
 - [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
+- [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
+- 
 
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
@@ -40,18 +42,22 @@ tags: ["tools", "resources"]
 [CivTak](https://www.civtak.org/2020/09/23/wintak-is-publicly-available/)
 
 ### Linux Images (VMWare/VirtualBox/USB)
+
 <a href="https://kali.org"><img src="https://img.shields.io/badge/Kali_Linux-557C94?style=for-the-badge&logo=kali-linux&logoColor=white"></a>
 <a href="https://blackarch.org/downloads.html"><img src="https://img.shields.io/badge/BlackArch-000000?style=for-the-badge&logo=arch-linux&logoColor=white"></a>
 <a href="https://www.debian.org/download"><img src="https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white"></a>
 <a href="https://ubuntu.com/download"><img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white"></a>
 <a href="https://archlinux.org/download/"><img src="https://img.shields.io/badge/Arch_Linux-1793D1?style=for-the-badge&logo=arch-linux&logoColor=white"></a>
-### Toolkit
 
-  
+### Programming
+- [Awesome Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
+
+### Toolkit
 
 - [Metasploit](https://github.com/rapid7/metasploit-framework)
 
 - [Metasploitable](https://github.com/rapid7/metasploitable3)
+- [F-Society Toolkit](https://github.com/Manisso/fsociety)
 
 - [Masscan](https://github.com/robertdavidgraham/masscan)
 
