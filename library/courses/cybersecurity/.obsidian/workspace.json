@@ -11,13 +11,30 @@
             "id": "e75841d51ad245c8",
             "type": "leaf",
             "state": {
-              "type": "pdf",
+              "type": "markdown",
               "state": {
-                "file": "SEI CERT/Lecture 10.pdf"
+                "file": "Curriculum & Progress.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "507c8835a45ed1a1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "courses/Cybercitizen's Toolkit.md",
+                "mode": "source",
+                "backlinks": true,
+                "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -83,7 +100,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "SEI CERT/Lecture 10.pdf",
+                "file": "courses/Cybercitizen's Toolkit.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,7 +117,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "SEI CERT/Lecture 10.pdf",
+                "file": "courses/Cybercitizen's Toolkit.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               }
@@ -123,7 +140,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "SEI CERT/Lecture 10.pdf"
+                "file": "courses/Cybercitizen's Toolkit.md"
               }
             }
           },
@@ -158,20 +175,21 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "e75841d51ad245c8",
+  "active": "507c8835a45ed1a1",
   "lastOpenFiles": [
-    "Technical Whitepapers/Technical Whitepapers.canvas",
+    "Curriculum & Progress.md",
+    "courses/The Cycle of Cyber Threat Intelligence.md",
+    "courses/Cybercitizen's Toolkit.md",
     "SEI CERT/Lecture 10.pdf",
+    "Technical Whitepapers/Technical Whitepapers.canvas",
     "SEI CERT/SEI CERT.canvas",
     "Untitled.canvas",
     "SEI CERT/SSE-Syllabus.docx",
     "Glossary.md",
-    "courses/The Cycle of Cyber Threat Intelligence.md",
     "courses/Digital Forensics Essentials.md",
     "courses/Penetration Testing Process.canvas",
     "courses/Introduction to Web Applications.canvas",
     "courses/Cybersecurity Intelligence.canvas",
-    "courses/Toolkit.md",
     "SEI CERT/Lecture 3.pdf",
     "SEI CERT/Lecture 11.pdf",
     "SEI CERT/Lecture 9.pdf",
