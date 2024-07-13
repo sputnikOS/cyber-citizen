@@ -19,8 +19,7 @@
 
 
 
-### The Open-Source Cybercitizen Foundation
-### Cybercitizen Open-Source Project
+# The Open-Source Cybercitizen Project
 <img style="height:150px;width:150px;" src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true"/>
 <hr>
 
