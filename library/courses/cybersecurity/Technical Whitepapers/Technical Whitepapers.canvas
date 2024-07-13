@@ -1,9 +1,0 @@
-{
-	"nodes":[
-		{"id":"cfc2e6b608f33047","type":"file","file":"Technical Whitepapers/Airgap.md","x":-216,"y":100,"width":400,"height":400},
-		{"id":"a8604bca59056a1b","type":"file","file":"Technical Whitepapers/Linux, AI & the Blockchain.md","x":220,"y":100,"width":400,"height":400},
-		{"id":"fb56d8ab3d49fbef","x":-680,"y":100,"width":400,"height":400,"type":"file","file":"Technical Whitepapers/Stuxnet.md"},
-		{"id":"05e7d7f31f381132","type":"file","file":"images/linux.png","x":-216,"y":-640,"width":400,"height":300}
-	],
-	"edges":[]
-}
