@@ -8,7 +8,7 @@ function Measure-CPU {
 
 # Get CPU temperature using WMI
 function Get-CpuTemperature {
-    $temperatureQuery = Get-WmiObject -Namespace "root\OpenHardwareMonitor" -Query "SELECT * FROM Sensor WHERE SensorType='Temperature' AND Name LIKE '%CPU%'"
+    # $temperatureQuery = Get-WmiObject -Namespace "root\OpenHardwareMonitor" -Query "SELECT * FROM Sensor WHERE SensorType='Temperature' AND Name LIKE '%CPU%'"
     
     if ($temperatureQuery) {
         foreach ($temp in $temperatureQuery) {
