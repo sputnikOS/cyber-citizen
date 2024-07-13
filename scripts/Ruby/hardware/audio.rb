@@ -1,5 +1,5 @@
 require 'win32ole'
-
+require 'colorize'
 # Method to list all audio devices (both input and output)
 def list_audio_devices
   wmi = WIN32OLE.connect("winmgmts://")

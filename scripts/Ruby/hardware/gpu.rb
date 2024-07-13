@@ -1,6 +1,5 @@
-require 'colorize'
 require 'open3'
-
+require 'colorize'
 
 # Method to display a terminal banner
 def display_banner(title)
