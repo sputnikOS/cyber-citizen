@@ -1,3 +1,4 @@
+venv/
 .vs
 .elixir_ls
 ./JScript/node_modues
@@ -5,3 +6,12 @@ JScript/node_modules
 JScript/package-lock.json
 ./JScript/package-lock.json
 .vscode
+Typescript/ui/node_modules
+Typescript/ui/node 
+Typescript/ui/.idea
+Typescript/ui/package-lock.json
+.idea
+./Typescript/blockchain/node_modues
+Typescript/blockchain/node_modules
+Typescript/blockchain/package-lock.json
+Typescript/ui/explorer/node_modules
