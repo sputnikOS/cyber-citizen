@@ -22,9 +22,10 @@ def banner():
 
   ======================================================================
                     
-                    version 0.1.2-alpha (sputnik)
+                    version 0.1.2-alpha (curiosity)
                     License: GPLv3
-                    https://www.github.com/prometheus1987
+                    https://www.github.com/sputnikOS
+          
   =======================================================================
     """ + Style.RESET_ALL)
 
@@ -35,7 +36,6 @@ def display():
     print("\033[91m\tNode: \033[0m" + platform.node())
     print("\033[91m\tOS Version: \033[0m" + platform.uname()[3])
     print("\033[91m\tSystem Type: \033[0m" + platform.architecture()[0])
-    print("\t" + "#" * 80 + "#")
     print("\033")
 
 def cpu_performance():
