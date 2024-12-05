@@ -26,7 +26,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Technical Whitepapers/Linux, AI & the Blockchain.md",
+                "file": "Curriculum & Progress.md",
                 "mode": "source",
                 "backlinks": true,
                 "source": false
@@ -100,7 +100,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Technical Whitepapers/Linux, AI & the Blockchain.md",
+                "file": "Curriculum & Progress.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -117,7 +117,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Technical Whitepapers/Linux, AI & the Blockchain.md",
+                "file": "Curriculum & Progress.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               }
@@ -140,7 +140,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Technical Whitepapers/Linux, AI & the Blockchain.md"
+                "file": "Curriculum & Progress.md"
               }
             }
           },
@@ -174,6 +174,7 @@
   },
   "active": "507c8835a45ed1a1",
   "lastOpenFiles": [
+    "Technical Whitepapers/Linux, AI & the Blockchain.md",
     "papers/Cybercitizen's Toolkit.md",
     "papers/The Cycle of Cyber Threat Intelligence.md",
     "papers/Digital Forensics Essentials.md",
@@ -207,7 +208,6 @@
     "Progress & Achievements.md",
     "Technical Whitepapers/Airgap.md",
     "().md",
-    "Technical Whitepapers/Linux, AI & the Blockchain.md",
     "images/logo.png",
     "Technical Whitepapers/Stuxnet.md",
     "images/linux.png",
