@@ -1,16 +1,10 @@
----
-title: 
-description: 
-pubDate: 
-heroImage: 
-tags:
----
+Cybercitizen's Toolkit
 <img style="width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
 
 
 #### Orgs & Education 
 - [EFF](https://www.eff.org)
-- [Wikileaks](https://www.wikileaks.org)
+- [Wikileaks](https://www.wikileaks.org) - allows the opportunity to study and learn about code for software used by state-level cybersecurity entities
 - [The Linux Foundation](https://linuxfoundation.org)
 - [The Internet Society](https://www.internetsociety.org)
 - [CIS 5930 Offensive Network Security Spring 2017](https://www.cs.fsu.edu/~liux/courses/offensivenetsec/index.html)
