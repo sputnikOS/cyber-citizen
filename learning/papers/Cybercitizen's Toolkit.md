@@ -1,4 +1,4 @@
-#### The Cyber-Citizen's Toolkit
+#### Open-Source Cybe Toolkit
 
 <img style="width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
 
