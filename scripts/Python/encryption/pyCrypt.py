@@ -3,6 +3,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.backends import default_backend
 
 import sys
+import os
 import argparse
 import colorama
 from colorama import Fore, Style
@@ -10,21 +11,21 @@ import humanize
 
 def banner():
     
-    print(Fore.MAGENTA + """
+    print(Fore.LIGHTGREEN_EX + """
 
-======================================================================
+                    ======================================================================
 
-██████╗░░█████╗░░██████╗██████╗░██╗░░░██╗████████╗███╗░░██╗██╗██╗░░██╗
-██╔══██╗██╔══██╗██╔════╝██╔══██╗██║░░░██║╚══██╔══╝████╗░██║██║██║░██╔╝
-██████╔╝███████║╚█████╗░██████╔╝██║░░░██║░░░██║░░░██╔██╗██║██║█████═╝░
-██╔══██╗██╔══██║░╚═══██╗██╔═══╝░██║░░░██║░░░██║░░░██║╚████║██║██╔═██╗░
-██║░░██║██║░░██║██████╔╝██║░░░░░╚██████╔╝░░░██║░░░██║░╚███║██║██║░╚██╗
-╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝╚═╝░░╚═╝
-======================================================================
-                    pyCrypt v0.1.0
-"Usage: python pyCrypt.py <encrypt|decrypt> <message|file> <output_file>"
-=======================================================================
-
+                    ██████╗░░█████╗░░██████╗██████╗░██╗░░░██╗████████╗███╗░░██╗██╗██╗░░██╗
+                    ██╔══██╗██╔══██╗██╔════╝██╔══██╗██║░░░██║╚══██╔══╝████╗░██║██║██║░██╔╝
+                    ██████╔╝███████║╚█████╗░██████╔╝██║░░░██║░░░██║░░░██╔██╗██║██║█████═╝░
+                    ██╔══██╗██╔══██║░╚═══██╗██╔═══╝░██║░░░██║░░░██║░░░██║╚████║██║██╔═██╗░
+                    ██║░░██║██║░░██║██████╔╝██║░░░░░╚██████╔╝░░░██║░░░██║░╚███║██║██║░╚██╗
+                    ╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝╚═╝░░╚═╝
+                    ======================================================================
+                                        pyCrypt v0.1.0
+                                Cipher: pgp, fernet, caesar, aes256, enigma
+                    Usage: python pyCrypt.py <encrypt|decrypt> <message|file> <output_file>
+                    ========================================================================
 """ + Style.RESET_ALL)
     
 
@@ -35,7 +36,7 @@ def generate_key_pair():
         backend=default_backend()
     )
     public_key = private_key.public_key()
-
+    
     pem_public_key = public_key.public_bytes(
         encoding=serialization.Encoding.PEM,
         format=serialization.PublicFormat.SubjectPublicKeyInfo
@@ -89,20 +90,18 @@ if __name__ == "__main__":
 
         print(f"Key pair and encrypted message saved to {output_file_arg}_public_key.pem and {output_file_arg}_encrypted_message.bin")
 
-    elif command == "decrypt":
-        with open(output_file_arg + "_private_key.pem", 'rb') as private_key_file:
-            private_key = serialization.load_pem_private_key(
-                private_key_file.read(),
-                password=None,
-                backend=default_backend()
-            )
-
-        with open(input_arg, 'rb') as encrypted_message_file:
-            encrypted_message = encrypted_message_file.read()
-
-        decrypted_message = decrypt_message(private_key, encrypted_message)
-        print(f"Decrypted message: {decrypted_message.decode('utf-8')}")
-
-    else:
+    elif command == "decrypt": 
+        if not os.path.exists(output_file_arg + "_private_key.pem"): 
+            print(f"Error: Private key file '{output_file_arg}_private_key.pem' not found.") 
+            sys.exit(1)
+            
+        with open(output_file_arg + "_private_key.pem", 'rb') as private_key_file: private_key = serialization.load_pem_private_key( private_key_file.read(), password=None, backend=default_backend() )
+        
+        with open(input_arg, 'rb') as encrypted_message_file: 
+            encrypted_message = encrypted_message_file.read() 
+            decrypted_message = decrypt_message(private_key, encrypted_message) 
+            print(f"Decrypted message: {decrypted_message.decode('utf-8')}")
+        
+    else: 
         print("Invalid command. Use 'encrypt' or 'decrypt'.")
         sys.exit(1)
