@@ -19,7 +19,7 @@
 
 
 # The Cybercitizen Project
-## An in-development resource for documenting a self-taught learning & promoting the ideals of open-source software. The goal of this project is to attempt to gain a self-taught university computer science education using open-source.  
+## An in-development repository for promoting the ideals of open-source engineering.  
 <img style="height:150px;width:150px;" src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true"/>
 <hr>
 
