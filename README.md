@@ -1,27 +1,29 @@
 ``` 
                               
-                              /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\ 
-                              ( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )
-                               > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ < 
-                               /\_/\                                                          /\_/\ 
-                              ( o.o )                                                        ( o.o )
-                               > ^ <        ##########   #######   ##   ##   ####  ####       > ^ < 
-                               /\_/\       #    #   # # #   #  #   ##  ###  ##   ##           /\_/\ 
-                              ( o.o )      #    #   #  #    #  ###### # #### #   ##          ( o.o )
-                               > ^ <       #    #   # #     #  #   ###  ##  ##   ##           > ^ < 
-                               /\_/\        #####   ##      #  #   ##   ##   ####  ####       /\_/\ 
-                              ( o.o )                                                        ( o.o )
-                               > ^ <                                                          > ^ < 
-                               /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\ 
-                              ( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )
-                               > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <
+                            /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\ 
+                            ( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )
+                             > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ < 
+                             /\_/\                                                          /\_/\ 
+                            ( o.o )                                                        ( o.o )
+                             > ^ <        ##########   #######   ##   ##   ####  ####       > ^ < 
+                             /\_/\       #    #   # # #   #  #   ##  ###  ##   ##           /\_/\ 
+                            ( o.o )      #    #   #  #    #  ###### # #### #   ##          ( o.o )
+                             > ^ <       #    #   # #     #  #   ###  ##  ##   ##           > ^ < 
+                             /\_/\        #####   ##      #  #   ##   ##   ####  ####       /\_/\ 
+                            ( o.o )                                                        ( o.o )
+                             > ^ <                                                          > ^ < 
+                             /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\  /\_/\ 
+                            ( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )( o.o )
+                             > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <  > ^ <
  ```
 
+# The Cyber-Citizen Project
+## An in-development repository for learning engineering by promoting the ideals of open-source engineering.  
 
-# The Cybercitizen Project
-## An in-development repository for promoting the ideals of open-source engineering.  
 <img style="height:150px;width:150px;" src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true"/>
 <hr>
+
+## [Cyber-citizen's Toolkit](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/Cybercitizen's%20Toolkit.md)
 
 #### Code:
 ![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
