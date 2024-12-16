@@ -14,16 +14,16 @@
 - [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
 - [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
 - [Ultimate Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
+- [Street Level Surveillance](https://sls.eff.org/)
+  [Atlas of Surveillance](https://atlasofsurveillance.org/)
 
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
 - Prevent your ISP from selling your data with custom DNS:
-	- [Run a DNS Leak Test](https://www.dnsleaktest.com)
-	- Install [Quad9 DNS](https://on.quad9.net) or [Cloudflare](https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/DNS)
-  * Tor is slow and not secure. 
-  * Google is always tracking you, even if you "disable" tracking.
-  * I have been using [Proton](https://proton.me) and it has never let me down. For $10/month you have access to their VPN and encrypted services: Calendar, Drive, Email (and Bridge).
-  * [Speedtest](https://speed.cloudflare.com)
+- [Run a DNS Leak Test](https://www.dnsleaktest.com)
+- Install [Quad9 DNS](https://on.quad9.net) or [Cloudflare](https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/DNS) 
+- I have been using [Proton](https://proton.me) and it has never let me down. For $10/month you have access to their VPN and encrypted services: Calendar, Drive, Email (and Bridge).
+- [Speedtest](https://speed.cloudflare.com)
 
 
 ## Software 
@@ -35,8 +35,7 @@
 <a href="https://www.virtualbox.org/wiki/Downloads"><img src="https://img.shields.io/badge/VirtualBox-21416b?style=for-the-badge&logo=VirtualBox&logoColor=white"></a>
 
 
-### Linux Images (VMWare/VirtualBox/USB)
-
+## Linux Images (VMWare/VirtualBox/USB)
 #### Privacy:
 - [Tails](https://tails.net/install/index.en.html)
 - [Security Enhanced Linux](https://github.com/SELinuxProject/selinux) - Security Enhanced Linux was originally created by the NSA and was released as open-source
