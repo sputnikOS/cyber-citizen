@@ -2,7 +2,7 @@ import os
 import pstats
 import time
 import platform
-
+import subprocess
 import psutil
 import timeit
 import colorama
@@ -75,12 +75,33 @@ def network_performance():
     print(f"Bytes Sent: {humanize.naturalsize(network_speed.bytes_sent)}")
     print(f"Bytes Received: {humanize.naturalsize(network_speed.bytes_recv)}")
 
+def nvidia():
+# Command to execute
+    command = "nvidia-smi"
+
+    # Run the command and get the output
+    try:
+        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # Print the output
+        print("Output:")
+        print(Fore.LIGHTWHITE_EX+result.stdout)
+        
+        # Print any error message
+        if result.stderr:
+            print("Error:")
+            print(result.stderr)
+
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
+
+
 def main():
     display()
     cpu_performance()
     memory_performance()
     disk_performance()
     network_performance()
+    nvidia()
 
 if __name__ == "__main__":
     colorama.init
