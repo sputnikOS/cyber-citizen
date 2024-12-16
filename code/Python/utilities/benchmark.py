@@ -29,6 +29,8 @@ def banner():
   =======================================================================
     """ + Style.RESET_ALL)
 
+    
+
 def display():
     print("\033[91m\tTime: \033[0m" + time.ctime())
     print("\033[91m\tCurrent directory: \033[0m" + os.getcwd())
@@ -74,6 +76,43 @@ def network_performance():
     print(f"Packets Received: {humanize.naturalsize(network_speed.packets_recv)}")
     print(f"Bytes Sent: {humanize.naturalsize(network_speed.bytes_sent)}")
     print(f"Bytes Received: {humanize.naturalsize(network_speed.bytes_recv)}")
+    
+    import time
+
+# Function to test the speed of an operation
+def test_speed():
+    # Start the timer
+    start_time = time.time()
+
+    # Example operation: summing a large range of numbers
+    total = sum(range(1, 10**7))  # Adjust the range for more or less computation
+
+    # End the timer
+    end_time = time.time()
+
+    # Calculate the duration
+    duration = end_time - start_time
+
+    # Calculate the total size of numbers processed in bytes
+    # Assuming each integer takes 4 bytes
+    total_size_in_bytes = len(range(1, 10**7)) * 4  # 4 bytes per integer
+
+    # Convert the size to gigabytes (GB)
+    total_size_in_gb = total_size_in_bytes / (1024 ** 3)  # 1024^3 to convert to GB
+
+    # Calculate the speed in gigabytes per second (GB/s)
+    speed_in_gbps = total_size_in_gb / duration if duration > 0 else 0
+
+    # Output the formatted result
+    print("="*40)
+    print(" Speed Test Results ".center(40, "="))
+    print("="*40)
+    print(f"Operation: Summing numbers from 1 to 10 million")
+    print(f"Total Sum: {total:,}")  # Format the total with commas
+    print(f"Total Processed Data: {total_size_in_gb:.6f} GB")
+    print(f"Speed: {speed_in_gbps:.6f} GB/s")
+    print(f"Time Taken: {duration:.6f} seconds")
+    print("="*40)
 
 def nvidia():
 # Command to execute
@@ -82,17 +121,16 @@ def nvidia():
     # Run the command and get the output
     try:
         result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        # Print the output
-        print("Output:")
+        # Print the outpu
         print(Fore.LIGHTWHITE_EX+result.stdout)
         
         # Print any error message
         if result.stderr:
-            print("Error:")
             print(result.stderr)
 
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
+
 
 
 def main():
@@ -101,6 +139,7 @@ def main():
     memory_performance()
     disk_performance()
     network_performance()
+    test_speed()
     nvidia()
 
 if __name__ == "__main__":
