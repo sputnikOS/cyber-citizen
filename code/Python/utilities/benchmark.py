@@ -9,6 +9,7 @@ import colorama
 from colorama import Fore, Style
 import humanize
 
+# import GPUtil
 def banner():
     print(Fore.MAGENTA + """
     
@@ -116,22 +117,25 @@ def test_speed():
 
 def nvidia():
 # Command to execute
-    command = "nvidia-smi"
+    # command = "nvidia-smi"
 
-    # Run the command and get the output
-    try:
-        result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        # Print the outpu
-        print(Fore.LIGHTWHITE_EX+result.stdout)
+    # # Run the command and get the output
+    # try:
+    #     result = subprocess.run(command, shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    #     # Print the outpu
+    #     print(Fore.LIGHTWHITE_EX+result.stdout)
         
-        # Print any error message
-        if result.stderr:
-            print(result.stderr)
+    #     # Print any error message
+    #     if result.stderr:
+    #         print(result.stderr)
 
-    except subprocess.CalledProcessError as e:
-        print(f"An error occurred: {e}")
+    # except subprocess.CalledProcessError as e:
+    #     print(f"An error occurred: {e}")
 
-
+# Get all available GPU devices
+    # gpus = GPUtil.getGPUs()
+    print()
+# 
 
 def main():
     display()
