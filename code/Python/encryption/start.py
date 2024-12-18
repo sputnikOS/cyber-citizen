@@ -12,7 +12,7 @@ def banner():
           
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-~                                                                                                                                           ~
+                                                                                                                                           
 
                                 ██████╗░░█████╗░░██████╗██████╗░██╗░░░██╗████████╗███╗░░██╗██╗██╗░░██╗
                                 ██╔══██╗██╔══██╗██╔════╝██╔══██╗██║░░░██║╚══██╔══╝████╗░██║██║██║░██╔╝
@@ -20,19 +20,7 @@ def banner():
                                 ██╔══██╗██╔══██║░╚═══██╗██╔═══╝░██║░░░██║░░░██║░░░██║╚████║██║██╔═██╗░
                                 ██║░░██║██║░░██║██████╔╝██║░░░░░╚██████╔╝░░░██║░░░██║░╚███║██║██║░╚██╗
                                 ╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝╚═╝░░╚        
-                                                                                                                                        
-      ,ad8888ba,                                                 88                                                                        
-     d8"'    `"8b                                         ,d     88                                                                        
-    d8'                                                   88     88                                                                        
-    88             8b,dPPYba,  8b       d8  8b,dPPYba,  MM88MMM  88   ,d8   ,adPPYba,   ,adPPYba,  8b,dPPYba,    ,adPPYba,  8b,dPPYba,     
-    88             88P'   "Y8  `8b     d8'  88P'    "8a   88     88 ,a8"   a8P_____88  a8P_____88  88P'    "8a  a8P_____88  88P'   "Y8     
-    Y8,            88           `8b   d8'   88       d8   88     8888[     8PP"""""""  8PP"""""""  88       d8  8PP"""""""  88             
-     Y8a.    .a8P  88            `8b,d8'    88b,   ,a8"   88,    88`"Yba,  "8b,   ,aa  "8b,   ,aa  88b,   ,a8"  "8b,   ,aa  88             
-      `"Y8888Y"'   88              Y88'     88`YbbdP"'    "Y888  88   `Y8a  `"Ybbd8"'   `"Ybbd8"'  88`YbbdP"'    `"Ybbd8"'  88             
-                                   d8'      88                                                     88                                      
-                                  d8'       88                                                     88                                      
-
-          
+                                       
                                                         
                                                         .sS$$$$$$$$$$$$$$Ss.
                                                     .$$$$$$$$$$$$$$$$$$$$$$s.
@@ -63,6 +51,8 @@ def banner():
                                                     : $$$$$$`.'    .'
                                                         $$$$   `. .'
                                                                 `
+          
+        
                                                                                                                                     
 ==============================================================================================================================================
 """ + Style.RESET_ALL)
@@ -84,13 +74,15 @@ def list_ciphers():
 # Function to display help information
 def help_menu():
     print(Fore.YELLOW + """
-        Usage: python pyCrypt.py <command> <cipher> <input_type> <output_file>
+        Usage: python start.py <command> <cipher> <input_type> <output_file>
 
         Commands:
         ----------
         encrypt   : Encrypt a message or file
         decrypt   : Decrypt a message or file
         generate  : Generate necessary keys (e.g., for Fernet)
+        help      : Help
+        list      : List ciphers
 
         Ciphers:
         --------
@@ -106,8 +98,8 @@ def help_menu():
         file      : Encrypt or decrypt a file
 
         Example:
-        python pyCrypt.py encrypt fernet message "Hello World" output.txt
-        python pyCrypt.py decrypt fernet file input.txt output.txt
+        python start.py encrypt fernet message "Hello World" output.txt
+        python start.py decrypt fernet file input.txt output.txt
 
     """ + Style.RESET_ALL)
 
@@ -161,26 +153,10 @@ def decrypt():
     # Implement actual decryption logic based on cipher and input type
 
 def generate():
-    print("Generating keys...")
-    # Implement key generation (for example, Fernet key generation)
-    # Initialize the GPG instance
-    gpg = gnupg.GPG()
-
-    # Define the key parameters
-    input_data = gpg.gen_key_input(
-        name_email='your-email@example.com',  # Replace with your email
-        passphrase='your-strong-passphrase',  # Replace with your passphrase
-    )
-
-    # Generate the key
-    key = gpg.gen_key(input_data)
-
-    # Display key information
-    print("PGP Key generated successfully.")
-    print("Key ID:", key.fingerprint)
-
-    return key
+    print ("Generate")
 
 if __name__ == "__main__":
     banner()
+    help_menu()
+    list_ciphers()
     main()
