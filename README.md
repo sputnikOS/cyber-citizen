@@ -53,8 +53,11 @@
 
 ### An in-development repository for learning engineering by promoting the ideals of open-source engineering.  
 
+# Publications
 ## [Cyber-citizen's Toolkit](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/Cybercitizen's%20Toolkit.md)
+## [Whitepaper: Airgap](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/airgap.md)
 <hr>
+
 
 
 
