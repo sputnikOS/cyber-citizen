@@ -1,3 +1,4 @@
+import gnupg
 import argparse
 import sys
 from colorama import Fore, Style
@@ -5,15 +6,21 @@ from colorama import Fore, Style
 # Function to print banner with color
 def banner():
     print(Fore.LIGHTGREEN_EX + """
-                    ======================================================================
 
-                    ██████╗░░█████╗░░██████╗██████╗░██╗░░░██╗████████╗███╗░░██╗██╗██╗░░██╗
-                    ██╔══██╗██╔══██╗██╔════╝██╔══██╗██║░░░██║╚══██╔══╝████╗░██║██║██║░██╔╝
-                    ██████╔╝███████║╚█████╗░██████╔╝██║░░░██║░░░██║░░░██╔██╗██║██║█████═╝░
-                    ██╔══██╗██╔══██║░╚═══██╗██╔═══╝░██║░░░██║░░░██║░░░██║╚████║██║██╔═██╗░
-                    ██║░░██║██║░░██║██████╔╝██║░░░░░╚██████╔╝░░░██║░░░██║░╚███║██║██║░╚██╗
-                    ╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝╚═╝░░╚═╝
-                    ======================================================================
+
+          
+          
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                                                                                           
+
+                                ██████╗░░█████╗░░██████╗██████╗░██╗░░░██╗████████╗███╗░░██╗██╗██╗░░██╗
+                                ██╔══██╗██╔══██╗██╔════╝██╔══██╗██║░░░██║╚══██╔══╝████╗░██║██║██║░██╔╝
+                                ██████╔╝███████║╚█████╗░██████╔╝██║░░░██║░░░██║░░░██╔██╗██║██║█████═╝░
+                                ██╔══██╗██╔══██║░╚═══██╗██╔═══╝░██║░░░██║░░░██║░░░██║╚████║██║██╔═██╗░
+                                ██║░░██║██║░░██║██████╔╝██║░░░░░╚██████╔╝░░░██║░░░██║░╚███║██║██║░╚██╗
+                                ╚═╝░░╚═╝╚═╝░░╚═╝╚═════╝░╚═╝░░░░░░╚═════╝░░░░╚═╝░░░╚═╝░░╚══╝╚═╝╚═╝░░╚        
+                                       
                                                         
                                                         .sS$$$$$$$$$$$$$$Ss.
                                                     .$$$$$$$$$$$$$$$$$$$$$$s.
@@ -44,8 +51,10 @@ def banner():
                                                     : $$$$$$`.'    .'
                                                         $$$$   `. .'
                                                                 `
-                                                
-                    ========================================================================
+          
+        
+                                                                                                                                    
+==============================================================================================================================================
 """ + Style.RESET_ALL)
 
 # Function to display available ciphers
@@ -65,13 +74,15 @@ def list_ciphers():
 # Function to display help information
 def help_menu():
     print(Fore.YELLOW + """
-        Usage: python pyCrypt.py <command> <cipher> <input_type> <output_file>
+        Usage: python start.py <command> <cipher> <input_type> <output_file>
 
         Commands:
         ----------
         encrypt   : Encrypt a message or file
         decrypt   : Decrypt a message or file
         generate  : Generate necessary keys (e.g., for Fernet)
+        help      : Help
+        list      : List ciphers
 
         Ciphers:
         --------
@@ -87,8 +98,8 @@ def help_menu():
         file      : Encrypt or decrypt a file
 
         Example:
-        python pyCrypt.py encrypt fernet message "Hello World" output.txt
-        python pyCrypt.py decrypt fernet file input.txt output.txt
+        python start.py encrypt fernet message "Hello World" output.txt
+        python start.py decrypt fernet file input.txt output.txt
 
     """ + Style.RESET_ALL)
 
@@ -142,9 +153,10 @@ def decrypt():
     # Implement actual decryption logic based on cipher and input type
 
 def generate():
-    print("Generating keys...")
-    # Implement key generation (for example, Fernet key generation)
+    print ("Generate")
 
 if __name__ == "__main__":
     banner()
+    help_menu()
+    list_ciphers()
     main()

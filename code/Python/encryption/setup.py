@@ -18,7 +18,8 @@ def main():
         "hashlib", # Advanced hashing (if needed separately)
         "colorama",
         "argparse",
-        "gnupg"
+        "gnupg",
+        "pycrypto"
     ]
 
     print("Starting installation of required packages...\n")
