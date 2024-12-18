@@ -9,7 +9,6 @@ from colorama import Fore, Style
 import humanize
 import wmi
 
-
 # Optional: Install GPUtil for GPU monitoring if needed (currently commented out)
 # import GPUtil
 
@@ -46,18 +45,15 @@ def cpu_performance():
     print(Fore.LIGHTGREEN_EX + f"CPU Usage: {cpu_percent}%" + Style.RESET_ALL)
     print(Fore.LIGHTGREEN_EX + f"CPU Count: {count} cores" + Style.RESET_ALL)
 
-
 def get_cpu_temp_windows():
+    """Get CPU temperature on Windows."""
     w = wmi.WMI(namespace="root\\wmi")
     temperature_info = w.MSAcpi_ThermalZoneTemperature()
     for temp in temperature_info:
         # WMI temperature is in tenths of Kelvin, convert it to Celsius
         temp_celsius = (temp.CurrentTemperature / 10) - 273.15
         return temp_celsius
-    print(temp_celsius)
     return "Unable to get CPU temperature"
-
-
 
 def memory_performance():
     """Display memory performance."""
@@ -104,11 +100,7 @@ def test_speed():
     print("=" * 40)
 
 def nvidia():
-    # """Display GPU info using nvidia-smi (if available)."""
-    # Uncomment and install GPUtil if you wish to use it for GPU monitoring
-    # gpus = GPUtil.getGPUs()
-    
-    # For nvidia-smi command, run if you have an NVIDIA GPU installed
+    """Display GPU info using nvidia-smi (if available)."""
     try:
         result = subprocess.run("nvidia-smi", shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         print(Fore.LIGHTWHITE_EX + result.stdout)
@@ -133,9 +125,5 @@ def main():
 if __name__ == "__main__":
     colorama.init()  # Ensure colorama is initialized
     banner()
-
-# This will prompt for administrator access on Windows
-    # subprocess.run(["runas", "/user:Administrator", "py benchmark.py"])
-
     execution_time = timeit.timeit(main, number=1)
     print(f"\nBenchmark completed in {execution_time:.2f} seconds.")

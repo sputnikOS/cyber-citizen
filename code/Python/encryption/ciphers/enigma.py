@@ -1,6 +1,7 @@
 import random
 import sys
 
+
 # Enigma-like substitution cipher settings
 # Here, we'll use a simple substitution cipher with a randomized mapping
 alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
