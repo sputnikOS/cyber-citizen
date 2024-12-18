@@ -33,3 +33,9 @@
 ![https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
 ![https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
+
+
+# Projects
+## Python Encryption
+![Capture](https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068)
+
