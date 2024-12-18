@@ -4,6 +4,8 @@ import colorama
 from colorama import Fore, Style
 import humanize
 
+import humanize.locale
+
 def make_rest_request():
     url = "https://api.magicthegathering.io/v1/formats"  # Example URL
 
@@ -13,10 +15,10 @@ def make_rest_request():
 
         # Parse JSON response
         data = response.json()
-        formatted_data = json.dumps(data, indent=4, sort_keys=True)  # Format JSON response
+        formatted_data = json.dumps(data['formats'], indent=4, sort_keys=True)  # Format JSON response
         print("Response received:")
         # print(formatted_data)
-        print(Fore.LIGHTGREEN_EX + formatted_data)
+        print(Fore.LIGHTGREEN_EX + humanize.locale(formatted_data))
         return data
 
     except requests.exceptions.HTTPError as http_err:

@@ -1,11 +1,14 @@
 import hashlib
 import time
-import argparse
 from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
 
+# Globals
+blockchain = []
+pending_transactions = []
 
+# Classes
 class Wallet:
     def __init__(self):
         self.balance = 0
@@ -30,10 +33,7 @@ class Token:
     def transfer(self, sender, receiver, amount):
         if sender in self.balance and self.balance[sender] >= amount:
             self.balance[sender] -= amount
-            if receiver in self.balance:
-                self.balance[receiver] += amount
-            else:
-                self.balance[receiver] = amount
+            self.balance[receiver] = self.balance.get(receiver, 0) + amount
             return True
         return False
 
@@ -55,8 +55,9 @@ class Block:
         self.hash = hash
 
 
+# Blockchain Functions
 def calculate_hash(index, previous_hash, timestamp, transactions):
-    value = str(index) + str(previous_hash) + str(timestamp) + str(transactions)
+    value = str(index) + str(previous_hash) + str(timestamp) + str(sorted(transactions, key=lambda x: str(x)))
     return hashlib.sha256(value.encode()).hexdigest()
 
 
@@ -71,6 +72,7 @@ def create_new_block(previous_block, transactions):
     return Block(index, previous_block.hash, timestamp, transactions, hash)
 
 
+# Routes
 @app.route('/')
 def index():
     return render_template('index.html', blockchain=blockchain)
@@ -78,43 +80,46 @@ def index():
 
 @app.route('/blockchain', methods=['GET'])
 def get_blockchain():
-    return jsonify({'blockchain': blockchain})
+    return jsonify({'blockchain': [block.__dict__ for block in blockchain]})
 
 
 @app.route('/transaction', methods=['POST'])
-def add_transaction(pending_transactions):
+def add_transaction():
     data = request.get_json()
-    sender = data['sender']
-    recipient = data['recipient']
-    amount = data['amount']
+    sender = data.get('sender')
+    recipient = data.get('recipient')
+    amount = data.get('amount')
 
-    # Create a new transaction and add it to the pending transactions list
-    new_transaction = Transaction(sender, recipient, amount, "your_token_instance")
-    pending_transactions.append(new_transaction.__dict__)
+    if not sender or not recipient or not amount:
+        return jsonify({'error': 'Invalid transaction data.'}), 400
 
-    response = {'message': f'Transaction added to pending transactions.'}
-    return jsonify(response), 201
+    # Check token balance
+    if token.transfer(sender, recipient, amount):
+        new_transaction = Transaction(sender, recipient, amount, token.symbol)
+        pending_transactions.append(new_transaction.__dict__)
+        return jsonify({'message': 'Transaction added to pending transactions.'}), 201
+    else:
+        return jsonify({'error': 'Insufficient balance or invalid sender.'}), 400
 
 
-# Example endpoint to mine a new block
 @app.route('/mine', methods=['GET'])
-def mine_block(pending_transactions):
+def mine_block():
+    if not pending_transactions:
+        return jsonify({'error': 'No transactions to mine.'}), 400
+
     previous_block = blockchain[-1]
-    transactions = pending_transactions  # Include pending transactions in the new block
+    transactions = pending_transactions.copy()  # Include pending transactions
     new_block = create_new_block(previous_block, transactions)
 
-    # Clear pending transactions after mining a block
+    # Clear pending transactions and add the block to the blockchain
     pending_transactions.clear()
+    blockchain.append(new_block)
 
-    response = {
-        'message': 'New block mined successfully.',
-        'block': new_block.__dict__
-    }
-    return render_template('mine.html', message=response['message'], block=response['block'])
+    return render_template('mine.html', message='New block mined successfully.', block=new_block.__dict__)
 
 
 if __name__ == '__main__':
-    blockchain = [create_genesis_block()]
+    blockchain.append(create_genesis_block())
     token = Token("OpenSputnik", "OS", 100)
     wallet = Wallet()
     token.mint(wallet.public_key, 500)
