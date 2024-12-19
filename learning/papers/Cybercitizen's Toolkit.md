@@ -3,6 +3,7 @@
 <img style="width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
 
 #### Organizations & Learning 
+- [Red Hat Guide to Security](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/4/html/security_guide/index#index)
 - [Electronic Frontier Foundation](https://www.eff.org)
 - [Wikileaks: Vault 7](https://wikileaks.org/ciav7p1/) - Analysis of the tools used by the CIA
 - [The Linux Foundation](https://linuxfoundation.org)
@@ -15,7 +16,7 @@
 - [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
 - [Ultimate Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
 - [Street Level Surveillance](https://sls.eff.org/)
-  [Atlas of Surveillance](https://atlasofsurveillance.org/)
+- [Atlas of Surveillance](https://atlasofsurveillance.org/)
 
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
