@@ -1,6 +1,6 @@
 # Cybercitizen's Toolkit & Reference 
 
-<img style="width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
+<img style="text-align:center;width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
 
 #### Organizations & Learning 
 - [Red Hat Guide to Security](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/4/html/security_guide/index#index)
