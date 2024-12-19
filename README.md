@@ -46,15 +46,12 @@
  ```
 
 # Learning 
-## [Cyberintelligence Library](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/cyberintelligence)
+## [Secure Software Engineering Library](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/cyberintelligence)
 ## [Audio Engineering Library](https://github.com/sputnikOS/open-source/tree/main/learning/audio-engineering)
 ## [SEI CERT Course: Software Security Engineering](https://github.com/sputnikOS/open-source/tree/main/learning/courses/SEI%20CERT)
 ## [SANS Course: The Cycle of Cyberthreat Intelligence](https://github.com/sputnikOS/open-source/blob/main/learning/papers/The%20Cycle%20of%20Cyber%20Threat%20Intelligence.md)
 ## [SANS Course: Digital Forensics Essentials](https://github.com/sputnikOS/open-source/blob/main/learning/papers/Digital%20Forensics%20Essentials.md)
-
-
-# Papers
-## [Cyber-citizen's Toolkit](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/Cybercitizen's%20Toolkit.md)
+## [Toolkit](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/Cybercitizen's%20Toolkit.md)
 ## [Whitepaper: Airgap](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/airgap.md)
 <hr>
 
