@@ -1,4 +1,4 @@
-hitepaper: Airgap Computer Infrastructure: Enhancing Security in Critical Environments
+Whitepaper: Airgap Computer Infrastructure: Enhancing Security in Critical Environments
 Abstract
 
 Airgap computer infrastructure is a critical concept in enhancing cybersecurity, particularly for sensitive environments such as military, financial institutions, and governmental agencies. By isolating computers or networks from the internet and other unsecured networks, an airgap ensures that even if one system is compromised, the potential for spreading threats is minimized. This whitepaper explores the benefits, challenges, and best practices of implementing airgap infrastructure, highlighting its importance in the protection of highly sensitive data and systems.
