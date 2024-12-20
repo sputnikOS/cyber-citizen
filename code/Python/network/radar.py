@@ -1,50 +1,62 @@
-import sys
-from scapy.all import ARP, Ether, srp
-from prettytable import PrettyTable
+import psutil
+import curses
+import time
+import math
 
-def scan_network(interface):
-    try:
-        # Create ARP request
-        arp = ARP(pdst="192.168.1.0/24")  # Replace with your network range
+# Initialize curses
+stdscr = curses.initscr()
+curses.curs_set(0)
+stdscr.nodelay(1)
+stdscr.timeout(100)
 
-        # Create Ethernet frame
-        ether = Ether(dst="ff:ff:ff:ff:ff:ff")
+# Function to draw radar-like animation
+def draw_radar(stdscr):
+    height, width = stdscr.getmaxyx()
+    center_y = height // 2
+    center_x = width // 2
+    radius = min(center_y, center_x) - 2
+    angle_increment = 360 / 12  # 12 segments to simulate radar sweep
 
-        # Combine into a single packet
-        packet = ether / arp
+    while True:
+        stdscr.clear()
 
-        # Send the packet and capture responses
-        result = srp(packet, timeout=3, iface=interface, verbose=False)[0]
+        # Get network I/O stats
+        net_io = psutil.net_io_counters()
+        bytes_sent = net_io.bytes_sent
+        bytes_recv = net_io.bytes_recv
 
-        devices = []
-        for sent, received in result:
-            devices.append({'IP': received.psrc, 'MAC': received.hwsrc})
+        # Calculate traffic intensity (for radar blip strength)
+        total_traffic = (bytes_sent + bytes_recv) / 1e6  # in MB
+        intensity = min(1.0, total_traffic / 10)  # Normalize to radar intensity
 
-        return devices
+        # Draw the radar circle
+        stdscr.addstr(center_y, center_x, "o", curses.color_pair(1))
 
-    except Exception as e:
-        print(f"Error: {e}")
-        return []
+        # Simulate radar sweep (clockwise)
+        for angle in range(0, 360, int(angle_increment)):
+            radian = math.radians(angle)
+            offset_x = int(radius * math.cos(radian))
+            offset_y = int(radius * math.sin(radian))
 
-def print_devices(devices):
-    table = PrettyTable(["IP Address", "MAC Address"])
-    for device in devices:
-        table.add_row([device['IP'], device['MAC']])
-    print(table)
+            # Adjust blip size based on traffic intensity
+            blip_size = int(radius * intensity)
+            if blip_size > 0:
+                stdscr.addstr(center_y + offset_y, center_x + offset_x, ".", curses.color_pair(2))
 
-def main():
-    if len(sys.argv) != 2:
-        print("Usage: python network_radar.py <interface>")
-        sys.exit(1)
+        # Display network traffic info
+        stdscr.addstr(1, 1, f"Sent: {bytes_sent / 1e6:.2f} MB  Recv: {bytes_recv / 1e6:.2f} MB", curses.color_pair(3))
 
-    interface = sys.argv[1]
-    print(f"Scanning network on interface {interface}...")
+        # Refresh the screen and wait
+        stdscr.refresh()
+        time.sleep(1)
 
-    devices = scan_network(interface)
-    if devices:
-        print_devices(devices)
-    else:
-        print("No devices found.")
+# Setup color pairs
+curses.start_color()
+curses.init_pair(1, curses.COLOR_GREEN, curses.COLOR_BLACK)  # Radar circle
+curses.init_pair(2, curses.COLOR_CYAN, curses.COLOR_BLACK)   # Radar blip
+curses.init_pair(3, curses.COLOR_WHITE, curses.COLOR_BLACK)  # Traffic info
 
-if __name__ == "__main__":
-    main()
+try:
+    draw_radar(stdscr)
+finally:
+    curses.endwin()

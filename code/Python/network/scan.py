@@ -1,43 +1,66 @@
-import scapy.all as scapy
-import socket
+import argparse
+import shodan
 import sys
+import json
 
-#  Working
+# Replace with your actual Shodan API key
+API_KEY = '5DjnnKaMwglBCIYf0MgXrM1NoLhYpPc5'
 
-def scan_network(ip_range):
-    # Create an ARP request packet to get the MAC address of the IP
-    arp_request = scapy.ARP(pdst=ip_range)
-    ether_frame = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")  # Broadcast MAC address
-    arp_request_broadcast = ether_frame / arp_request
-
-    # Send the ARP request and receive the response
-    answered_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
-
-    devices_list = []
-    for element in answered_list:
-        device_info = {
-            "ip": element[1].psrc,
-            "mac": element[1].hwsrc,
-            "name": get_device_name(element[1].psrc)
-        }
-        devices_list.append(device_info)
-    return devices_list
-
-def get_device_name(ip):
+def get_ip_details(ip_address):
+    """Retrieve detailed information for the given IP address using Shodan."""
     try:
-        device_name = socket.gethostbyaddr(ip)[0]
-    except (socket.herror, socket.gaierror):
-        device_name = "Unknown"
-    return device_name
+        # Initialize Shodan API
+        api = shodan.Shodan(API_KEY)
+        
+        # Perform the search query for the given IP
+        result = api.host(ip_address)
+        
+        # Display basic information
+        print(f"IP Information for {ip_address}:")
+        print(f"Organization: {result.get('org', 'n/a')}")
+        print(f"Location: {result.get('city', 'n/a')}, {result.get('country_name', 'n/a')}")
+        print(f"ASN: {result.get('asn', 'n/a')}")
+        print(f"OS: {result.get('os', 'n/a')}")
+        print(f"Last Update: {result.get('last_update', 'n/a')}")
+        
+        # Detailed services info
+        print("\nServices:")
+        for service in result.get('data', []):
+            print(f"Port: {service['port']} - {service.get('product', 'n/a')} "
+                  f"({service.get('info', 'n/a')})")
+            print(f"Banner: {service.get('data', 'n/a')}")
+            print("=============================================")
+        
+        # Get the vulnerabilities if available
+        if result.get('vulns'):
+            print("\nVulnerabilities:")
+            for vuln, details in result['vulns'].items():
+                print(f"{vuln}: {details['description']}")
+                print("=============================================")
+        else:
+            print("\nNo vulnerabilities found.")
 
-def print_devices(devices_list):
-    print("IP Address\t\tMAC Address\t\tDevice Name")
-    print("--------------------------------------------------------------")
-    for device in devices_list:
-        print(f"{device['ip']}\t\t{device['mac']}\t\t{device['name']}")
+        # Display Shodan raw data (optional for in-depth analysis)
+        print("\nRaw Data:")
+        print(json.dumps(result, indent=4))
+        
+    except shodan.APIError as e:
+        print(f"Error: {e}")
+
+def main():
+    # Command-line argument parsing
+    parser = argparse.ArgumentParser(description="Shodan IP In-Depth Scan")
+    parser.add_argument("ip", help="IP address to scan")
+    args = parser.parse_args()
+
+    # Validate the IP address argument
+    ip_address = args.ip
+    if not ip_address:
+        print("Please provide a valid IP address to scan.")
+        sys.exit(1)
+
+    # Perform the scan
+    get_ip_details(ip_address)
 
 if __name__ == "__main__":
-    input = sys.argv[1]
-    ip_range = input  # Adjust to your network range
-    devices = scan_network(ip_range)
-    print_devices(devices)
+    main()
