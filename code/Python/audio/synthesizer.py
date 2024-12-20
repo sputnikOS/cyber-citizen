@@ -21,7 +21,7 @@ def play_tone(frequency, duration, sample_rate=44100, amplitude=0.5):
     """
     Generate and play a sine wave of a given frequency.
     
-    :param frequency: Frequency of the tone in Hz.
+    :param frequency: Frequency of the tone in Hz.  
     :param duration: Duration of the tone in seconds.
     :param sample_rate: Sample rate (default is 44100 Hz).
     :param amplitude: Amplitude of the tone (default is 0.5).
