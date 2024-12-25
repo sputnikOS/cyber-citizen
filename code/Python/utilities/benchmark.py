@@ -8,6 +8,8 @@ import colorama
 from colorama import Fore, Style
 import humanize
 import wmi
+import sounddevice as sd
+import argparse
 
 # Optional: Install GPUtil for GPU monitoring if needed (currently commented out)
 # import GPUtil
@@ -21,11 +23,40 @@ def banner():
   #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
   #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
   ======================================================================
+                    Benchmark
                     version 0.1.2-alpha (curiosity)
                     License: GPLv3
                     https://www.github.com/sputnikOS
   =======================================================================
     """ + Style.RESET_ALL)
+
+
+
+def list_network_interfaces():
+    # Get the network interfaces
+    interfaces = psutil.net_if_addrs()
+
+    # Print the interfaces and their addresses
+    for interface, addresses in interfaces.items():
+        print(f"Interface: {interface}")
+        for address in addresses:
+            print(f"  Address Family: {address.family.name}")
+            print(f"  Address: {address.address}")
+            print(f"  Netmask: {address.netmask}")
+            print(f"  Broadcast: {address.broadcast}")
+            print()
+# Function to list audio devices
+def list_audio_devices():
+    devices = sd.query_devices()  # Get list of all audio devices
+    print("Available audio devices:\n")
+    
+    for idx, device in enumerate(devices):
+        print(f"Device #{idx}: {device['name']}")
+        print(f"  - Default sample rate: {device['default_samplerate']} Hz")
+        print(f"  - Input channels: {device['max_input_channels']}")
+        print(f"  - Output channels: {device['max_output_channels']}")
+        print(f"  - Host API: {device['hostapi']}\n")
+
 
 def display_system_info():
     """Display system information."""
@@ -45,15 +76,11 @@ def cpu_performance():
     print(Fore.LIGHTGREEN_EX + f"CPU Usage: {cpu_percent}%" + Style.RESET_ALL)
     print(Fore.LIGHTGREEN_EX + f"CPU Count: {count} cores" + Style.RESET_ALL)
 
-def get_cpu_temp_windows():
+def get_battery():
     """Get CPU temperature on Windows."""
-    w = wmi.WMI(namespace="root\\wmi")
-    temperature_info = w.MSAcpi_ThermalZoneTemperature()
-    for temp in temperature_info:
-        # WMI temperature is in tenths of Kelvin, convert it to Celsius
-        temp_celsius = (temp.CurrentTemperature / 10) - 273.15
-        return temp_celsius
-    return "Unable to get CPU temperature"
+    w = psutil.sensors_battery()
+    print(w)
+
 
 def memory_performance():
     """Display memory performance."""
@@ -111,19 +138,21 @@ def nvidia():
     except subprocess.CalledProcessError as e:
         print(f"An error occurred: {e}")
 
+
 def main():
-    """Main function to run all benchmarks."""
-    display_system_info()
-    cpu_performance()
-    memory_performance()
-    disk_performance()
-    network_performance()
-    test_speed()
-    # get_cpu_temp_windows()
-    nvidia()
+    parser = argparse.ArgumentParser(description="Execute a command from the command line") 
+    parser.add_argument('stats', type=str, help='Command to execute')
+    args = parser.parse_args()
+
+    banner()
+    if args.stats:
+        display_system_info()
+        disk_performance()
+
 
 if __name__ == "__main__":
     colorama.init()  # Ensure colorama is initialized
-    banner()
+    # banner()
+    # main()
     execution_time = timeit.timeit(main, number=1)
     print(f"\nBenchmark completed in {execution_time:.2f} seconds.")
