@@ -66,8 +66,10 @@
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![Capture](https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068)
 
-
-###x
+### Blockchain
+![https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+![Flask](https://img.shields.io/badge/C-%23000.svg?style=for-the-badge&logo=c&logoColor=white)
+![https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
 
 # Learning 
 ## [Secure Software Engineering Library](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/cyberintelligence)
