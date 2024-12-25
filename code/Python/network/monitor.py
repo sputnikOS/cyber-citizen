@@ -1,38 +1,24 @@
-import pyshark
+from scapy.all import ARP, sniff
+from datetime import datetime
 
+def process_packet(packet):
+    """Process ARP packets to detect devices."""
+    if ARP in packet and (packet[ARP].op == 1 or packet[ARP].op == 2):  # ARP request or reply
+        mac_address = packet[ARP].hwsrc
+        ip_address = packet[ARP].psrc
+        print(f"[{datetime.now()}] Device detected: IP={ip_address}, MAC={mac_address}")
 
-def capture_packets(interface='eth0', packet_count=10):
-    """
-    Captures live packets from the specified network interface and prints their details.
-
-    :param interface: The network interface to capture packets from (default is 'eth0').
-    :param packet_count: The number of packets to capture.
-    """
-    # Capture live packets from the specified interface
-    capture = pyshark.LiveCapture(interface=interface)
-    
-    print(f"Starting packet capture on interface: {interface}")
-    
-    for packet in capture.sniff_continuously(packet_count=packet_count):
-        print_packet_details(packet)
-
-def print_packet_details(packet):
-    """
-    Prints detailed information about a captured packet.
-
-    :param packet: The packet to print details for.
-    """
+def monitor_network(interface):
+    """Start sniffing on the specified network interface."""
+    print(f"Monitoring network on interface: {interface}")
+    print("Press Ctrl+C to stop.")
     try:
-        print(f"\nPacket Number: {packet.number}")
-        print(f"Timestamp: {packet.sniff_time}")
-        print(f"Source Address: {packet.ip.src}")
-        print(f"Destination Address: {packet.ip.dst}")
-        print(f"Protocol: {packet.highest_layer}")
-        print(f"Info: {packet.info}")
-    except AttributeError as e:
-        print(f"AttributeError: {e}")
+        sniff(filter="arp", prn=process_packet, iface=interface, store=0)
+    except KeyboardInterrupt:
+        print("\nStopping network monitor.")
+    except Exception as e:
+        print(f"Error: {e}")
 
 if __name__ == "__main__":
-    interface = 'eth0'  # Replace with your network interface (e.g., 'en0', 'wlan0')
-    packet_count = 10   # Number of packets to capture
-    capture_packets(interface, packet_count)
+    interface = input("Enter the network interface to monitor (e.g., eth0, wlan0): ")
+    monitor_network(interface)

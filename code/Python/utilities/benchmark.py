@@ -20,37 +20,39 @@ from prettytable import PrettyTable
 
 
 def banner():
-    print(Fore.LIGHTWHITE_EX + """
- =======================================================================
-  ####    #    #### ##### #   # ##### #   # #   # #   #      ###   ####
-  #   #  # #  #     #   #  # #    #   #   # #  ## #  #      #   # #
-  ####  ##### #     #   #   #     #   ##### # # # ###       #   # #
-  #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
-  #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
-  ======================================================================
-                    System Benchmark and Monitoring Tool
-                    version 1.1.2-beta-(curiosity)
-                    License: GPLv3
+    print(Fore.LIGHTCYAN_EX + """
+=======================================================================================================
+                    ####    #    #### ##### #   # ##### #   # #   # #   #      ###   ####
+                    #   #  # #  #     #   #  # #    #   #   # #  ## #  #      #   # #
+                    ####  ##### #     #   #   #     #   ##### # # # ###       #   # #
+                    #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
+                    #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
+=======================================================================================================
+                                
                     https://www.github.com/sputnikOS
+                            0.1.2-curiosity 
+                                GPLv3
                   
-                  usage: benchmark.py [option]
+                    usage: benchmark.py [option]
                     options:
-                    -h, --help  show this help message and exit
-                    --all       Run all benchmarks
-                    --cpu       Display CPU performance
-                    --memory    Display memory performance
-                    --disk      Display disk performance
-                    --network   Display network performance
-                    --speed     Run speed test
-                    --gpu       Check GPU info
-                    --battery   Display battery info (Windows)
-                    --info      Display basic system info
+                        -h, --help  show this help message and exit
+                        --all       Run all benchmarks
+                        --cpu       Display CPU performance
+                        --memory    Display memory performance
+                        --disk      Display disk performance
+                        --network   Display network performance
+                        --speed     Run speed test
+                        --gpu       Check GPU info
+                        --battery   Display battery info (Windows)
+                        --info      Display basic system info
           
-===========================================================================      
-===========================================================================
+========================================================================================================      
+========================================================================================================
           
     """ + Style.RESET_ALL)
 
+def clearScr():
+    os.system('cls ')
 
 
 def list_network_interfaces():
@@ -101,8 +103,8 @@ def cpu_performance():
 
 def get_battery():
     """Get CPU temperature on Windows."""
-    w = psutil.sensors_battery()
-    print(w)
+    battery = psutil.sensors_battery()
+    print(f"Battery: {battery}")
 
 
 def memory_performance():
@@ -175,7 +177,7 @@ def main():
     parser.add_argument('--info', action='store_true', help='Display basic system info')
     args = parser.parse_args()
 
-    banner()
+    
 
     if args.all:
         display_system_info()
@@ -204,8 +206,9 @@ def main():
         display_system_info()
  
 if __name__ == "__main__":
-    colorama.init()  # Ensure colorama is initialized
-    # banner()
-    # main()
+    colorama.init()
+    clearScr()  # Ensure colorama is initialized
+    banner()
+    
     execution_time = timeit.timeit(main, number=1)
     print(f"\nBenchmark completed in {execution_time:.2f} seconds.")
