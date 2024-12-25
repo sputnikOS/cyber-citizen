@@ -86,6 +86,7 @@ def display_system_info():
     table = PrettyTable() 
     table.field_names = ["Key", "Value"] 
     table.add_row(["Time", time.ctime()]) 
+    table.add_row(["User", os.getlogin()]) 
     table.add_row(["Directory", os.getcwd()]) 
     table.add_row(["Platform", platform.platform()])
     table.add_row(["Node", platform.node()])
