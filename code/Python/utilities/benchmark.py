@@ -14,8 +14,13 @@ import argparse
 # Optional: Install GPUtil for GPU monitoring if needed (currently commented out)
 # import GPUtil
 
+from rich.console import Console
+from rich.table import Table
+from prettytable import PrettyTable
+
+
 def banner():
-    print(Fore.MAGENTA + """
+    print(Fore.LIGHTWHITE_EX + """
  =======================================================================
   ####    #    #### ##### #   # ##### #   # #   # #   #      ###   ####
   #   #  # #  #     #   #  # #    #   #   # #  ## #  #      #   # #
@@ -23,11 +28,27 @@ def banner():
   #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
   #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
   ======================================================================
-                    Benchmark
-                    version 0.1.2-alpha (curiosity)
+                    System Benchmark and Monitoring Tool
+                    version 1.1.2-beta-(curiosity)
                     License: GPLv3
                     https://www.github.com/sputnikOS
-  =======================================================================
+                  
+                  usage: benchmark.py [option]
+                    options:
+                    -h, --help  show this help message and exit
+                    --all       Run all benchmarks
+                    --cpu       Display CPU performance
+                    --memory    Display memory performance
+                    --disk      Display disk performance
+                    --network   Display network performance
+                    --speed     Run speed test
+                    --gpu       Check GPU info
+                    --battery   Display battery info (Windows)
+                    --info      Display basic system info
+          
+===========================================================================      
+===========================================================================
+          
     """ + Style.RESET_ALL)
 
 
@@ -59,14 +80,16 @@ def list_audio_devices():
 
 
 def display_system_info():
-    """Display system information."""
-    print(Fore.CYAN + f"Time: {time.ctime()}")
-    print(f"Current directory: {os.getcwd()}")
-    print(f"Operating System: {platform.platform()}")
-    print(f"Node: {platform.node()}")
-    print(f"OS Version: {platform.uname()[3]}")
-    print(f"System Type: {platform.architecture()[0]}")
-    print(Style.RESET_ALL)
+    console = Console() 
+    table = PrettyTable() 
+    table.field_names = ["Key", "Value"] 
+    table.add_row(["Time", time.ctime()]) 
+    table.add_row(["Directory", os.getcwd()]) 
+    table.add_row(["Platform", platform.platform()])
+    table.add_row(["Node", platform.node()])
+    table.add_row(["OS", platform.uname()])
+    table.add_row(["Architecture", platform.architecture()])
+    print(table)
 
 def cpu_performance():
     """Display CPU performance."""
@@ -140,16 +163,46 @@ def nvidia():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Execute a command from the command line") 
-    parser.add_argument('stats', type=str, help='Command to execute')
+    parser = argparse.ArgumentParser(description="System Benchmark and Monitoring Tool")
+    parser.add_argument('--all', action='store_true', help='Run all benchmarks')
+    parser.add_argument('--cpu', action='store_true', help='Display CPU performance')
+    parser.add_argument('--memory', action='store_true', help='Display memory performance')
+    parser.add_argument('--disk', action='store_true', help='Display disk performance')
+    parser.add_argument('--network', action='store_true', help='Display network performance')
+    parser.add_argument('--speed', action='store_true', help='Run speed test')
+    parser.add_argument('--gpu', action='store_true', help='Check GPU info')
+    parser.add_argument('--battery', action='store_true', help='Display battery info (Windows)')
+    parser.add_argument('--info', action='store_true', help='Display basic system info')
     args = parser.parse_args()
 
     banner()
-    if args.stats:
+
+    if args.all:
         display_system_info()
+        cpu_performance()
+        memory_performance()
         disk_performance()
-
-
+        network_performance()
+        test_speed()
+        nvidia()
+        get_battery()
+    if args.cpu:
+        cpu_performance()
+    if args.memory:
+        memory_performance()
+    if args.disk:
+        disk_performance()
+    if args.network:
+        network_performance()
+    if args.speed:
+        test_speed()
+    if args.gpu:
+        nvidia()
+    if args.battery:
+        get_battery()
+    if args.info:
+        display_system_info()
+ 
 if __name__ == "__main__":
     colorama.init()  # Ensure colorama is initialized
     # banner()
