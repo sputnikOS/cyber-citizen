@@ -1,11 +1,10 @@
-import gnupg
 import argparse
-import sys
+import sys, os
 from colorama import Fore, Style
 
 # Function to print banner with color
 def banner():
-    print(Fore.LIGHTGREEN_EX + """
+    print(Fore.LIGHTWHITE_EX + """
 
 
           
@@ -56,6 +55,9 @@ def banner():
                                                                                                                                     
 ==============================================================================================================================================
 """ + Style.RESET_ALL)
+
+def clearScr():
+    os.system('clear')
 
 # Function to display available ciphers
 def list_ciphers():
@@ -156,6 +158,7 @@ def generate():
     print ("Generate")
 
 if __name__ == "__main__":
+    clearScr()
     banner()
     help_menu()
     list_ciphers()
