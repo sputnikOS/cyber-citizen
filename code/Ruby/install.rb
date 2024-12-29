@@ -2,7 +2,9 @@
 required_gems = [
   { name: 'dotenv', version: nil },     # Example: Install latest version
   { name: 'shodan', version: '1.0.0' }, # Example: Install specific version
-  { name: 'colorize', version: nil }
+  { name: 'colorize', version: nil },
+  { name: 'curses', version: nil },
+  { name: 'nmap', version: nil }
 ]
 
 # Method to check if a gem is installed
