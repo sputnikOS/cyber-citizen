@@ -1,66 +1,140 @@
+require 'securerandom'
 require 'digest'
-require 'time'
+require 'colorize'
 
-class Block
-  attr_reader :index, :timestamp, :transactions, :prev_hash, :nonce, :hash
+# Class representing a Crypto Token
+class CryptoToken
+  attr_accessor :name, :symbol, :total_supply
 
-  def initialize(index, transactions, prev_hash)
-    @index = index
-    @timestamp = Time.now
-    @transactions = transactions
-    @prev_hash = prev_hash
-    @nonce, @hash = mine_block
+  def initialize(name, symbol, total_supply)
+    @name = name
+    @symbol = symbol
+    @total_supply = total_supply
   end
 
-  def mine_block(difficulty = '00')
-    nonce = 0
-    loop do
-      hash = calc_hash_with_nonce(nonce)
-      if hash.start_with?(difficulty)
-        return [nonce, hash]
-      else
-        nonce += 1
-      end
+  def to_s
+    "#{@name} (#{@symbol}) - Total Supply: #{@total_supply}"
+  end
+end
+
+# Class representing a Wallet
+class Wallet
+  attr_accessor :address, :balance
+
+  def initialize
+    # Generate a random wallet address (UUID for simplicity)
+    @address = SecureRandom.hex(16)
+    @balance = 0
+  end
+
+  def deposit(amount)
+    @balance += amount
+  end
+
+  def withdraw(amount)
+    if @balance >= amount
+      @balance -= amount
+    else
+      puts "Insufficient funds"
     end
   end
 
-  def calc_hash_with_nonce(nonce)
-    sha = Digest::SHA256.new
-    sha.update(@index.to_s + @timestamp.to_s + @transactions.to_s + @prev_hash + nonce.to_s)
-    sha.hexdigest
+  def to_s
+    "Wallet Address: #{@address}, Balance: #{@balance}"
   end
 end
 
+# Class representing the Blockchain
 class Blockchain
-  attr_reader :chain
+  attr_accessor :chain, :tokens, :wallets
 
   def initialize
-    @chain = [create_genesis_block]
+    @chain = []
+    @tokens = []
+    @wallets = []
+    create_genesis_block
   end
 
-  def add_block(transactions)
-    prev_block = @chain[-1]
-    new_block = Block.new(@chain.length, transactions, prev_block.hash)
+  # Create the first block in the blockchain (genesis block)
+  def create_genesis_block
+    genesis_block = Block.new(0, "Genesis Block", "0")
+    @chain << genesis_block
+  end
+
+  # Add a block to the blockchain
+  def add_block(data)
+    previous_hash = @chain.last.hash
+    new_block = Block.new(@chain.length, data, previous_hash)
     @chain << new_block
   end
 
-  private
+  # Add a crypto token to the blockchain
+  def add_token(token)
+    @tokens << token
+  end
 
-  def create_genesis_block
-    Block.new(0, "Genesis Block", "0")
+  # Add a wallet to the blockchain
+  def create_wallet
+    wallet = Wallet.new
+    @wallets << wallet
+    wallet
+  end
+
+  # Display blockchain
+  def display_chain
+    @chain.each { |block| puts block }
+  end
+
+  # Verify blockchain integrity
+  def valid_chain?
+    @chain.each_with_index do |block, index|
+      next if index == 0
+      previous_block = @chain[index - 1]
+      return false if block.previous_hash != previous_block.hash
+      return false if block.hash != block.calculate_hash
+    end
+    true
   end
 end
 
-# Example Usage
-blockchain = Blockchain.new
-blockchain.add_block("Transaction 1: Alice sends 1 coin to Bob")
-blockchain.add_block("Transaction 2: Bob sends 2 coins to Charlie")
+# Class representing a Block in the blockchain
+class Block
+  attr_accessor :index, :data, :timestamp, :previous_hash, :hash
 
-blockchain.chain.each do |block|
-  puts "Block #{block.index}:"
-  puts "Nonce: #{block.nonce}"
-  puts "Hash: #{block.hash}"
-  puts "Previous Hash: #{block.prev_hash}"
-  puts "Transactions: #{block.transactions}"
-  puts "-" * 20
+  def initialize(index, data, previous_hash)
+    @index = index
+    @data = data
+    @timestamp = Time.now.to_i
+    @previous_hash = previous_hash
+    @hash = calculate_hash
+  end
+
+  # Calculate the hash of the block
+  def calculate_hash
+    content = "#{@index}#{@data}#{@timestamp}#{@previous_hash}"
+    Digest::SHA256.hexdigest(content)
+  end
+
+  def to_s
+    "Block #{@index}: #{@data}, Timestamp: #{@timestamp}, Hash: #{@hash}, Previous Hash: #{@previous_hash}"
+  end
 end
+
+# Example usage
+
+# Initialize blockchain
+blockchain = Blockchain.new
+
+# Add a crypto token
+oss = CryptoToken.new("Sputnik", "OSS", 100)
+blockchain.add_token(oss)
+puts "Added Token: #{oss}"
+
+
+
+# Display blockchain
+puts "\nBlockchain:".colorize(:green)
+blockchain.display_chain
+
+# Verify blockchain integrity
+puts "\nIs the blockchain valid? #{blockchain.valid_chain?}"
