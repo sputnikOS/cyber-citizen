@@ -46,6 +46,7 @@ print_info() {
     info "CPU" cpu
     info "GPU" gpu
     info "Memory" memory
+    info "Temp" temp
 
     info "GPU Driver" gpu_driver 
     info "Disk" disk
@@ -69,7 +70,7 @@ print_info() {
 # Default:  'on'
 # Values:   'on', 'off'
 # Flag:     --title_fqdn
-title_fqdn="off"
+title_fqdn="on"
 
 
 # Kernel
@@ -168,7 +169,7 @@ memory_unit="mib"
 # on:   '998 (pacman), 8 (flatpak), 4 (snap)'
 # tiny: '908 (pacman, flatpak, snap)'
 # off:  '908'
-package_managers="on"
+package_managers="on --package_managers"
 
 
 # Shell
@@ -194,7 +195,7 @@ shell_path="off"
 # Example:
 # on:  'bash 4.4.5'
 # off: 'bash'
-shell_version="on"
+shell_version="on --shell_version"
 
 
 # CPU
@@ -207,7 +208,7 @@ shell_version="on"
 # Flag:    --speed_type
 # Supports: Linux with 'cpufreq'
 # NOTE: Any file in '/sys/devices/system/cpu/cpu0/cpufreq' can be used as a value.
-speed_type="bios_limit"
+speed_type="scaling_cur_freq"
 
 # CPU speed shorthand
 #
@@ -219,7 +220,7 @@ speed_type="bios_limit"
 # Example:
 # on:    'i7-6500U (4) @ 3.1GHz'
 # off:   'i7-6500U (4) @ 3.100GHz'
-speed_shorthand="off"
+speed_shorthand="on"
 
 # Enable/Disable CPU brand in output.
 #
@@ -256,13 +257,13 @@ cpu_speed="on"
 # logical:  'Intel i7-6500U (4) @ 3.1GHz' (All virtual cores)
 # physical: 'Intel i7-6500U (2) @ 3.1GHz' (All physical cores)
 # off:      'Intel i7-6500U @ 3.1GHz'
-cpu_cores="logical"
+cpu_cores="logical --cpu_cores"
 
 # CPU Temperature
 # Hide/Show CPU temperature.
 # Note the temperature is added to the regular CPU function.
 #
-# Default: 'F --cpu_temp'
+# Default: 'F'
 # Values:  'C', 'F', 'off'
 # Flag:    --cpu_temp
 # Supports: Linux, BSD
@@ -273,11 +274,10 @@ cpu_cores="logical"
 # C:   'Intel i7-6500U (4) @ 3.1GHz [27.2°C]'
 # F:   'Intel i7-6500U (4) @ 3.1GHz [82.0°F]'
 # off: 'Intel i7-6500U (4) @ 3.1GHz'
-cpu_temp="off"
+cpu_temp="F --cpu_temp"
 
 
 # GPU   
-
 
 # Enable/Disable GPU Brand
 #
@@ -288,7 +288,7 @@ cpu_temp="off"
 # Example:
 # on:  'AMD HD 7950'
 # off: 'HD 7950'
-gpu_brand="on"
+gpu_brand="on --gpu_brand"
 
 # Which GPU to display
 #
@@ -307,7 +307,7 @@ gpu_brand="on"
 #
 # integrated:
 #   GPU1: Intel Integrated Graphics
-gpu_type="all"
+gpu_type="all --gpu_type"
 
 
 # Resolution
@@ -322,7 +322,7 @@ gpu_type="all"
 # Example:
 # on:  '1920x1080 @ 60Hz'
 # off: '1920x1080'
-refresh_rate="off"
+refresh_rate="on --refresh_rate"
 
 
 # Gtk Theme / Icons / Font
@@ -385,7 +385,7 @@ public_ip_timeout=2
 # Default: 'auto' (interface of default route)
 # Values:  'auto', 'en0', 'en1'
 # Flag:    --ip_interface
-local_ip_interface=('auto')
+local_ip_interface=('auto --ip_interface')
 
 
 # Desktop Environment

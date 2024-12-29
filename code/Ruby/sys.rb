@@ -1,20 +1,18 @@
-require 'sys/proctable'
-require 'sys/uname'
-require 'socket'
-require 'terminal-table'
-require 'colorize'
 require 'artii'
+require 'colorize'
+require 'terminal-table'
+require 'io/console'
 
+def clear_terminal
+  if Gem.win_platform?
+    system("cls")  # Clear command for Windows
+  else
+    system("clear")  # Clear command for Unix-based systems
+  end
+end
 
 def get_os_info
-  os_info = Sys::Uname.uname
-  {
-    "System" => os_info.sysname,
-    "Node Name" => os_info.nodename,
-    "Release" => os_info.release,
-    "Version" => os_info.version,
-    "Machine" => os_info.machine
-  }
+  { "OS" => `uname -s`.strip, "Version" => `uname -r`.strip }
 end
 
 def get_cpu_info
@@ -30,35 +28,25 @@ def get_cpu_info
 end
 
 def get_memory_info
-  mem_info = {}
-  File.readlines('/proc/meminfo').each do |line|
-    key, value = line.split(':')
-    mem_info[key.strip] = value.strip if key && value
-  end
-  mem_info
+  { "Total Memory" => `free -h | grep Mem | awk '{print $2}'`.strip, "Used Memory" => `free -h | grep Mem | awk '{print $3}'`.strip }
 end
 
 def get_disk_info
-  disk_info = `df -h`
-  disk_info
+  `df -h`
 end
 
 def get_network_info
-  hostname = Socket.gethostname
-  ip_address = Socket.ip_address_list.detect(&:ipv4_private?).ip_address
-  {
-    "Hostname" => hostname,
-    "IP Address" => ip_address
-  }
+  { "IP Address" => `hostname -I`.strip, "MAC Address" => `cat /sys/class/net/$(ip route show default | awk '/default/ {print $5}')/address`.strip }
 end
 
 def get_uptime
-  uptime_seconds = File.read('/proc/uptime').split[0].to_i
-  uptime_string = Time.at(uptime_seconds).utc.strftime("%H:%M:%S")
-  {
-    "Uptime (seconds)" => uptime_seconds,
-    "Uptime (formatted)" => uptime_string
-  }
+  { "Uptime" => `uptime -p`.strip }
+end
+
+def center_text(text)
+  terminal_width = IO.console.winsize[1] rescue 100  # Default to 100 if terminal width can't be determined
+  padding = [(terminal_width - text.length) / 2, 0].max
+  puts " " * padding + text
 end
 
 def display_table(title, data)
@@ -68,25 +56,26 @@ def display_table(title, data)
 end
 
 def display_info
+  clear_terminal
   artii = Artii::Base.new(font: "slant")
-  puts artii.asciify("SYS")
-  puts "System Information".colorize(:yellow).center(40, "=")
-  display_table("OS Information", get_os_info)
+  banner = artii.asciify("SputnikOS")
+  puts banner.center(140).colorize(:yellow)
 
-  puts "\nCPU Information".colorize(:yellow).center(40, "=")
-  display_table("CPU Information", get_cpu_info)
+  headers = ["System Information", "CPU Information", "Memory Information", "Disk Information", "Network Information", "Uptime Information"]
+  methods = [method(:get_os_info), method(:get_cpu_info), method(:get_memory_info), method(:get_disk_info), method(:get_network_info), method(:get_uptime)]
 
-  puts "\nMemory Information".colorize(:yellow).center(40, "=")
-  display_table("Memory Information", get_memory_info)
-
-  puts "\nDisk Information".colorize(:yellow).center(40, "=")
-  puts get_disk_info.colorize(:green)
-
-  puts "\nNetwork Information".colorize(:yellow).center(40, "=")
-  display_table("Network Information", get_network_info)
-
-  puts "\nUptime Information".colorize(:yellow).center(40, "=")
-  display_table("Uptime Information", get_uptime)
+  headers.each_with_index do |header, index|
+  puts "\n" + "=" *   140
+    puts header.center(140).colorize(:yellow)
+    puts "=" * 140
+    data = methods[index].call
+    if header == "Disk Information"
+      puts data.colorize(:green)
+    else
+      display_table(header, data)
+    end
+  end
 end
 
+# Call the function to display system information
 display_info
