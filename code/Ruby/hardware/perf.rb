@@ -1,46 +1,67 @@
-require 'sys/proctable'
+require 'benchmark'
+require 'sys/cpu'
+# require 'sys/filesystem'
+require 'net/ping'
+
 include Sys
 
-def get_cpu_usage
-  cpu_usage_info = `powershell -Command "(Get-WmiObject Win32_Processor | Measure-Object -Property LoadPercentage -Average).Average"`.strip.to_f
-  # `top -bn1 | grep "Cpu(s)"`.match(/(\d+\.\d+) us/)[1].to_f
+def cpu_info
+  puts "CPU Model: #{CPU.processors.first.model_name}"
+  # puts "CPU Speed: #{CPU.processor.} MHz"
 end
 
-def get_memory_usage
-  mem_info = `free -m`.split("\n")[1].split
-  used_mem = mem_info[2].to_f
-  total_mem = mem_info[1].to_f
-  mem_usage = (used_mem / total_mem) * 100
-  [used_mem, total_mem, mem_usage]
+def memory_info
+  mem_info = `free -m`
+  puts mem_info
 end
 
-def get_disk_usage
-  disk_info = `df -m /`.split("\n")[1].split
-  used_disk = disk_info[2].to_f
-  total_disk = disk_info[1].to_f
-  disk_usage = (used_disk / total_disk) * 100
-  [used_disk, total_disk, disk_usage]
-end
+# def disk_info
+#   stat = Filesystem.stat('/')
+#   puts "Filesystem: #{stat.filesystem_type}"
+#   puts "Total Space: #{stat.bytes_total / 1024 / 1024} MB"
+#   puts "Free Space: #{stat.bytes_free / 1024 / 1024} MB"
+# end
 
-def display_hardware_performance
-  cpu_usage = get_cpu_usage
-  used_mem, total_mem, mem_usage = get_memory_usage
-  used_disk, total_disk, disk_usage = get_disk_usage
-
-  puts "=== Real-Time Hardware Performance ==="
-  puts "CPU Usage: #{cpu_usage.round(2)}%"
-  puts "Memory Usage: #{mem_usage.round(2)}% (Used: #{used_mem.round(2)} MB / Total: #{total_mem.round(2)} MB)"
-  puts "Disk Usage: #{disk_usage.round(2)}% (Used: #{used_disk.round(2)} MB / Total: #{total_disk.round(2)} MB)"
-
-  top_processes = ProcTable.ps.sort_by { |p| -p.pctcpu }.first(5)
-  puts "\nTop 5 Processes by CPU Usage:"
-  top_processes.each do |p|
-    puts "PID: #{p.pid}: #{p.comm} - #{(p.pctcpu * 100).round(2)}%"
+def network_latency
+  check = Net::Ping::External.new('8.8.8.8')
+  if check.ping
+    puts "Ping to 8.8.8.8: #{check.duration * 1000} ms"
+  else
+    puts "Ping to 8.8.8.8 failed."
   end
 end
 
-loop do
-  # system('clear') # For Windows, use system('cls')
-  display_hardware_performance
-  sleep 1
+def io_benchmark
+  result = Benchmark.measure do
+    file = File.new("testfile", "w+")
+    1_000_000.times { file.puts("This is a benchmark test.") }
+    file.close
+  end
+  puts "I/O Benchmark Time: #{result.real} seconds"
 end
+
+def cpu_benchmark
+  Benchmark.bm do |x|
+    x.report("CPU Intensive Task: ") do
+      (1..5000).reduce(:*)
+    end
+  end
+end
+
+puts "CPU Information:"
+cpu_info
+
+puts "\nMemory Information:"
+memory_info
+
+puts "\nDisk Information:"
+disk_info
+
+puts "\nNetwork Latency:"
+network_latency
+
+puts "\nI/O Benchmark:"
+io_benchmark
+
+puts "\nCPU Benchmark:"
+cpu_benchmark
