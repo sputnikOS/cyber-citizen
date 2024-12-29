@@ -9,24 +9,31 @@ def display_help
   a = Artii::Base.new
   header = a.asciify('Cryptkeeper')
 
-  puts header.colorize(:blue)
+  puts header.colorize(:red)
   puts ""
-  puts "Usage: cryptkeeper.rb [options]"
+  puts "Usage: cryptkeeper.rb [options]".colorize(:yellow)
   puts ""
-  puts "Encrypt or decrypt data using various ciphers."
+  puts "Encrypt or decrypt data using various ciphers.".colorize(:yellow)
   puts ""
-  puts "Options:"
-  puts "  -e, --encrypt DATA        Encrypt the given DATA"
-  puts "  -d, --decrypt DATA        Decrypt the given DATA"
-  puts "  -k, --key KEY             Encryption key (base64 encoded)"
-  puts "  -i, --iv IV               Initialization vector (base64 encoded)"
-  puts "  -c, --cipher CIPHER       Cipher algorithm (e.g., aes-256-cbc, des-ede3, rc4)"
-  puts "  -h, --help                Show this help message"
+  puts "Options:".colorize(:yellow)
+  puts "  -e, --encrypt DATA        Encrypt the given DATA".colorize(:yellow)
+  puts "  -d, --decrypt DATA        Decrypt the given DATA".colorize(:yellow)
+  puts "  -k, --key KEY             Encryption key (base64 encoded)".colorize(:yellow)
+  puts "  -i, --iv IV               Initialization vector (base64 encoded)".colorize(:yellow)
+  puts "  -c, --cipher CIPHER       Cipher algorithm (e.g., aes-256-cbc, des-ede3, rc4)".colorize(:yellow)
+  puts "  -h, --help                Show this help message".colorize(:yellow)
   puts ""
-  puts "Example usage:"
-  puts "  Encrypting data: ruby cryptkeeper.rb -e 'Hello, World!' -k <base64_key> -c 'aes-256-cbc' -i <base64_iv>"
-  puts "  Decrypting data: ruby cryptkeeper.rb -d <base64_encrypted_data> -k <base64_key> -c 'aes-256-cbc' -i <base64_iv>"
-  puts "  Encrypt with RC4: ruby cryptkeeper.rb -e 'Hello, World!' -k <base64_key> -c 'rc4'"
+  puts "Example usage:".colorize(:yellow)
+  puts "  Encrypting data: ruby cryptkeeper.rb -e 'Hello, World!' -k <base64_key> -c 'aes-256-cbc' -i <base64_iv>".colorize(:yellow)
+  puts "  Decrypting data: ruby cryptkeeper.rb -d <base64_encrypted_data> -k <base64_key> -c 'aes-256-cbc' -i <base64_iv>".colorize(:yellow)
+  puts "  Encrypt with RC4: ruby cryptkeeper.rb -e 'Hello, World!' -k <base64_key> -c 'rc4'".colorize(:yellow)
+end
+
+def center_text(text)
+  terminal_width = `tput cols`.to_i  # Get terminal width using tput
+  padding = [(terminal_width - text.length) / 2, 0].max  # Calculate left padding
+
+  puts " " * padding + text  # Print text with the calculated padding
 end
 
 # Function to encrypt data using a specific cipher
