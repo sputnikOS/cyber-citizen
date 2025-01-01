@@ -20,40 +20,50 @@ from prettytable import PrettyTable
 
 
 def banner():
-    print(Fore.LIGHTCYAN_EX + """
-=======================================================================================================
+    divider = (Fore.BLUE + """      
+===================================================================================================================================================================          
+===================================================================================================================================================================
+    """ + Style.RESET_ALL)
+    header = (Fore.LIGHTYELLOW_EX + """
+          
                     ####    #    #### ##### #   # ##### #   # #   # #   #      ###   ####
                     #   #  # #  #     #   #  # #    #   #   # #  ## #  #      #   # #
                     ####  ##### #     #   #   #     #   ##### # # # ###       #   # #
                     #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
                     #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
-=======================================================================================================
-                                
-                    https://www.github.com/sputnikOS
-                            0.1.2-curiosity 
-                                GPLv3
-                  
-                    usage: benchmark.py [option]
-                    options:
-                        -h, --help  show this help message and exit
-                        --all       Run all benchmarks
-                        --cpu       Display CPU performance
-                        --memory    Display memory performance
-                        --disk      Display disk performance
-                        --network   Display network performance
-                        --speed     Run speed test
-                        --gpu       Check GPU info
-                        --battery   Display battery info (Windows)
-                        --info      Display basic system info
-          
-========================================================================================================      
-========================================================================================================
-          
-    """ + Style.RESET_ALL)
 
-def clearScr():
-    os.system('cls ')
+                                        https://www.github.com/sputnikOS
+                                                GPLv3 License           
+                               
+          """ + Style.RESET_ALL)
+    subheader = (Fore.LIGHTWHITE_EX + """
 
+                                    usage: benchmark.py [option]
+                                    options:
+                                        -h, --help  show this help message and exit
+                                        --all       Run all benchmarks
+                                        --cpu       Display CPU performance
+                                        --memory    Display memory performance
+                                        --disk      Display disk performance
+                                        --network   Display network performance
+                                        --speed     Run speed test
+                                        --gpu       Check GPU info
+                                        --battery   Display battery info (Windows)
+                                        --info      Display basic system info
+            """ + Style.RESET_ALL)
+    
+    print(divider)
+    print(header)
+    print(divider)
+    print(subheader)
+    print(divider)
+
+def clear_terminal():
+    """Clear the terminal screen based on the OS."""
+    if os.name == 'nt':  # For Windows
+        os.system('cls')
+    else:  # For Unix-based systems (Linux/macOS)
+        os.system('clear')
 
 def list_network_interfaces():
     # Get the network interfaces
@@ -208,7 +218,7 @@ def main():
  
 if __name__ == "__main__":
     colorama.init()
-    clearScr()  # Ensure colorama is initialized
+    clear_terminal()  # Ensure colorama is initialized
     banner()
     
     execution_time = timeit.timeit(main, number=1)
