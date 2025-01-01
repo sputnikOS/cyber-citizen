@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-# pylint: disable=not-callable, no-member, unsubscriptable-object
-# indent = tab
-# tab-size = 4
-
+# bpytop package for Windows
+# in development 
 
 import os, sys, io, threading, signal, re, subprocess, logging, logging.handlers, argparse
 import urllib.request
-from time import time, sleep, strftime, tzset
+import platform
+from time import time, sleep, strftime
 from datetime import timedelta
 from _thread import interrupt_main
 from collections import defaultdict
@@ -18,14 +17,14 @@ from shutil import which
 from typing import List, Dict, Tuple, Union, Any, Iterable
 
 errors: List[str] = []
-try: import fcntl, termios, tty, pwd
+try: import colorama
 except Exception as e: errors.append(f'{e}')
 
 try: import psutil # type: ignore
 except Exception as e: errors.append(f'{e}')
 
-SELF_START = time()
-
+if platform.system() == 'Windows':
+	SELF_START = time()
 SYSTEM: str
 if "linux" in sys.platform: SYSTEM = "Linux"
 elif "bsd" in sys.platform: SYSTEM = "BSD"
@@ -1677,8 +1676,8 @@ class Box:
 	clock_len: int = 0
 	resized: bool = False
 	clock_custom_format: Dict[str, Any] = {
-		"/host" : os.uname()[1],
-		"/user" : os.environ.get("USER") or pwd.getpwuid(os.getuid())[0],
+		"/host" : platform.uname()[1],
+		"/user" : os.getlogin(),
 		"/uptime" : "",
 		}
 	if clock_custom_format["/host"].endswith(".local"):
