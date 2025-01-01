@@ -18,9 +18,9 @@ def memory_usage():
     """Check memory usage of the current process."""
     process = psutil.Process(os.getpid())
     mem = process.memory_info().rss / (1024 * 1024)  # Convert to MB
+    print(process)
     print(f"Memory usage: {mem:.2f} MB")
 
 # Example usage
 memory_usage()
 clear_ram()
-memory_usage()

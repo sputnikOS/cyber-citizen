@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "cryptkeeper"
+version = "0.1.0"
+description = "open-source CLI for encryption"
+authors = ["SputnikOS"]
+license = "GPLv3"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
