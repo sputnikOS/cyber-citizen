@@ -12,7 +12,7 @@ import soundfile as sf
 import argparse
 
 # Optional: Install GPUtil for GPU monitoring if needed (currently commented out)
-# import GPUtil
+import GPUtil   
 
 from rich.console import Console
 from rich.table import Table
@@ -176,6 +176,13 @@ def test_speed():
     print("=" * 40)
 
 def nvidia():
+    # Monitor GPU usage before the benchmark
+    print("Initial GPU stats:")
+    gpus = GPUtil.getGPUs()
+    print(gpus) 
+    for gpu in gpus:
+        print(f"GPU {gpu.id}: {gpu.memoryUsed}MB / {gpu.memoryTotal}MB memory used, {gpu.load * 100}% load")
+    
     """Display GPU info using nvidia-smi (if available)."""
     try:
         result = subprocess.run("nvidia-smi", shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
