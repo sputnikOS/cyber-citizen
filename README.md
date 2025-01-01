@@ -101,23 +101,16 @@
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/sputnikOS/open-source?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/sputnikOS/open-source?style=for-the-badge)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sputnikOS/open-source?style=for-the-badge)
-
-
-
 ![GitHub language count](https://img.shields.io/github/languages/count/sputnikOS/open-source?style=for-the-badge)
-![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
-![Elixir](https://img.shields.io/badge/elixir-%234B275F.svg?style=for-the-badge&logo=elixir&logoColor=white)
-![https://img.shields.io/badge/Java-black?style=for-the-badge&logo=javat&logoColor=#E57324](https://img.shields.io/badge/Java-black?style=for-the-badge&logo=java&logoColor=#E57324)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
-![https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
-![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
-![C](https://img.shields.io/badge/C-%23000.svg?style=for-the-badge&logo=c&logoColor=white)
-![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
+
 
 <br/>
 
 <h2 align="center"><a href="https://github.com/sputnikOS/open-source/tree/main/code/Python/encryption">Cryptkeeper</a></h2>
+
+![Usage](https://img.shields.io/badge/Usage-CLI%20encryption-white)
+![Python](https://img.shields.io/badge/Python-v3.7%5E-green?logo=python?style=for-the-badge)
+
 <img style="width:500px;height:500px" src="https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068">
 
 <h2 align="center">Benchmark</h2>
