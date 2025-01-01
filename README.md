@@ -95,7 +95,8 @@
  ```
 
 # SputnikOS 
-![GitHub Created At](https://img.shields.io/github/created-at/sputnikOS/open-source?style=for-the-badge) ![GitHub Release](https://img.shields.io/github/v/release/sputnikOS/open-source?style=for-the-badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/sputnikOS/open-source?style=for-the-badge)
+![GitHub Created At](https://img.shields.io/github/created-at/sputnikOS/open-source?style=for-the-badge) ![GitHub Release](https://img.shields.io/github/v/release/sputnikOS/open-source?style=for-the-badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/sputnikOS/open-source?style=for-the-badge)![GitHub language count](https://img.shields.io/github/languages/count/sputnikOS/open-source?style=for-the-badge)
+
 
 ![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
 ![Elixir](https://img.shields.io/badge/elixir-%234B275F.svg?style=for-the-badge&logo=elixir&logoColor=white)
@@ -104,20 +105,22 @@
 ![https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
 ![https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ![PowerShell](https://img.shields.io/badge/PowerShell-%235391FE.svg?style=for-the-badge&logo=powershell&logoColor=white)
+![C](https://img.shields.io/badge/C-%23000.svg?style=for-the-badge&logo=c&logoColor=white)
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 
-### Cryptkeeper: zero-trust transparent allowing for powerful cryptography from the command line
-![Capture](https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068)
+<br/>
 
-#### System Tools
-![Capture](https://private-user-images.githubusercontent.com/8669791/399152328-de3c52cd-e5b9-4a29-9f57-181385ca2946.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU0NjgwNDksIm5iZiI6MTczNTQ2Nzc0OSwicGF0aCI6Ii84NjY5NzkxLzM5OTE1MjMyOC1kZTNjNTJjZC1lNWI5LTRhMjktOWY1Ny0xODEzODVjYTI5NDYuUE5HP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI0MTIyOSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNDEyMjlUMTAyMjI5WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9ZTc0NWEyN2Q0YTlhMDAxMmUwOTEzMDVhNDJhYTdmYzk2NzUzYmQ4YmZiOGM1MmI2Njk2NDdlZDg4ZWIwMDgyMCZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.ElHexns2vjcsa5gpscxDZEKozvKvLPWxtZ-8irByJQ8)
+<h1 align="center">Projects</h1>
+
+### Cryptkeeper: zero-trust transparent allowing for powerful cryptography from the command line
+<img align="center" style="width:500px;height:500px" src="https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068">
+
+### System Tools
 ![Capture](https://github.com/user-attachments/assets/c6a0c683-c5e3-4b8d-9b8f-d283978fe3df)
 
+### Audio 
 
 ### Blockchain
-![https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
-![Flask](https://img.shields.io/badge/C-%23000.svg?style=for-the-badge&logo=c&logoColor=white)
-![https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white](https://img.shields.io/badge/Ruby-CC342D?style=for-the-badge&logo=ruby&logoColor=white)
 
 # Learning 
 ## [Secure Software Engineering Library](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/cyberintelligence)
