@@ -5,9 +5,8 @@ import time
 import timeit
 import subprocess
 import colorama
-from colorama import Fore, Style
+from colorama import Fore, Style, init
 import humanize
-import wmi
 import sounddevice as sd
 import argparse
 
@@ -33,29 +32,14 @@ def banner():
                     #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
 
                                         https://www.github.com/sputnikOS
-                                                GPLv3 License           
+                                                GPLv3 License    
+                                        usage: python3 benchmark.py [options]       
                                
           """ + Style.RESET_ALL)
-    subheader = (Fore.LIGHTWHITE_EX + """
-
-                                    usage: benchmark.py [option]
-                                    options:
-                                        -h, --help  show this help message and exit
-                                        --all       Run all benchmarks
-                                        --cpu       Display CPU performance
-                                        --memory    Display memory performance
-                                        --disk      Display disk performance
-                                        --network   Display network performance
-                                        --speed     Run speed test
-                                        --gpu       Check GPU info
-                                        --battery   Display battery info (Windows)
-                                        --info      Display basic system info
-            """ + Style.RESET_ALL)
+  
     
     print(divider)
     print(header)
-    print(divider)
-    print(subheader)
     print(divider)
 
 def clear_terminal():
@@ -118,11 +102,32 @@ def get_battery():
     print(f"Battery: {battery}")
 
 
+
 def memory_performance():
     """Display memory performance."""
     print(Fore.LIGHTYELLOW_EX + "\nMemory Performance Benchmark:" + Style.RESET_ALL)
+    
+    # Get memory details
     memory = psutil.virtual_memory()
-    print(f"Memory: {humanize.naturalsize(memory.used)}/{humanize.naturalsize(memory.total)} bytes")
+    
+    # Display overall memory usage
+    print(f"Total Memory: {humanize.naturalsize(memory.total)}")
+    print(f"Used Memory: {humanize.naturalsize(memory.used)}")
+    print(f"Available Memory: {humanize.naturalsize(memory.available)}")
+    print(f"Memory Usage: {memory.percent}%")
+    
+def ram_performance():
+    """Analyze RAM performance over time."""
+    print(Fore.LIGHTGREEN_EX + "\nRAM Performance Over Time:" + Style.RESET_ALL)
+    
+    # Measure memory usage over a period
+    start_time = time.time()
+    for i in range(10):  # Example: monitor over 10 seconds
+        memory = psutil.virtual_memory()
+        print(f"Time: {time.strftime('%H:%M:%S', time.gmtime(time.time() - start_time))}")
+        print(f"Used Memory: {humanize.naturalsize(memory.used)} | Available Memory: {humanize.naturalsize(memory.available)} | Memory Usage: {memory.percent}%")
+        time.sleep(1)  # Sleep for 1 second before the next update
+        
 
 def disk_performance():
     """Display disk performance."""
@@ -183,7 +188,7 @@ def main():
     parser.add_argument('--disk', action='store_true', help='Display disk performance')
     parser.add_argument('--network', action='store_true', help='Display network performance')
     parser.add_argument('--speed', action='store_true', help='Run speed test')
-    parser.add_argument('--gpu', action='store_true', help='Check GPU info')
+    parser.add_argument('--nvidia', action='store_true', help='Check GPU info')
     parser.add_argument('--battery', action='store_true', help='Display battery info (Windows)')
     parser.add_argument('--info', action='store_true', help='Display basic system info')
     args = parser.parse_args()
@@ -203,13 +208,14 @@ def main():
         cpu_performance()
     if args.memory:
         memory_performance()
+        ram_performance()
     if args.disk:
         disk_performance()
     if args.network:
         network_performance()
     if args.speed:
         test_speed()
-    if args.gpu:
+    if args.nvidia:
         nvidia()
     if args.battery:
         get_battery()
@@ -217,7 +223,9 @@ def main():
         display_system_info()
  
 if __name__ == "__main__":
-    colorama.init()
+
+    # Initialize colorama
+    init(autoreset=True)
     clear_terminal()  # Ensure colorama is initialized
     banner()
     
