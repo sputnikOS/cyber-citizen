@@ -1,5 +1,4 @@
-import hashlib
-import time
+import hashlib, time, os
 from flask import Flask, jsonify, request, render_template
 
 app = Flask(__name__)
@@ -7,6 +6,11 @@ app = Flask(__name__)
 # Globals
 blockchain = []
 pending_transactions = []
+
+def clearScr():
+    os.system('clear')
+
+
 
 # Classes
 class Wallet:

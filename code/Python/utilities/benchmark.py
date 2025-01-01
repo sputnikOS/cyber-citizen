@@ -5,14 +5,14 @@ import time
 import timeit
 import subprocess
 import colorama
-from colorama import Fore, Style
+from colorama import Fore, Style, init
 import humanize
-import wmi
 import sounddevice as sd
+import soundfile as sf
 import argparse
 
 # Optional: Install GPUtil for GPU monitoring if needed (currently commented out)
-# import GPUtil
+import GPUtil   
 
 from rich.console import Console
 from rich.table import Table
@@ -20,38 +20,35 @@ from prettytable import PrettyTable
 
 
 def banner():
-    print(Fore.LIGHTWHITE_EX + """
- =======================================================================
-  ####    #    #### ##### #   # ##### #   # #   # #   #      ###   ####
-  #   #  # #  #     #   #  # #    #   #   # #  ## #  #      #   # #
-  ####  ##### #     #   #   #     #   ##### # # # ###       #   # #
-  #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
-  #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
-  ======================================================================
-                    System Benchmark and Monitoring Tool
-                    version 1.1.2-beta-(curiosity)
-                    License: GPLv3
-                    https://www.github.com/sputnikOS
-                  
-                  usage: benchmark.py [option]
-                    options:
-                    -h, --help  show this help message and exit
-                    --all       Run all benchmarks
-                    --cpu       Display CPU performance
-                    --memory    Display memory performance
-                    --disk      Display disk performance
-                    --network   Display network performance
-                    --speed     Run speed test
-                    --gpu       Check GPU info
-                    --battery   Display battery info (Windows)
-                    --info      Display basic system info
-          
-===========================================================================      
-===========================================================================
-          
+    divider = (Fore.BLUE + """      
+===================================================================================================================================================================          
+===================================================================================================================================================================
     """ + Style.RESET_ALL)
+    header = (Fore.LIGHTYELLOW_EX + """
+          
+                    ####    #    #### ##### #   # ##### #   # #   # #   #      ###   ####
+                    #   #  # #  #     #   #  # #    #   #   # #  ## #  #      #   # #
+                    ####  ##### #     #   #   #     #   ##### # # # ###       #   # #
+                    #     #   # #     #   #  #      #   #   # ##  # #  #      #   # #
+                    #     #   #  #### #   # #       #   #   # #   # #   #      ###   ####
 
+                                        https://www.github.com/sputnikOS
+                                                GPLv3 License    
+                                        usage: python3 benchmark.py [options]       
+                               
+          """ + Style.RESET_ALL)
+  
+    
+    print(divider)
+    print(header)
+    print(divider)
 
+def clear_terminal():
+    """Clear the terminal screen based on the OS."""
+    if os.name == 'nt':  # For Windows
+        os.system('cls')
+    else:  # For Unix-based systems (Linux/macOS)
+        os.system('clear')
 
 def list_network_interfaces():
     # Get the network interfaces
@@ -66,17 +63,24 @@ def list_network_interfaces():
             print(f"  Netmask: {address.netmask}")
             print(f"  Broadcast: {address.broadcast}")
             print()
+
 # Function to list audio devices
+
 def list_audio_devices():
-    devices = sd.query_devices()  # Get list of all audio devices
-    print("Available audio devices:\n")
+    # List all audio devices (input and output)
+    devices = sd.query_devices()
     
-    for idx, device in enumerate(devices):
-        print(f"Device #{idx}: {device['name']}")
-        print(f"  - Default sample rate: {device['default_samplerate']} Hz")
-        print(f"  - Input channels: {device['max_input_channels']}")
-        print(f"  - Output channels: {device['max_output_channels']}")
-        print(f"  - Host API: {device['hostapi']}\n")
+    print("Audio Devices:")
+    for i, device in enumerate(devices):
+        print(f"Device {i}: {device['name']} - {'Input' if device['max_input_channels'] > 0 else 'Output'}")
+
+def list_supported_formats():
+    # List common supported audio formats for reading/writing with soundfile
+    formats = sf.available_formats()
+    
+    print("\nSupported Audio Formats:")
+    for fmt in formats:
+        print(f" - {fmt}")
 
 
 def display_system_info():
@@ -84,6 +88,7 @@ def display_system_info():
     table = PrettyTable() 
     table.field_names = ["Key", "Value"] 
     table.add_row(["Time", time.ctime()]) 
+    # table.add_row(["User", os.getlogin()])
     table.add_row(["Directory", os.getcwd()]) 
     table.add_row(["Platform", platform.platform()])
     table.add_row(["Node", platform.node()])
@@ -101,15 +106,36 @@ def cpu_performance():
 
 def get_battery():
     """Get CPU temperature on Windows."""
-    w = psutil.sensors_battery()
-    print(w)
+    battery = psutil.sensors_battery()
+    print(f"Battery: {battery}")
+
 
 
 def memory_performance():
     """Display memory performance."""
     print(Fore.LIGHTYELLOW_EX + "\nMemory Performance Benchmark:" + Style.RESET_ALL)
+    
+    # Get memory details
     memory = psutil.virtual_memory()
-    print(f"Memory: {humanize.naturalsize(memory.used)}/{humanize.naturalsize(memory.total)} bytes")
+    
+    # Display overall memory usage
+    print(f"Total Memory: {humanize.naturalsize(memory.total)}")
+    print(f"Used Memory: {humanize.naturalsize(memory.used)}")
+    print(f"Available Memory: {humanize.naturalsize(memory.available)}")
+    print(f"Memory Usage: {memory.percent}%")
+    
+def ram_performance():
+    """Analyze RAM performance over time."""
+    print(Fore.LIGHTGREEN_EX + "\nRAM Performance Over Time:" + Style.RESET_ALL)
+    
+    # Measure memory usage over a period
+    start_time = time.time()
+    for i in range(10):  # Example: monitor over 10 seconds
+        memory = psutil.virtual_memory()
+        print(f"Time: {time.strftime('%H:%M:%S', time.gmtime(time.time() - start_time))}")
+        print(f"Used Memory: {humanize.naturalsize(memory.used)} | Available Memory: {humanize.naturalsize(memory.available)} | Memory Usage: {memory.percent}%")
+        time.sleep(1)  # Sleep for 1 second before the next update
+        
 
 def disk_performance():
     """Display disk performance."""
@@ -150,6 +176,13 @@ def test_speed():
     print("=" * 40)
 
 def nvidia():
+    # Monitor GPU usage before the benchmark
+    print("Initial GPU stats:")
+    gpus = GPUtil.getGPUs()
+    print(gpus) 
+    for gpu in gpus:
+        print(f"GPU {gpu.id}: {gpu.memoryUsed}MB / {gpu.memoryTotal}MB memory used, {gpu.load * 100}% load")
+    
     """Display GPU info using nvidia-smi (if available)."""
     try:
         result = subprocess.run("nvidia-smi", shell=True, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -170,12 +203,13 @@ def main():
     parser.add_argument('--disk', action='store_true', help='Display disk performance')
     parser.add_argument('--network', action='store_true', help='Display network performance')
     parser.add_argument('--speed', action='store_true', help='Run speed test')
-    parser.add_argument('--gpu', action='store_true', help='Check GPU info')
+    parser.add_argument('--nvidia', action='store_true', help='Check GPU info')
     parser.add_argument('--battery', action='store_true', help='Display battery info (Windows)')
     parser.add_argument('--info', action='store_true', help='Display basic system info')
+    parser.add_argument('--audio', action='store_true', help='Display audio')
     args = parser.parse_args()
 
-    banner()
+    
 
     if args.all:
         display_system_info()
@@ -190,22 +224,29 @@ def main():
         cpu_performance()
     if args.memory:
         memory_performance()
+        ram_performance()
     if args.disk:
         disk_performance()
     if args.network:
         network_performance()
     if args.speed:
         test_speed()
-    if args.gpu:
+    if args.nvidia:
         nvidia()
     if args.battery:
         get_battery()
     if args.info:
         display_system_info()
- 
+    if args.audio:
+        list_audio_devices()
+        list_supported_formats()
+
 if __name__ == "__main__":
-    colorama.init()  # Ensure colorama is initialized
-    # banner()
-    # main()
+
+    # Initialize colorama
+    init(autoreset=True)
+    clear_terminal()  # Ensure colorama is initialized
+    banner()
+    
     execution_time = timeit.timeit(main, number=1)
     print(f"\nBenchmark completed in {execution_time:.2f} seconds.")

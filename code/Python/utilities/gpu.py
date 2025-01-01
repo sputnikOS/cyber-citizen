@@ -15,6 +15,7 @@ def benchmark_gpu_with_monitoring():
         # Monitor GPU usage before the benchmark
         print("Initial GPU stats:")
         gpus = GPUtil.getGPUs()
+        print(gpus) 
         for gpu in gpus:
             print(f"GPU {gpu.id}: {gpu.memoryUsed}MB / {gpu.memoryTotal}MB memory used, {gpu.load * 100}% load")
         

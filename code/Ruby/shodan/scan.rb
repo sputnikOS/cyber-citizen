@@ -3,6 +3,7 @@ require 'cgi'
 require 'json'
 require 'openssl'
 require 'net/http'
+require 'dotenv/load'
 
 module Shodan
 
@@ -18,7 +19,7 @@ module Shodan
     attr_accessor :exploits
 
     def initialize(api_key)
-      @api_key = api_key
+      @api_key = ENV['key']
       @base_url = "https://api.shodan.io/"
       @base_url_exploits = "https://exploits.shodan.io/api/"
 
