@@ -1,160 +1,228 @@
+import sys
 import numpy as np
 import sounddevice as sd
-from PyQt5 import QtWidgets, QtCore
-import rtmidi
+import matplotlib.pyplot as plt
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QSlider, QPushButton, QComboBox, QGridLayout
+from PyQt5.QtCore import Qt
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt5.QtGui import QColor, QPalette
 
-# Sample rate
-SAMPLE_RATE = 44100
-
-# Synthesizer Modules
-def oscillator(frequency, duration, waveform='sine'):
-    t = np.linspace(0, duration, int(SAMPLE_RATE * duration), endpoint=False)
-    if waveform == 'sine':
-        return np.sin(2 * np.pi * frequency * t)
-    elif waveform == 'square':
-        return np.sign(np.sin(2 * np.pi * frequency * t))
-    elif waveform == 'sawtooth':
-        return 2 * (t * frequency - np.floor(0.5 + t * frequency))
-    elif waveform == 'triangle':
-        return 2 * np.abs(2 * (t * frequency - np.floor(t * frequency + 0.5))) - 1
-    else:
-        raise ValueError("Unsupported waveform")
-
-def envelope(signal, attack=0.1, decay=0.1, sustain=0.7, release=0.2):
-    attack_samples = int(attack * SAMPLE_RATE)
-    decay_samples = int(decay * SAMPLE_RATE)
-    release_samples = int(release * SAMPLE_RATE)
-    sustain_samples = len(signal) - (attack_samples + decay_samples + release_samples)
-
-    if sustain_samples < 0:
-        raise ValueError("Duration too short for given ADSR settings")
-
-    attack_curve = np.linspace(0, 1, attack_samples)
-    decay_curve = np.linspace(1, sustain, decay_samples)
-    sustain_curve = np.full(sustain_samples, sustain)
-    release_curve = np.linspace(sustain, 0, release_samples)
-
-    envelope_curve = np.concatenate([attack_curve, decay_curve, sustain_curve, release_curve])
-    return signal[:len(envelope_curve)] * envelope_curve
-
-def low_pass_filter(signal, cutoff_freq):
-    from scipy.signal import butter, lfilter
-    nyquist = 0.5 * SAMPLE_RATE
-    normal_cutoff = cutoff_freq / nyquist
-    b, a = butter(1, normal_cutoff, btype='low', analog=False)
-    return lfilter(b, a, signal)
-
-def modular_synth(note, duration, waveform, filter_freq, adsr):
-    note_frequencies = {
-        "C4": 261.63, "D4": 293.66, "E4": 329.63, "F4": 349.23,
-        "G4": 392.00, "A4": 440.00, "B4": 493.88, "C5": 523.25
-    }
-    frequency = note_frequencies.get(note, 440.0)
-    signal = oscillator(frequency, duration, waveform)
-    signal = envelope(signal, *adsr)
-    signal = low_pass_filter(signal, filter_freq)
-    return signal
-
-# GUI Application
-class SynthGUI(QtWidgets.QWidget):
+# Define the MonoSynth class
+class MonoSynth:
     def __init__(self):
+        self.sample_rate = 44100
+        self.frequency = 440.0  # Default pitch (A4)
+        self.amplitude = 0.5
+        self.waveform = 'sine'  # Default waveform
+        self.duration = 1.0  # Duration of the note in seconds
+        self.envelope_attack = 0.1
+        self.envelope_decay = 0.1
+        self.envelope_sustain = 0.7
+        self.envelope_release = 0.2
+        self.current_time = 0.0
+
+    def generate_waveform(self):
+        t = np.linspace(0, self.duration, int(self.sample_rate * self.duration), endpoint=False)
+        if self.waveform == 'sine':
+            waveform = np.sin(2 * np.pi * self.frequency * t)
+        elif self.waveform == 'square':
+            waveform = np.sign(np.sin(2 * np.pi * self.frequency * t))
+        elif self.waveform == 'saw':
+            waveform = 2 * (t * self.frequency - np.floor(t * self.frequency + 0.5))
+        else:
+            waveform = np.zeros_like(t)
+        return waveform
+
+    def apply_envelope(self, waveform):
+        attack_samples = int(self.envelope_attack * self.sample_rate)
+        decay_samples = int(self.envelope_decay * self.sample_rate)
+        sustain_samples = int((self.duration - self.envelope_attack - self.envelope_decay - self.envelope_release) * self.sample_rate)
+
+        envelope = np.zeros_like(waveform)
+        
+        # Attack phase
+        envelope[:attack_samples] = np.linspace(0, 1, attack_samples)
+        
+        # Decay phase
+        envelope[attack_samples:attack_samples+decay_samples] = np.linspace(1, self.envelope_sustain, decay_samples)
+        
+        # Sustain phase
+        envelope[attack_samples+decay_samples:attack_samples+decay_samples+sustain_samples] = self.envelope_sustain
+        
+        # Release phase
+        envelope[-int(self.envelope_release * self.sample_rate):] = np.linspace(self.envelope_sustain, 0, int(self.envelope_release * self.sample_rate))
+
+        return waveform * envelope
+
+    def play_sound(self, callback=None):
+        waveform = self.generate_waveform()
+        waveform_with_envelope = self.apply_envelope(waveform)
+        if callback:
+            callback(waveform_with_envelope)
+        sd.play(waveform_with_envelope * self.amplitude, self.sample_rate)
+
+    def play_note_by_frequency(self, frequency, callback=None):
+        self.frequency = frequency
+        self.play_sound(callback)
+
+# PyQt5 GUI
+class SynthGUI(QWidget):
+    def __init__(self, synth):
         super().__init__()
-        self.init_ui()
-        self.midi_in = None
+        self.synth = synth
+        self.setWindowTitle("Mono Synthesizer with Oscilloscope")
+        self.setGeometry(200, 200, 800, 600)
 
-    def init_ui(self):
-        layout = QtWidgets.QVBoxLayout()
+        # Set dark theme
+        self.setStyleSheet("""
+            QWidget {
+                background-color: #2E2E2E;
+                color: white;
+                font-family: 'Helvetica Neue', sans-serif;
+            }
+            QLabel {
+                font-size: 16px;
+                margin-bottom: 8px;
+            }
+            QPushButton {
+                background-color: #4CAF50;
+                border: none;
+                color: white;
+                font-size: 14px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #45a049;
+            }
+            QSlider::groove:horizontal {
+                height: 8px;
+                background: #555;
+                border-radius: 4px;
+            }
+            QSlider::handle:horizontal {
+                width: 20px;
+                background: #4CAF50;
+                border-radius: 10px;
+            }
+            QComboBox {
+                background-color: #555;
+                color: white;
+                border-radius: 5px;
+            }
+            QComboBox::drop-down {
+                background-color: #555;
+                border-radius: 5px;
+            }
+        """)
 
-        # Waveform Selection
-        self.waveform_label = QtWidgets.QLabel("Waveform:")
-        layout.addWidget(self.waveform_label)
-        self.waveform_combo = QtWidgets.QComboBox()
-        self.waveform_combo.addItems(["sine", "square", "sawtooth", "triangle"])
-        layout.addWidget(self.waveform_combo)
+        # Layout
+        self.layout = QVBoxLayout()
 
-        # Filter Cutoff
-        self.filter_label = QtWidgets.QLabel("Filter Cutoff Frequency (Hz):")
-        layout.addWidget(self.filter_label)
-        self.filter_slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
-        self.filter_slider.setMinimum(100)
-        self.filter_slider.setMaximum(5000)
-        self.filter_slider.setValue(1000)
-        layout.addWidget(self.filter_slider)
+        # Frequency Control
+        self.frequency_label = QLabel("Frequency")
+        self.layout.addWidget(self.frequency_label)
+        self.frequency_slider = QSlider(Qt.Horizontal)
+        self.frequency_slider.setRange(20, 2000)
+        self.frequency_slider.setValue(int(self.synth.frequency))
+        self.frequency_slider.valueChanged.connect(self.update_frequency)
+        self.layout.addWidget(self.frequency_slider)
 
-        # ADSR Sliders
-        self.adsr_sliders = {}
-        adsr_params = ["Attack", "Decay", "Sustain", "Release"]
-        for param in adsr_params:
-            label = QtWidgets.QLabel(f"{param}:")
-            layout.addWidget(label)
-            slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
-            slider.setMinimum(1)
-            slider.setMaximum(1000)
-            slider.setValue(100 if param == "Sustain" else 100)
-            layout.addWidget(slider)
-            self.adsr_sliders[param] = slider
+        # Waveform Control
+        self.waveform_label = QLabel("Waveform")
+        self.layout.addWidget(self.waveform_label)
+        self.waveform_combo = QComboBox()
+        self.waveform_combo.addItems(['sine', 'square', 'saw'])
+        self.waveform_combo.setCurrentText(self.synth.waveform)
+        self.waveform_combo.currentTextChanged.connect(self.update_waveform)
+        self.layout.addWidget(self.waveform_combo)
+
+        # Amplitude Control
+        self.amplitude_label = QLabel("Amplitude")
+        self.layout.addWidget(self.amplitude_label)
+        self.amplitude_slider = QSlider(Qt.Horizontal)
+        self.amplitude_slider.setRange(0, 100)
+        self.amplitude_slider.setValue(int(self.synth.amplitude * 100))
+        self.amplitude_slider.valueChanged.connect(self.update_amplitude)
+        self.layout.addWidget(self.amplitude_slider)
 
         # Play Button
-        self.play_button = QtWidgets.QPushButton("Play Note")
-        self.play_button.clicked.connect(self.play_note)
-        layout.addWidget(self.play_button)
+        self.play_button = QPushButton("Play")
+        self.play_button.clicked.connect(self.play_sound)
+        self.layout.addWidget(self.play_button)
 
-        self.setLayout(layout)
-        self.setWindowTitle("Modular Synthesizer")
-        self.resize(400, 300)
+        # Virtual Keyboard
+        self.keyboard_layout = QGridLayout()
+        self.create_keyboard()
+        self.layout.addLayout(self.keyboard_layout)
 
-        # Initialize MIDI Input
-        self.init_midi_input()
+        # Oscilloscope (matplotlib plot)
+        self.canvas = FigureCanvas(plt.figure())
+        self.layout.addWidget(self.canvas)
 
-    def init_midi_input(self):
-        midi_in = rtmidi.MidiIn()
-        available_ports = midi_in.get_ports()
-        if available_ports:
-            midi_in.open_port(0)  # Open the first available port
-            midi_in.set_callback(self.midi_callback)
-            self.midi_in = midi_in
-        else:
-            print("No MIDI devices found.")
+        # Set layout
+        self.setLayout(self.layout)
 
-    def midi_callback(self, message, data=None):
-        # MIDI message: [status, note, velocity]
-        message, _ = message
-        status, note, velocity = message
-        if status == 144:  # Note On
-            note_name = self.note_number_to_name(note)
-            self.play_midi_note(note_name)
+    def update_frequency(self):
+        self.synth.frequency = self.frequency_slider.value()
 
-    def play_midi_note(self, note):
-        waveform = self.waveform_combo.currentText()
-        filter_freq = self.filter_slider.value()
-        adsr = tuple(slider.value() / 1000 for slider in self.adsr_sliders.values())
-        duration = 1.0  # Default duration for MIDI note
-        signal = modular_synth(note, duration, waveform, filter_freq, adsr)
-        sd.play(signal, samplerate=SAMPLE_RATE)
-        sd.wait()
+    def update_waveform(self):
+        self.synth.waveform = self.waveform_combo.currentText()
 
-    def play_note(self):
-        waveform = self.waveform_combo.currentText()
-        filter_freq = self.filter_slider.value()
-        adsr = tuple(slider.value() / 1000 for slider in self.adsr_sliders.values())
-        note = "C4"
-        duration = 1.0
+    def update_amplitude(self):
+        self.synth.amplitude = self.amplitude_slider.value() / 100.0
 
-        signal = modular_synth(note, duration, waveform, filter_freq, adsr)
-        sd.play(signal, samplerate=SAMPLE_RATE)
-        sd.wait()
+    def play_sound(self):
+        self.synth.play_sound(callback=self.update_oscilloscope)
 
-    def note_number_to_name(self, number):
-        """Convert MIDI note number to musical note name."""
-        note_names = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"]
-        octave = (number // 12) - 1
-        note = note_names[number % 12]
-        return f"{note}{octave}"
+    def play_note_on_button(self, note):
+        frequencies = {
+            'C': 261.63, 'C#': 277.18, 'D': 293.66, 'D#': 311.13,
+            'E': 329.63, 'F': 349.23, 'F#': 369.99, 'G': 392.00,
+            'G#': 415.30, 'A': 440.00, 'A#': 466.16, 'B': 493.88
+        }
+        frequency = frequencies[note]
+        self.synth.play_note_by_frequency(frequency, callback=self.update_oscilloscope)
 
-# Run GUI Application
-if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    gui = SynthGUI()
+    def create_keyboard(self):
+        notes = [
+            ('C', 0, 0), ('C#', 1, 0), ('D', 2, 0), ('D#', 3, 0),
+            ('E', 4, 0), ('F', 5, 0), ('F#', 6, 0), ('G', 7, 0),
+            ('G#', 8, 0), ('A', 9, 0), ('A#', 10, 0), ('B', 11, 0)
+        ]
+        
+        for note, x, y in notes:
+            button = QPushButton(note)
+            button.setStyleSheet("""
+                background-color: white;
+                color: black;
+                border: 2px solid #4CAF50;
+                border-radius: 5px;
+                font-size: 14px;
+                height: 80px;
+                width: 60px;
+            """)
+            button.clicked.connect(lambda _, note=note: self.play_note_on_button(note))
+            self.keyboard_layout.addWidget(button, y, x)
+
+    def update_oscilloscope(self, waveform):
+        # Update the oscilloscope with the waveform data
+        ax = self.canvas.figure.add_subplot(111)
+        ax.clear()  # Clear the previous plot
+        ax.plot(waveform)
+        ax.set_title("Oscilloscope", color='white')
+        ax.set_xlabel("Time (samples)", color='white')
+        ax.set_ylabel("Amplitude", color='white')
+        ax.tick_params(axis='both', colors='white')  # Set axis labels and ticks to white
+        self.canvas.draw()
+
+# Main function to run the app
+def main():
+    app = QApplication(sys.argv)
+    synth = MonoSynth()
+    gui = SynthGUI(synth)
     gui.show()
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()
