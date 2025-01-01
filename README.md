@@ -100,6 +100,9 @@
 ![GitHub Release](https://img.shields.io/github/v/release/sputnikOS/open-source?style=for-the-badge) 
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/sputnikOS/open-source?style=for-the-badge)
 ![GitHub last commit](https://img.shields.io/github/last-commit/sputnikOS/open-source?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/sputnikOS/open-source?style=for-the-badge)
+
+
 
 ![GitHub language count](https://img.shields.io/github/languages/count/sputnikOS/open-source?style=for-the-badge)
 ![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
