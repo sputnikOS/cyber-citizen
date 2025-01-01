@@ -29,7 +29,7 @@ typedef struct Blockchain {
 } Blockchain;
 
 void compute_hash(Block *block, char *output) {
-    char data[BLOCK_DATA_SIZE];
+    char data[BLOCK_DATA_SIZE] = {0};
     snprintf(data, BLOCK_DATA_SIZE, "%d%s%d", block->index, block->prev_hash, block->nonce);
     for (int i = 0; i < block->transaction_count; i++) {
         snprintf(data + strlen(data), BLOCK_DATA_SIZE - strlen(data), "%s%s%d",
@@ -64,8 +64,17 @@ void mine_block(Block *block) {
 }
 
 Blockchain *create_blockchain() {
-    Blockchain *blockchain = malloc(sizeof(Blockchain));
-    blockchain->blocks = malloc(sizeof(Block));
+    Blockchain *blockchain = (Blockchain *)malloc(sizeof(Blockchain));
+    if (blockchain == NULL) {
+        fprintf(stderr, "Failed to allocate memory for blockchain.\n");
+        exit(EXIT_FAILURE);
+    }
+    blockchain->blocks = (Block *)malloc(sizeof(Block));
+    if (blockchain->blocks == NULL) {
+        fprintf(stderr, "Failed to allocate memory for genesis block.\n");
+        free(blockchain);
+        exit(EXIT_FAILURE);
+    }
     blockchain->size = 1;
 
     Block *genesis_block = &blockchain->blocks[0];
@@ -92,7 +101,12 @@ void add_transaction(Block *block, const char *sender, const char *receiver, int
 }
 
 void add_block(Blockchain *blockchain) {
-    blockchain->blocks = realloc(blockchain->blocks, (blockchain->size + 1) * sizeof(Block));
+    blockchain->blocks = (Block *)realloc(blockchain->blocks, (blockchain->size + 1) * sizeof(Block));
+    if (blockchain->blocks == NULL) {
+        fprintf(stderr, "Failed to allocate memory for new block.\n");
+        exit(EXIT_FAILURE);
+    }
+
     Block *prev_block = &blockchain->blocks[blockchain->size - 1];
     Block *new_block = &blockchain->blocks[blockchain->size++];
 
@@ -119,6 +133,11 @@ void print_blockchain(Blockchain *blockchain) {
     }
 }
 
+void free_blockchain(Blockchain *blockchain) {
+    free(blockchain->blocks);
+    free(blockchain);
+}
+
 int main(int argc, char *argv[]) {
     Blockchain *blockchain = create_blockchain();
 
@@ -127,8 +146,7 @@ int main(int argc, char *argv[]) {
         printf("  %s add_transaction <sender> <receiver> <amount>\n", argv[0]);
         printf("  %s mine_block\n", argv[0]);
         printf("  %s print\n", argv[0]);
-        free(blockchain->blocks);
-        free(blockchain);
+        free_blockchain(blockchain);
         return 0;
     }
 
@@ -149,7 +167,6 @@ int main(int argc, char *argv[]) {
         printf("Unknown command.\n");
     }
 
-    free(blockchain->blocks);
-    free(blockchain);
+    free_blockchain(blockchain);
     return 0;
 }

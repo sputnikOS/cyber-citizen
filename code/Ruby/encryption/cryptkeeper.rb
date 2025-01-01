@@ -1,141 +1,126 @@
 require 'openssl'
 require 'base64'
 require 'optparse'
-require 'artii'
-require 'colorize'
 
-# Display help information
-def display_help
-  a = Artii::Base.new
-  header = a.asciify('Cryptkeeper')
+# Utility module for cryptographic operations
+module CryptoUtils
+  def self.encrypt(data, cipher_name, key, iv = nil)
+    cipher = OpenSSL::Cipher.new(cipher_name)
+    cipher.encrypt
+    cipher.key = key
+    cipher.iv = iv if iv
 
-  puts header.colorize(:red)
-  puts ""
-  puts "Usage: cryptkeeper.rb [options]".colorize(:yellow)
-  puts ""
-  puts "Encrypt or decrypt data using various ciphers.".colorize(:yellow)
-  puts ""
-  puts "Options:".colorize(:yellow)
-  puts "  -e, --encrypt DATA        Encrypt the given DATA".colorize(:yellow)
-  puts "  -d, --decrypt DATA        Decrypt the given DATA".colorize(:yellow)
-  puts "  -k, --key KEY             Encryption key (base64 encoded)".colorize(:yellow)
-  puts "  -i, --iv IV               Initialization vector (base64 encoded)".colorize(:yellow)
-  puts "  -c, --cipher CIPHER       Cipher algorithm (e.g., aes-256-cbc, des-ede3, rc4)".colorize(:yellow)
-  puts "  -h, --help                Show this help message".colorize(:yellow)
-  puts ""
-  puts "Example usage:".colorize(:yellow)
-  puts "  Encrypting data: ruby cryptkeeper.rb -e 'Hello, World!' -k <base64_key> -c 'aes-256-cbc' -i <base64_iv>".colorize(:yellow)
-  puts "  Decrypting data: ruby cryptkeeper.rb -d <base64_encrypted_data> -k <base64_key> -c 'aes-256-cbc' -i <base64_iv>".colorize(:yellow)
-  puts "  Encrypt with RC4: ruby cryptkeeper.rb -e 'Hello, World!' -k <base64_key> -c 'rc4'".colorize(:yellow)
-end
+    encrypted = cipher.update(data) + cipher.final
+    Base64.encode64(encrypted)
+  end
 
-def center_text(text)
-  terminal_width = `tput cols`.to_i  # Get terminal width using tput
-  padding = [(terminal_width - text.length) / 2, 0].max  # Calculate left padding
+  def self.decrypt(encrypted_data, cipher_name, key, iv = nil)
+    cipher = OpenSSL::Cipher.new(cipher_name)
+    cipher.decrypt
+    cipher.key = key
+    cipher.iv = iv if iv
 
-  puts " " * padding + text  # Print text with the calculated padding
-end
+    decrypted = cipher.update(Base64.decode64(encrypted_data)) + cipher.final
+    decrypted
+  end
 
-# Function to encrypt data using a specific cipher
-def encrypt(data, cipher, key, iv = nil)
-  cipher_obj = OpenSSL::Cipher.new(cipher)
-  cipher_obj.encrypt
-  cipher_obj.key = key
-  cipher_obj.iv = iv if iv
+  def self.encrypt_file(input_file, output_file, cipher_name, key, iv = nil)
+    File.open(output_file, 'wb') do |outf|
+      File.open(input_file, 'rb') do |inf|
+        while (data = inf.read(4096))
+          encrypted = encrypt(data, cipher_name, key, iv)
+          outf.write(Base64.decode64(encrypted))
+        end
+      end
+    end
+  end
 
-  encrypted = cipher_obj.update(data) + cipher_obj.final
-  Base64.encode64(encrypted)
-end
-
-# Function to decrypt data using a specific cipher
-def decrypt(encrypted_data, cipher, key, iv = nil)
-  cipher_obj = OpenSSL::Cipher.new(cipher)
-  cipher_obj.decrypt
-  cipher_obj.key = key
-  cipher_obj.iv = iv if iv
-
-  decrypted = cipher_obj.update(Base64.decode64(encrypted_data)) + cipher_obj.final
-  decrypted
-end
-
-# Function to list available ciphers
-def list_ciphers
-  puts "Available ciphers:"
-  OpenSSL::Cipher.ciphers.each do |cipher|
-    puts "- #{cipher}"
+  def self.decrypt_file(input_file, output_file, cipher_name, key, iv = nil)
+    File.open(output_file, 'wb') do |outf|
+      File.open(input_file, 'rb') do |inf|
+        while (data = inf.read(4096))
+          decrypted = decrypt(Base64.encode64(data), cipher_name, key, iv)
+          outf.write(decrypted)
+        end
+      end
+    end
   end
 end
 
-# Command-line options parsing
-options = {}
-OptionParser.new do |opts|
-  opts.banner = "Usage: cryptkeeper.rb [options]"
-
-  opts.on("-e", "--encrypt DATA", "Encrypt the data") do |data|
-    options[:data] = data
-    options[:action] = :encrypt
+# Command line interface for the file encryption/decryption program
+class FileCryptoCLI
+  def initialize
+    @options = {}
+    parse_options
+    validate_options
   end
 
-  opts.on("-d", "--decrypt DATA", "Decrypt the data") do |data|
-    options[:data] = data
-    options[:action] = :decrypt
+  def run
+    key = Base64.decode64(@options[:key])
+    iv = @options[:iv] ? Base64.decode64(@options[:iv]) : nil
+
+    case @options[:action]
+    when :encrypt_file
+      CryptoUtils.encrypt_file(@options[:input], @options[:output], @options[:cipher], key, iv)
+      puts "File encrypted successfully to #{@options[:output]}"
+    when :decrypt_file
+      CryptoUtils.decrypt_file(@options[:input], @options[:output], @options[:cipher], key, iv)
+      puts "File decrypted successfully to #{@options[:output]}"
+    when :encrypt_string
+      encrypted_data = CryptoUtils.encrypt(@options[:data], @options[:cipher], key, iv)
+      puts "Encrypted Data: #{encrypted_data}"
+    when :decrypt_string
+      decrypted_data = CryptoUtils.decrypt(@options[:data], @options[:cipher], key, iv)
+      puts "Decrypted Data: #{decrypted_data}"
+    else
+      puts "Unknown action #{@options[:action]}"
+    end
+  rescue ArgumentError => e
+    puts "Error: #{e.message}"
+  rescue OpenSSL::Cipher::CipherError => e
+    puts "Error: Invalid cipher or encryption parameters. Please check the cipher name and key/IV."
+  rescue => e
+    puts "An unexpected error occurred: #{e.message}"
   end
 
-  opts.on("-k", "--key KEY", "Encryption key (base64)") do |key|
-    options[:key] = key
+  private
+
+  def parse_options
+    OptionParser.new do |opts|
+      opts.banner = "Usage: file_crypto.rb [options]"
+
+      opts.on("-e", "--encrypt-file", "Encrypt the input file") { @options[:action] = :encrypt_file }
+      opts.on("-d", "--decrypt-file", "Decrypt the input file") { @options[:action] = :decrypt_file }
+      opts.on("-s", "--encrypt-string DATA", "Encrypt the given string") { |data| @options[:data] = data; @options[:action] = :encrypt_string }
+      opts.on("-r", "--decrypt-string DATA", "Decrypt the given string") { |data| @options[:data] = data; @options[:action] = :decrypt_string }
+      opts.on("-i", "--input FILE", "Input file") { |file| @options[:input] = file }
+      opts.on("-o", "--output FILE", "Output file") { |file| @options[:output] = file }
+      opts.on("-k", "--key KEY", "Encryption key (base64)") { |key| @options[:key] = key }
+      opts.on("-v", "--iv IV", "Initialization vector (base64)") { |iv| @options[:iv] = iv }
+      opts.on("-c", "--cipher CIPHER", "Cipher algorithm (aes-256-cbc, des-ede3, rc4, etc.)") { |cipher| @options[:cipher] = cipher }
+      opts.on("-h", "--help", "Show this help message") { puts opts; exit }
+    end.parse!
   end
 
-  opts.on("-i", "--iv IV", "Initialization vector (base64)") do |iv|
-    options[:iv] = iv
-  end
+  def validate_options
+    if @options[:action].nil? || @options[:key].nil? || @options[:cipher].nil?
+      puts "Missing required arguments. Use -h for help."
+      exit
+    end
 
-  opts.on("-c", "--cipher CIPHER", "Cipher algorithm (aes-256-cbc, des-ede3, rc4, etc.)") do |cipher|
-    options[:cipher] = cipher
-  end
+    if [:encrypt_file, :decrypt_file].include?(@options[:action]) && (@options[:input].nil? || @options[:output].nil?)
+      puts "Missing input or output file. Use -h for help."
+      exit
+    end
 
-  opts.on("-h", "--help", "Show help message") do
-    display_help
-    exit
+    if [:encrypt_string, :decrypt_string].include?(@options[:action]) && @options[:data].nil?
+      puts "Missing data to encrypt/decrypt. Use -h for help."
+      exit
+    end
   end
-
-  opts.on("-l", "--list-ciphers", "List available ciphers") do
-    options[:list_ciphers] = true
-  end
-end.parse!
-
-# Display available ciphers if the list-ciphers flag is set
-if options[:list_ciphers]
-  list_ciphers
-  exit
 end
 
-# Check if necessary arguments are provided
-if options[:action].nil? || options[:data].nil? || options[:key].nil? || options[:cipher].nil?
-  puts "Missing required arguments. Use -e for encryption or -d for decryption."
-  display_help
-  exit
-end
-
-# Decode base64 for key and IV if they are provided
-begin
-  key = Base64.decode64(options[:key])
-  iv = options[:iv] ? Base64.decode64(options[:iv]) : nil
-rescue ArgumentError => e
-  puts "Error: Invalid base64 encoding for key or IV. Please provide a valid base64 encoded string."
-  exit
-end
-
-# Perform the requested action
-begin
-  if options[:action] == :encrypt
-    encrypted_data = encrypt(options[:data], options[:cipher], key, iv)
-    puts "Encrypted Data: #{encrypted_data}"
-  elsif options[:action] == :decrypt
-    decrypted_data = decrypt(options[:data], options[:cipher], key, iv)
-    puts "Decrypted Data: #{decrypted_data}"
-  end
-rescue OpenSSL::Cipher::CipherError => e
-  puts "Error: Invalid cipher or encryption parameters. Please check the cipher name and key/IV."
-rescue => e
-  puts "An unexpected error occurred: #{e.message}"
+# Run the CLI if this file is executed directly
+if __FILE__ == $0
+  FileCryptoCLI.new.run
 end
