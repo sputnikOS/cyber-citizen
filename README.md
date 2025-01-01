@@ -95,7 +95,8 @@
  ```
 
 # SputnikOS 
-![GitHub Created At](https://img.shields.io/github/created-at/sputnikOS/open-source?style=for-the-badge) ![GitHub Release](https://img.shields.io/github/v/release/sputnikOS/open-source?style=for-the-badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/sputnikOS/open-source?style=for-the-badge)![GitHub language count](https://img.shields.io/github/languages/count/sputnikOS/open-source?style=for-the-badge)
+![GitHub Created At](https://img.shields.io/github/created-at/sputnikOS/open-source?style=for-the-badge)![GitHub last commit](https://img.shields.io/github/last-commit/sputnikOS/open-source?style=for-the-badge)
+ ![GitHub Release](https://img.shields.io/github/v/release/sputnikOS/open-source?style=for-the-badge) ![GitHub commit activity](https://img.shields.io/github/commit-activity/t/sputnikOS/open-source?style=for-the-badge)![GitHub language count](https://img.shields.io/github/languages/count/sputnikOS/open-source?style=for-the-badge)
 
 
 ![Bash Script](https://img.shields.io/badge/bash_script-%23121011.svg?style=for-the-badge&logo=gnu-bash&logoColor=white)
@@ -110,10 +111,8 @@
 
 <br/>
 
-<h1 align="center">Projects</h1>
-
-### Cryptkeeper: zero-trust transparent allowing for powerful cryptography from the command line
-<img align="center" style="width:500px;height:500px" src="https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068">
+<h2 align="center"><a href="https://github.com/sputnikOS/open-source/tree/main/code/Python/encryption">Cryptkeeper</a></h2>
+<img style="width:500px;height:500px" src="https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068">
 
 ### System Tools
 ![Capture](https://github.com/user-attachments/assets/c6a0c683-c5e3-4b8d-9b8f-d283978fe3df)
