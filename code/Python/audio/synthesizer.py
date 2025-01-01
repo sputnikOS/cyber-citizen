@@ -44,9 +44,10 @@ class EnvelopeGenerator:
         return np.concatenate((attack, decay, sustain, release))
 
 class Filter:
-    def __init__(self, cutoff=1000, sample_rate=44100):
+    def __init__(self, cutoff=1000, sample_rate=44100, resonance=0.5):
         self.cutoff = cutoff
         self.sample_rate = sample_rate
+        self.resonance = resonance
 
     def apply_filter(self, signal):
         # Simple low-pass filter using a moving average
