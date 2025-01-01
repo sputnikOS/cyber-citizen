@@ -8,6 +8,7 @@ import colorama
 from colorama import Fore, Style, init
 import humanize
 import sounddevice as sd
+import soundfile as sf
 import argparse
 
 # Optional: Install GPUtil for GPU monitoring if needed (currently commented out)
@@ -62,17 +63,24 @@ def list_network_interfaces():
             print(f"  Netmask: {address.netmask}")
             print(f"  Broadcast: {address.broadcast}")
             print()
+
 # Function to list audio devices
+
 def list_audio_devices():
-    devices = sd.query_devices()  # Get list of all audio devices
-    print("Available audio devices:\n")
+    # List all audio devices (input and output)
+    devices = sd.query_devices()
     
-    for idx, device in enumerate(devices):
-        print(f"Device #{idx}: {device['name']}")
-        print(f"  - Default sample rate: {device['default_samplerate']} Hz")
-        print(f"  - Input channels: {device['max_input_channels']}")
-        print(f"  - Output channels: {device['max_output_channels']}")
-        print(f"  - Host API: {device['hostapi']}\n")
+    print("Audio Devices:")
+    for i, device in enumerate(devices):
+        print(f"Device {i}: {device['name']} - {'Input' if device['max_input_channels'] > 0 else 'Output'}")
+
+def list_supported_formats():
+    # List common supported audio formats for reading/writing with soundfile
+    formats = sf.available_formats()
+    
+    print("\nSupported Audio Formats:")
+    for fmt in formats:
+        print(f" - {fmt}")
 
 
 def display_system_info():
@@ -80,7 +88,7 @@ def display_system_info():
     table = PrettyTable() 
     table.field_names = ["Key", "Value"] 
     table.add_row(["Time", time.ctime()]) 
-    table.add_row(["User", os.getlogin()]) 
+    # table.add_row(["User", os.getlogin()])
     table.add_row(["Directory", os.getcwd()]) 
     table.add_row(["Platform", platform.platform()])
     table.add_row(["Node", platform.node()])
@@ -191,6 +199,7 @@ def main():
     parser.add_argument('--nvidia', action='store_true', help='Check GPU info')
     parser.add_argument('--battery', action='store_true', help='Display battery info (Windows)')
     parser.add_argument('--info', action='store_true', help='Display basic system info')
+    parser.add_argument('--audio', action='store_true', help='Display audio')
     args = parser.parse_args()
 
     
@@ -221,7 +230,10 @@ def main():
         get_battery()
     if args.info:
         display_system_info()
- 
+    if args.audio:
+        list_audio_devices()
+        list_supported_formats()
+
 if __name__ == "__main__":
 
     # Initialize colorama
