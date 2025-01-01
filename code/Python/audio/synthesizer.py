@@ -43,16 +43,40 @@ class MonoSynth:
         # Attack phase
         envelope[:attack_samples] = np.linspace(0, 1, attack_samples)
         
-        # Decay phase
-        envelope[attack_samples:attack_samples+decay_samples] = np.linspace(1, self.envelope_sustain, decay_samples)
-        
-        # Sustain phase
-        envelope[attack_samples+decay_samples:attack_samples+decay_samples+sustain_samples] = self.envelope_sustain
-        
-        # Release phase
-        envelope[-int(self.envelope_release * self.sample_rate):] = np.linspace(self.envelope_sustain, 0, int(self.envelope_release * self.sample_rate))
+        audio
+        return np.concatenate((attack, decay, sustain, release))
 
-        return waveform * envelope
+class Filter:
+    def __init__(self, cutoff=1000, sample_rate=44100, resonance=0.5):
+        self.cutoff = cutoff
+        self.sample_rate = sample_rate
+        self.resonance = resonance
+
+    def apply_filter(self, signal):
+        # Simple low-pass filter using a moving average
+        filter_size = int(self.sample_rate / self.cutoff)
+        filtered_signal = np.convolve(signal, np.ones(filter_size)/filter_size, mode='same')
+        return filtered_signal
+
+def play_synth(oscillator, envelope, fltr, duration):
+    wave = oscillator.generate_wave(duration)
+    env = envelope.generate_envelope(duration)
+    signal = wave * env
+    filtered_signal = fltr.apply_filter(signal)
+    sd.play(filtered_signal, samplerate=oscillator.sample_rate)
+    sd.wait()
+    
+    # Decay phase
+    envelope[attack_samples:attack_samples+decay_samples] = np.linspace(1, self.envelope_sustain, decay_samples)
+
+    # Sustain phase
+    envelope[attack_samples+decay_samples:attack_samples+decay_samples+sustain_samples] = self.envelope_sustain
+
+    # Release phase
+    envelope[-int(self.envelope_release * self.sample_rate):] = np.linspace(self.envelope_sustain, 0, int(self.envelope_release * self.sample_rate))
+    main
+
+    return waveform * envelope
 
     def play_sound(self, callback=None):
         waveform = self.generate_waveform()
