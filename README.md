@@ -111,13 +111,10 @@
 
 <h2 align="center"><a href="https://github.com/sputnikOS/open-source/tree/main/code/Python/encryption">Cryptkeeper</a></h2>
 
-![Usage](https://img.shields.io/badge/Usage-CLI%20encryption-white)
-![Python](https://img.shields.io/badge/Python-v3.1%5E-green?logo=python?style=for-the-badge)
+![Usage](https://img.shields.io/badge/Usage-CLI%20encryption-black)
+![Python](https://img.shields.io/badge/Python-v3.0%5E-black?logo=python?style=for-the-badge)
 
 <img style="width:500px;height:500px" src="https://github.com/user-attachments/assets/b4a867b9-59a1-413e-9ab0-965101b16068">
-
-<h2 align="center">Benchmark</h2>
-<img style="width:500px;height:500px" src="https://private-user-images.githubusercontent.com/8669791/399536430-8af2fcbf-af9c-4297-a32b-c164930166ea.PNG?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzU2OTg5NjQsIm5iZiI6MTczNTY5ODY2NCwicGF0aCI6Ii84NjY5NzkxLzM5OTUzNjQzMC04YWYyZmNiZi1hZjljLTQyOTctYTMyYi1jMTY0OTMwMTY2ZWEuUE5HP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MDEwMSUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTAxMDFUMDIzMTA0WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YWViZWRjZWRiM2RjNmVhNzY2YjNmNDI4NTVkNWNjODNhNzgwOTdjNTgxNDMxYTEwZmYzNTE4NTEwODk3ZGNhYSZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.C12g6xpq5EfADj4mqnjqCJvreMzN3g08uvbQVnbDh28">
 
 # Learning 
 ## [Secure Software Engineering Library](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/cyberintelligence)
