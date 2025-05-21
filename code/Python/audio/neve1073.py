@@ -2,9 +2,11 @@ import tkinter as tk
 from tkinter import filedialog
 from tkinter import ttk
 import numpy as np
+import sounddevice as sd
 import soundfile as sf
 from scipy.signal import butter, lfilter
 import matplotlib.pyplot as plt
+from PIL import Image, ImageTk
 
 # DSP Functions (same as previous example)
 def soft_clip(x, drive=1.0):
@@ -43,8 +45,8 @@ def process_signal(x, fs, drive, hp_freq, shelf_gain, output_gain):
 class PreampGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("Neve 1073-Style Preamp")
-
+        self.root.title("N73 Preamp")
+        
         # Sliders
         self.drive = self.add_slider("Drive", 0.5, 5.0, 2.5)
         self.hp_freq = self.add_slider("HPF Frequency (Hz)", 20, 200, 80)
@@ -54,6 +56,9 @@ class PreampGUI:
         # Buttons
         ttk.Button(root, text="Load WAV", command=self.load_wav).pack(pady=5)
         ttk.Button(root, text="Process & Save", command=self.process_wav).pack(pady=5)
+        ttk.Button(root, text="Play Original", command=lambda: sd.play(self.x, self.fs)).pack(pady=5)
+        # ttk.Button(root, text="Stop Playback", command=sd.stop).pack(pady=5)
+        ttk.Button(root, text="Play Processed", command=self.play_processed).pack(pady=5)
 
         # Display area for waveform
         self.fig, self.ax = plt.subplots(figsize=(5, 2))
@@ -106,7 +111,23 @@ class PreampGUI:
             sf.write(out_path, y, self.fs)
             self.plot_waveform(y)
 
+    def play_processed(self):
+        if self.x is None:
+            return
+        y = process_signal(
+            self.x, self.fs,
+            drive=self.drive.get(),
+            hp_freq=self.hp_freq.get(),
+            shelf_gain=self.shelf_gain.get(),
+            output_gain=self.output_gain.get()
+        )
+        # Play using sounddevice
+        sd.stop()  # stop any ongoing playback
+        sd.play(y, samplerate=self.fs)
+
 # Main App
 root = tk.Tk()
 app = PreampGUI(root)
 root.mainloop()
+
+
