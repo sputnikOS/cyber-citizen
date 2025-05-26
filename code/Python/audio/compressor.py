@@ -5,7 +5,8 @@ import soundfile as sf
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QVBoxLayout, QLabel, QSlider, QPushButton, QHBoxLayout, QFileDialog
 )
-from PyQt6.QtCore import Qt
+from PyQt6.QtCore import Qt, QTimer
+from PyQt6.QtGui import QPainter, QColor
 
 class SSLBusCompressor:
     def __init__(self, sample_rate=44100):
@@ -45,6 +46,24 @@ class SSLBusCompressor:
             output[i] = x * gain * self.makeup_gain
         return output
 
+class VUMeter(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.level = 0.0  # 0.0 to 1.0
+
+    def set_level(self, level):
+        self.level = max(0.0, min(1.0, level))
+        self.update()
+
+    def paintEvent(self, event):
+        painter = QPainter(self)
+        rect = self.rect()
+        # Background
+        painter.fillRect(rect, QColor(30, 30, 30))
+        # VU bar
+        bar_height = int(rect.height() * self.level)
+        painter.fillRect(0, rect.height() - bar_height, rect.width(), bar_height, QColor(0, 220, 0))
+
 class CompressorGUI(QWidget):
     def __init__(self):
         super().__init__()
@@ -81,11 +100,21 @@ class CompressorGUI(QWidget):
         self.file_info_label = QLabel("No file loaded")
         layout.addWidget(self.file_info_label)
 
+        # VU Meter
+        self.vu_meter = VUMeter()
+        self.vu_meter.setFixedHeight(30)
+        layout.addWidget(self.vu_meter)
+
         self.setLayout(layout)
 
         self.audio_data = None
         self.processed_data = None
         self.sample_rate = 44100
+
+        # VU Timer
+        self.vu_timer = QTimer()
+        self.vu_timer.setInterval(50)  # update every 50 ms
+        self.vu_timer.timeout.connect(self.update_vu)
 
     def create_slider(self, min_val, max_val, init_val, label_text):
         layout = QHBoxLayout()
@@ -94,7 +123,7 @@ class CompressorGUI(QWidget):
         slider.setMinimum(min_val)
         slider.setMaximum(max_val)
         slider.setValue(init_val)
-        slider.setTickInterval((max_val - min_val) // 10)
+        slider.setTickInterval(max(1, (max_val - min_val) // 10))
         slider.setTickPosition(QSlider.TickPosition.TicksBelow)
         slider.valueChanged.connect(lambda val, l=label, t=label_text: l.setText(f"{t}: {val}"))
         layout.addWidget(label)
@@ -127,6 +156,25 @@ class CompressorGUI(QWidget):
     def play_processed_audio(self):
         if self.processed_data is not None:
             sd.play(self.processed_data, self.sample_rate)
+            self.vu_timer.start()
+            # Stop VU updates after playback
+            duration_ms = int(len(self.processed_data) / self.sample_rate * 1000)
+            QTimer.singleShot(duration_ms, self.vu_timer.stop)
+
+    def update_vu(self):
+        if self.processed_data is not None and sd.get_stream() is not None:
+            # Get current playback position
+            stream_time = sd.get_stream().time
+            idx = int(stream_time * self.sample_rate)
+            window = self.processed_data[idx:idx+1024]
+            if len(window) > 0:
+                rms = np.sqrt(np.mean(window**2))
+                vu_level = min(rms / 0.5, 1.0)  # normalize for display
+                self.vu_meter.set_level(vu_level)
+            else:
+                self.vu_meter.set_level(0.0)
+        else:
+            self.vu_meter.set_level(0.0)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
