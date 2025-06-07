@@ -94,7 +94,7 @@
                                                        
  ```
 
-<h1 style="font-size:60px;" align="center">SputnikOS</h1>
+<h1 style="font-size:60px;" align="center">Open Source Engineering Project </h1>
 
 <img style="width:400px;height:400px;" src="https://github.com/user-attachments/assets/9edb8886-02d1-4ad5-b671-d979b356453e">
 
@@ -108,6 +108,12 @@
 
 
 <br/>
+
+<h1>Examples:</h1>
+<h3>Software Engineering</h3>
 <img src="https://github.com/sputnikOS/open-source/blob/312e43741e1a986db50ef990c90eb9aaca970530/learning/benchmark.jpg">
+
+<h3>Audio Engineering</h3>
+<img src="https://raw.githubusercontent.com/sputnikOS/website/refs/heads/main/public/images/api.jpg">
 
 
