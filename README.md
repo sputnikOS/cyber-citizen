@@ -109,20 +109,4 @@
 
 <br/>
 
-<h2 align="center"><a href="https://github.com/sputnikOS/open-source/tree/main/code/Python/encryption">Open-Source</a></h2>
-
-![Usage](https://img.shields.io/badge/Usage-CLI%20encryption-black)
-![Python](https://img.shields.io/badge/Python-v3.0%5E-black?logo=python?style=for-the-badge)
-
-<img style="width:500px;height:500px" src="https://github.com/sputnikOS/website/blob/main/public/images/api.jpg">
-
-# Learning 
-## [Secure Software Engineering Library](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/cyberintelligence)
-## [Audio Engineering Library](https://github.com/sputnikOS/open-source/tree/main/learning/audio-engineering)
-## [SEI CERT Course: Software Security Engineering](https://github.com/sputnikOS/open-source/tree/main/learning/courses/SEI%20CERT)
-## [SANS Course: The Cycle of Cyberthreat Intelligence](https://github.com/sputnikOS/open-source/blob/main/learning/papers/The%20Cycle%20of%20Cyber%20Threat%20Intelligence.md)
-## [SANS Course: Digital Forensics Essentials](https://github.com/sputnikOS/open-source/blob/main/learning/papers/Digital%20Forensics%20Essentials.md)
-## [Toolkit](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/Cybercitizen's%20Toolkit.md)
-## [Whitepaper: Airgap](https://github.com/sputnikOS/cyber-citizen/blob/main/learning/papers/airgap.md)
-<hr>
 
