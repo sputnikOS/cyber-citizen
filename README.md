@@ -109,4 +109,6 @@
 
 <br/>
 
+<img src="https://www.github.com/sputnikOS/website/public/images/benchmark.jpg"/>
+
 
