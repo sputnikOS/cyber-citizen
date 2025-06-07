@@ -108,7 +108,6 @@
 
 
 <br/>
-
-<img src="https://www.github.com/sputnikOS/website/public/images/benchmark.jpg"/>
+<img src="https://github.com/sputnikOS/open-source/blob/312e43741e1a986db50ef990c90eb9aaca970530/learning/benchmark.jpg">
 
 
