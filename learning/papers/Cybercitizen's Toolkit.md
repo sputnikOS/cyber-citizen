@@ -1,33 +1,39 @@
-# Cybercitizen's Toolkit & Reference 
+*version 0.1*
+
+#### “Wars of the Future Will Be Information Wars”
 
 <img style="text-align:center;width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
 
-#### Organizations & Learning 
+#### Activism
 - [Red Hat Guide to Security](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/4/html/security_guide/index#index)
 - [Electronic Frontier Foundation](https://www.eff.org)
-- [Wikileaks: Vault 7](https://wikileaks.org/ciav7p1/) - Analysis of the tools used by the CIA
+- [SANS Internet Storm Center](https://proton.me/)
+- [Wikileaks: Vault 7](https://wikileaks.org/ciav7p1/) - *For analysis and research purposes only*
 - [The Linux Foundation](https://linuxfoundation.org)
 - [The Internet Society](https://www.internetsociety.org)
-- [CIS 5930 Offensive Network Security Spring 2017](https://www.cs.fsu.edu/~liux/courses/offensivenetsec/index.html)
 - [Citizen Clinic](https://citizenclinic.io)
-- [Software Engineering Institue](https://www.sei.cmu.edu)
-- [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)
-- [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
-- [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
-- [Ultimate Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
 - [Street Level Surveillance](https://sls.eff.org/)
 - [Atlas of Surveillance](https://atlasofsurveillance.org/)
 
+Learning
+
+- [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)[Software Engineering Institue](https://www.sei.cmu.edu)
+- [Software Engineering Institue](https://www.sei.cmu.edu)
+- [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
+- - [CIS 5930 Offensive Network Security Spring 2017](https://www.cs.fsu.edu/~liux/courses/offensivenetsec/index.html)
+- [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
+- [Ultimate Python Repo](https://github.com/vinta/awesome-python?tab=readme-ov-file#distributed-computing)
 #### Online Privacy
 - Check your emails and passwords for breaches: [HaveIBeenPwned](https://haveibeenpwned.com/)
-- Prevent your ISP from selling your data with custom DNS:
 - [Run a DNS Leak Test](https://www.dnsleaktest.com)
-- Install [Quad9 DNS](https://on.quad9.net) or [Cloudflare](https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/DNS) 
-- I have been using [Proton](https://proton.me) and it has never let me down. For $10/month you have access to their VPN and encrypted services: Calendar, Drive, Email (and Bridge).
-- [Speedtest](https://speed.cloudflare.com)
+- Install [Quad9 DNS](https://on.quad9.net) or [Cloudflare](https://www.cloudflare.com/learning/dns/what-is-1.1.1.1/DNS)
+- Invest in a VPN service. I use [Proton](https://proton.me/) and highly recommend them. I have been with them since the start, and am in no way sponsored by them.
+- Run [Speedtest](https://speed.cloudflare.com) on network
 
 
-## Software 
+---
+
+# Software
 #### Windows Software
 <a href="https://learn.microsoft.com/en-us/powershell/"><img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white"></a>
 <a href="https://git-scm.com/downloads"><img src="https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white"></a>
@@ -85,9 +91,9 @@
 - [SANS Internet Storm Center](https://isc.sans.edu)
 - [NASA Open Data](https://data.nasa.gov)
 - [SOAR](https://soar.earth)
- 
- 
- ### Reading 
+
+
+### Reading
 - **The Sovereign Individual**, James Dale Davidson, Lord William Rees-Mogg.
 - **The Fourth Turning Is Here**, Neil Howe.
 - **Active Measures**, Thomas Rid.
