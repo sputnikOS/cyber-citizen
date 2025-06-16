@@ -106,6 +106,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/sputnikOS/open-source?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/sputnikOS/open-source?style=for-the-badge)
 
+![License](https://img.shields.io/badge/GPL--3.0-red?style=for-the-badge)
 
 <br/>
 
