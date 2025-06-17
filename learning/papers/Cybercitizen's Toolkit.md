@@ -4,6 +4,16 @@
 
 <img style="text-align:center;width:150px;height:150px;"  src="https://github.com/sputnikOS/website/blob/main/public/cia.png?raw=true" />
 
+**Cyberspace Operations Training:**
+- Securing Windows operating systems. 
+- Computer forensic investigation. 
+- Incident response. 
+- Intrusion detection in-depth. 
+- Hacker techniques. 
+- Exploits and incident mitigation and prevention. 
+- Network penetration testing. 
+- Ethical hacking. 
+- Auditing networks, perimeters, and information technology systems
 #### Activism
 - [Red Hat Guide to Security](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/4/html/security_guide/index#index)
 - [Electronic Frontier Foundation](https://www.eff.org)
@@ -17,8 +27,8 @@
 
 Learning
 
-- [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)[Software Engineering Institue](https://www.sei.cmu.edu)
-- [Software Engineering Institue](https://www.sei.cmu.edu)
+- [SANS Blue Team Wiki](https://wiki.sans.blue/#!index.md)
+- [Software Engineering Institute](https://www.sei.cmu.edu)
 - [SANS SEC505 (Source)](https://github.com/p0w3rsh3ll/SEC505)
 - - [CIS 5930 Offensive Network Security Spring 2017](https://www.cs.fsu.edu/~liux/courses/offensivenetsec/index.html)
 - [OSCP Cheatsheet](https://github.com/0xsyr0/OSCP)
