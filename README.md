@@ -109,4 +109,11 @@
 
 <br/>
 
+# Code Projects
+
+## Audio 
+#### Vintage analog preamp emulation (Python)
+<img src="https://github.com/sputnikOS/website/blob/main/public/images/api.jpg"/>
+
+## Encryption
 
