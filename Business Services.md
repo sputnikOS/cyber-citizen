@@ -1,8 +1,4 @@
-
-![[48481 1.jpg]]
-
-Executive summary
-A modular portfolio of services for a firm led by a computer engineer specializing in software development, cybersecurity, cyber-warfare, and cyber intelligence. Services are grouped into Product & Engineering, Cybersecurity Operations, Cyber Intelligence & Targeting, Offensive/Red Team Capabilities (authorized), Professional Services & Advisory, Training & Exercises, and Managed/Subscription offerings. Each item includes a short description, typical deliverables, target customers, and suggested pricing models.
+# Business Servicea Summary:
 
 I. Product & Engineering Services
 1. Secure Software Development (Custom Applications)
