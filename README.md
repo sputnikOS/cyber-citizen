@@ -94,7 +94,7 @@
                                                        
  ```
 
-<h1 style="font-size:60px;" align="center">SputnikOS</h1>
+<h1 style="font-size:60px;" align="center">Open-Source Cybercitizen Project</h1>
 
 <img style="width:400px;height:400px;" src="https://github.com/user-attachments/assets/9edb8886-02d1-4ad5-b671-d979b356453e">
 
