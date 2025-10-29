@@ -94,9 +94,7 @@
                                                        
  ```
 
-<h1 style="font-size:60px;" align="center">SputnikOS</h1>
-
-<img style="width:400px;height:400px;" src="https://github.com/user-attachments/assets/9edb8886-02d1-4ad5-b671-d979b356453e">
+<h1 style="font-size:60px;" align="center">Cyber Citizen Project</h1>
 
 ![GitHub Created At](https://img.shields.io/github/created-at/sputnikOS/open-source?style=for-the-badge)
 ![GitHub Release](https://img.shields.io/github/v/release/sputnikOS/open-source?style=for-the-badge) 
