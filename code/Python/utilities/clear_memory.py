@@ -1,22 +1,26 @@
-import subprocess
+import psutil
+import os
 
-def clear_memory():
-    try:
-        # PowerShell command to clear standby memory
-        command = r'powershell.exe -Command "& {Clear-Host; $mem = Get-WmiObject Win32_OperatingSystem; $mem.FreePhysicalMemory}"'
-        
-        # Execute the command
-        result = subprocess.run(command, shell=True, capture_output=True, text=True)
-        
-        # Display the result
-        print(result.stdout)
-        
-    except Exception as e:
-        print(f"Error: {e}")
+import gc
 
-def main():
-    print("Clearing standby memory...")
-    clear_memory()
+def clear_ram():
+    """Force garbage collection to free up memory."""
+    gc.collect()
+    print("Garbage collection complete.")
 
-if __name__ == "__main__":
-    main()
+def release_large_object(obj):
+    """Delete a large object and clear memory."""
+    del obj  # Remove the reference to the object
+    gc.collect()  # Trigger garbage collection
+    print("Large object cleared from memory.")
+
+def memory_usage():
+    """Check memory usage of the current process."""
+    process = psutil.Process(os.getpid())
+    mem = process.memory_info().rss / (1024 * 1024)  # Convert to MB
+    print(process)
+    print(f"Memory usage: {mem:.2f} MB")
+
+# Example usage
+memory_usage()
+clear_ram()

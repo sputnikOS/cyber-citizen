@@ -11,17 +11,30 @@ def install_package(package_name):
         print(f"Error installing {package_name}: {e}\n")
 
 def main():
+
+    banner = """
+                
+            ██╗███╗   ██╗███████╗████████╗ █████╗ ██╗     ██╗     ███████╗██████╗
+            ██║████╗  ██║██╔════╝╚══██╔══╝██╔══██╗██║     ██║     ██╔════╝██╔══██╗
+            ██║██╔██╗ ██║███████╗   ██║   ███████║██║     ██║     █████╗  ██████╔╝
+            ██║██║╚██╗██║╚════██║   ██║   ██╔══██║██║     ██║     ██╔══╝  ██╔══██╗
+            ██║██║ ╚████║███████║   ██║   ██║  ██║███████╗███████╗███████╗██║  ██║
+            ╚═╝╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝  ╚═╝
+
+    """
     packages = [
         "pycryptodome",   # Comprehensive cryptography library
         "cryptography",   # Modern cryptography library
         "python-gnupg",   # PGP/GPG encryption
         "hashlib", # Advanced hashing (if needed separately)
         "colorama",
+        "humanize",
         "argparse",
         "gnupg",
         "pycrypto"
     ]
 
+    print(banner)
     print("Starting installation of required packages...\n")
     for package in packages:
         install_package(package)
