@@ -1,4 +1,4 @@
-# Business Servicea Summary:
+# Business Services Summary:
 
 I. Product & Engineering Services
 1. Secure Software Development (Custom Applications)
