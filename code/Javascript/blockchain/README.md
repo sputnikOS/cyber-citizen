@@ -1,5 +1,4 @@
-# Coin
-
+# OpenCoin
 ```
 npm install
 npm start

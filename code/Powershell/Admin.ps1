@@ -1,11 +1,14 @@
-# Prompt for the username to grant admin access
-$username = Read-Host "Enter the username of the user you want to grant admin access"
+# Define the username to be added to the Administrators group
+$UserName = "samson"
 
-# Check if the user exists
-if (Get-LocalUser -Name $username -ErrorAction SilentlyContinue) {
-    # Add the user to the local administrators group
-    Add-LocalGroupMember -Group "Administrators" -Member $username
-    Write-Host "User '$username' has been granted full admin control."
+# Add the user to the Administrators group
+Add-LocalGroupMember -Group "Administrators" -Member $UserName
+
+# Confirm the user has been added
+$UserAdded = Get-LocalGroupMember -Group "Administrators" | Where-Object { $_.Name -eq $UserName }
+
+if ($UserAdded) {
+    Write-Host "User $UserName has been added to the Administrators group."
 } else {
-    Write-Host "User '$username' does not exist on this machine."
+    Write-Host "Failed to add user $UserName to the Administrators group."
 }

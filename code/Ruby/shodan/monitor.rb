@@ -1,8 +1,9 @@
 require 'shodan'
 require 'set'
+require 'dotenv/load'
 
-API_KEY = "YOUR_SHODAN_API_KEY"
-TARGET_IP = "YOUR_IP_ADDRESS" # Replace with your network's public IP address
+API_KEY = ENV['key']
+TARGET_IP = "50.87.16.103" # Replace with your network's public IP address
 CHECK_INTERVAL = 3600 # Check every hour
 
 def fetch_open_ports(api, ip)
